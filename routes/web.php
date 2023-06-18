@@ -17,4 +17,9 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+
+// show signin page
 Route::view('/', 'auth/signin');
+
+// show signup page
+Route::view('/signup', 'auth/signup');
