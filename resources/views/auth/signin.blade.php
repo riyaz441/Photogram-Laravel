@@ -7,7 +7,8 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.112.5">
-    <title>Signin Template · Bootstrap v5.3</title>
+    <title>Photogram Signin</title>
+    <link rel="shortcut icon" href="../assets/brand/camera.png" type="image/x-icon">
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
 
@@ -139,45 +140,10 @@
       </symbol>
     </svg>
 
-    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-      <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
-              id="bd-theme"
-              type="button"
-              aria-expanded="false"
-              data-bs-toggle="dropdown"
-              aria-label="Toggle theme (auto)">
-        <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
-        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
-            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#sun-fill"></use></svg>
-            Light
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
-            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
-            Dark
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
-            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#circle-half"></use></svg>
-            Auto
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-          </button>
-        </li>
-      </ul>
-    </div>
-
 
   <main class="form-signin w-100 m-auto">
-    <form action="index.php" method="post">
-      <img class="mx-auto d-block mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="65">
+    <form action="" method="post">
+      <img class="mx-auto d-block mb-4" src="../assets/brand/camera.png" alt="" width="72" height="65">
       <h1 class="h3 mb-3 fw-normal text-center">Login to Photogram</h1>
 
       <div class="form-floating">
@@ -195,7 +161,7 @@
         </label>
       </div>
       <button name="submit" class="w-100 btn btn-lg btn-dark mb-3" type="submit">Log in</button>
-      <a href="signup.php" class="link-dark" style="text-decoration: none;">Create new account</a>
+      <p class="text-center"><a href="" class="link-dark" style="text-decoration: none;">Create new account</a></p>
     </form>
   </main>
 
