@@ -125,29 +125,41 @@
   </head>
   <body class="d-flex align-items-center py-4 bg-body-tertiary">
 
-  <main class="form-signin w-100 m-auto">
-    <form action="" method="post">
-      <img class="mx-auto d-block mb-4" src="../assets/brand/camera.png" alt="" width="72" height="65">
-      <h1 class="h3 mb-3 fw-normal text-center">Login to Photogram</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 mt-3">
+<img src="../assets/brand/camera.png" alt="" height="400" width="400">
+            </div>
+            <div class="col-sm-6">
+                                <main class="form-signin w-100 m-auto">
+                    <form action="" method="post">
+                    <img class="mx-auto d-block mb-4" src="../assets/brand/camera.png" alt="" width="72" height="65">
+                    <h1 class="h3 mb-3 fw-normal text-center">Login to Photogram</h1>
 
-      <div class="form-floating">
-        <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
-        <label for="floatingInput">Email address</label>
-      </div>
-      <div class="form-floating">
-        <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
-        <label for="floatingPassword">Password</label>
-      </div>
+                    <div class="form-floating">
+                        <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+                        <label for="floatingInput">Email address</label>
+                    </div>
+                    <div class="form-floating">
+                        <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                        <label for="floatingPassword">Password</label>
+                    </div>
 
-      <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div>
-      <button name="submit" class="w-100 btn btn-lg btn-dark mb-3" type="submit">Login</button>
-      <p class="text-center"><a href="/signup" class="link-dark" style="text-decoration: none;">Create new account</a></p>
-    </form>
-  </main>
+                    <div class="checkbox mb-3">
+                        <label>
+                        <input type="checkbox" value="remember-me"> Remember me
+                        </label>
+                    </div>
+                    <button name="submit" class="w-100 btn btn-lg btn-dark mb-3" type="submit">Login</button>
+                    <p class="text-center"><a href="/signup" class="link-dark" style="text-decoration: none;">Create new account</a></p>
+                    </form>
+                </main>
+
+            </div>
+        </div>
+    </div>
+
+
 
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
