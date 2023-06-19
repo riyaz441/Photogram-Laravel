@@ -141,6 +141,12 @@
   </head>
   <body class="d-flex align-items-center py-4 bg-body-tertiary">
 
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 mt-5">
+                <img src="../assets/brand/camera.png" alt="" height="400" width="400">
+            </div>
+            <div class="col-sm-6">
   <main class="form-signin w-100 m-auto">
     <form action="" method="post">
       <img class="mx-auto d-block mb-4" src="../assets/brand/camera.png" alt="" width="72" height="65">
@@ -167,6 +173,11 @@
       <p class="text-center"><a href="/" class="link-dark" style="text-decoration: none;">I have a account</a></p>
     </form>
   </main>
+            </div>
+        </div>
+    </div>
+
+
 
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
