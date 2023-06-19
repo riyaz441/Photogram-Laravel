@@ -127,7 +127,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 mt-3">
+            <div class="col-sm-6 mt-2">
 <img src="../assets/brand/camera.png" alt="" height="400" width="400">
             </div>
             <div class="col-sm-6">
