@@ -12,6 +12,12 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
 
+    {{-- jquery cdn link --}}
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+    {{-- ajax cdn link --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
 
 
 
@@ -148,7 +154,7 @@
             </div>
             <div class="col-sm-6">
   <main class="form-signin w-100 m-auto">
-    <form action="" method="post">
+    <form method="post" id="form">
       <img class="mx-auto d-block mb-4" src="../assets/brand/camera.png" alt="" width="72" height="65">
       <h1 class="h3 mb-3 fw-normal text-center">Signup to Photogram</h1>
 
@@ -168,8 +174,9 @@
                 <input name="mobile" type="mobile" class="form-control" id="floatingMobile" placeholder="Mobile" required>
                 <label for="floatingMobile">Mobile</label>
             </div>
+            @csrf
 
-      <button name="submit" class="w-100 btn btn-lg btn-dark mb-3" type="submit">Signup</button>
+      <button name="submit" class="w-100 btn btn-lg btn-dark mb-3" type="submit" id="submit">Signup</button>
       <p class="text-center"><a href="/" class="link-dark" style="text-decoration: none;">I have a account</a></p>
     </form>
   </main>
@@ -180,6 +187,26 @@
 
 
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+{{-- js code --}}
+<script>
+$(document).ready(function(){
+  $("#submit").click(function(){
+
+    $.ajax({
+
+        type: "POST",
+        url: {{url('formsubmit')}},
+        data : $('#form').serialize(),
+        success: function(data) {
+            console.log(data);
+        }
+
+    });
+
+  });
+});
+</script>
 
     </body>
 </html>
