@@ -149,12 +149,12 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 mt-5">
-                <img src="../assets/brand/camera.png" alt="" height="400" width="400">
+            <div class="col-sm-6 mt-3">
+                <img src="../assets/brand/cameraone.png" alt="" height="550" width="550">
             </div>
             <div class="col-sm-6">
   <main class="form-signin w-100 m-auto">
-    <form method="post" id="form">
+    <form method="post" id="formsubmit">
       <img class="mx-auto d-block mb-4" src="../assets/brand/camera.png" alt="" width="72" height="65">
       <h1 class="h3 mb-3 fw-normal text-center">Signup to Photogram</h1>
 
@@ -191,13 +191,20 @@
 {{-- js code --}}
 <script>
 $(document).ready(function(){
-  $("#submit").click(function(){
+
+$("#submit").click(function(){
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 
     $.ajax({
 
         type: "POST",
         url: {{url('formsubmit')}},
-        data : $('#form').serialize(),
+        data : $('#formsubmit').serialize(),
         success: function(data) {
             console.log(data);
         }

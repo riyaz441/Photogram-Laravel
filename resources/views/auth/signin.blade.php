@@ -127,11 +127,11 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 mt-2">
-<img src="../assets/brand/camera.png" alt="" height="400" width="400">
-            </div>
             <div class="col-sm-6">
-                                <main class="form-signin w-100 m-auto">
+<img src="../assets/brand/cameraone.png" alt="" height="550" width="550">
+            </div>
+            <div class="col-sm-6 mt-5">
+                <main class="form-signin w-100 m-auto">
                     <form action="" method="post">
                     <img class="mx-auto d-block mb-4" src="../assets/brand/camera.png" alt="" width="72" height="65">
                     <h1 class="h3 mb-3 fw-normal text-center">Login to Photogram</h1>

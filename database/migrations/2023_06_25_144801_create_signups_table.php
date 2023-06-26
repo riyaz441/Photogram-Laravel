@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('signups', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
-            $table->string('email');
+            $table->string('username')->unique();
+            $table->string('email')->unique();
             $table->string('password');
-            $table->bigInteger('mobile');
+            $table->bigInteger('mobile')->unique();
             $table->tinyInteger('active_status');
             $table->tinyInteger('deleted');
             $table->timestamps();
