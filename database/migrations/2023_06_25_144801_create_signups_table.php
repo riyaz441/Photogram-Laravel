@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->bigInteger('mobile')->unique();
-            $table->tinyInteger('active_status');
-            $table->tinyInteger('deleted');
+            $table->tinyInteger('active_status')->default(0);
+            $table->tinyInteger('deleted')->default(0);
             $table->timestamps();
         });
     }

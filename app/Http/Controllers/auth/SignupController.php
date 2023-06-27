@@ -26,6 +26,11 @@ class SignupController extends Controller
         $signupsave->password = $password;
         $signupsave->mobile = $mobile;
 
-        $signupsave->save();
+        try {
+            $signupsave->save();
+            return ['message' => '0'];
+        } catch (\Throwable $e) {
+            return ['message' => $e->getCode()];
+        }
     }
 }
