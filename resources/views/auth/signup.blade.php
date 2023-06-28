@@ -183,7 +183,7 @@
                         </div>
                         <div class="form-floating mb-3">
                             <input name="mobile" type="mobile" class="form-control" id="mobile"
-                                placeholder="Mobile" required>
+                                placeholder="Mobile" maxlength="10" required>
                             <label for="floatingMobile">Mobile</label>
                         </div>
                         @csrf
@@ -203,6 +203,7 @@
                         <div class="alert alert-success text-center" role="alert" id="jsalertsuccess">
 
                         </div>
+
                     </form>
                 </main>
             </div>
@@ -220,6 +221,18 @@
             // hide the js alert load the page
             $("#jsalerterror").hide();
             $("#jsalertsuccess").hide();
+
+            // only number input in mobile using jquery start
+            $('#mobile').keypress(function(e) {
+
+                var charCode = (e.which) ? e.which : event.keyCode
+
+                if (String.fromCharCode(charCode).match(/[^0-9]/g))
+
+                    return false;
+
+            });
+            // only number input in mobile using jquery end
 
             $.ajaxSetup({
                 headers: {
@@ -264,6 +277,7 @@
                             $(document).find('span.error-text').text('');
                         },
                         success: function(data) {
+
                             if (data.message == 0) {
                                 $("#jsalertsuccess").show();
                                 $("#jsalertsuccess").html("Signup Success!");
@@ -273,6 +287,26 @@
                             } else if (data.message == 23000) {
                                 $("#jsalerterror").show();
                                 $("#jsalerterror").html("Duplicate Values!");
+                            } else if (data.error['username'] ==
+                                "The username field is required."
+                            ) { // server side validation response
+                                $("#jsalerterror").show();
+                                $("#jsalerterror").html("Username is required!");
+                            } else if (data.error['email'] ==
+                                "The email field is required."
+                            ) { // server side validation response
+                                $("#jsalerterror").show();
+                                $("#jsalerterror").html("Email is required!");
+                            } else if (data.error['password'] ==
+                                "The password field is required."
+                            ) { // server side validation response
+                                $("#jsalerterror").show();
+                                $("#jsalerterror").html("Password is required!");
+                            } else if (data.error['mobile'] ==
+                                "The mobile field is required."
+                            ) { // server side validation response
+                                $("#jsalerterror").show();
+                                $("#jsalerterror").html("Mobilen No is required!");
                             } else {
                                 $("#jsalerterror").show();
                                 $("#jsalerterror").html("Signup Failed!");
@@ -280,6 +314,7 @@
 
                         }
                     });
+                    // ajax call end
                 }
 
             });
