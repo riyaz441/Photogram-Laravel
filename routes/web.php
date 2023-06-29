@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\SignupController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,5 +26,8 @@ Route::view('/', 'auth/signin');
 // show signup page
 Route::view('/signup', 'auth/signup');
 
-// signup controller
+// signup route
 Route::post('/formsubmit', [SignupController::class, 'signupsave']);
+
+// login check route
+Route::post('/logincheck', [LoginController::class, 'logincheck']);
