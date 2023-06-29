@@ -294,7 +294,8 @@
                                 $("#jsalerterror").show();
                                 $("#jsalerterror").html(data.error['username']);
                             } else if (data.error['email'] ==
-                                "The email field is required."
+                                "The email field is required." || data.error['email'] ==
+                                "The email field must be a valid email address."
                             ) { // server side validation response
                                 $("#jsalerterror").show();
                                 $("#jsalerterror").html(data.error['email']);
