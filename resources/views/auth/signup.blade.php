@@ -280,6 +280,7 @@
 
                             if (data.message == 0) {
                                 $("#jsalertsuccess").show();
+                                $("#jsalerterror").hide();
                                 $("#jsalertsuccess").html("Signup Success!");
 
                                 // reset the form
@@ -291,22 +292,24 @@
                                 "The username field is required."
                             ) { // server side validation response
                                 $("#jsalerterror").show();
-                                $("#jsalerterror").html("Username is required!");
+                                $("#jsalerterror").html(data.error['username']);
                             } else if (data.error['email'] ==
                                 "The email field is required."
                             ) { // server side validation response
                                 $("#jsalerterror").show();
-                                $("#jsalerterror").html("Email is required!");
+                                $("#jsalerterror").html(data.error['email']);
                             } else if (data.error['password'] ==
-                                "The password field is required."
+                                "The password field is required." || data.error['password'] ==
+                                "The password field must be at least 8 characters."
                             ) { // server side validation response
                                 $("#jsalerterror").show();
-                                $("#jsalerterror").html("Password is required!");
+                                $("#jsalerterror").html(data.error['password']);
                             } else if (data.error['mobile'] ==
-                                "The mobile field is required."
+                                "The mobile field is required." || data.error['mobile'] ==
+                                "The mobile field must be 10 digits."
                             ) { // server side validation response
                                 $("#jsalerterror").show();
-                                $("#jsalerterror").html("Mobilen No is required!");
+                                $("#jsalerterror").html(data.error['mobile']);
                             } else {
                                 $("#jsalerterror").show();
                                 $("#jsalerterror").html("Signup Failed!");

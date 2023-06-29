@@ -21,7 +21,7 @@ class SignupController extends Controller
             'username' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:8',
-            'mobile' => 'required|numeric|max:10'
+            'mobile' => 'required|numeric|digits:10'
         ]);
 
 
