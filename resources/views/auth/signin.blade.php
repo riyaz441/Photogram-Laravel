@@ -238,7 +238,11 @@
                     },
                     success: function(data) {
 
-                        alert(data.email);
+                        if (data.status == 1) {
+                            alert("your account has been deleted");
+                        } else if (data.status == 0) {
+                            alert("good");
+                        }
 
                     }
                 });
