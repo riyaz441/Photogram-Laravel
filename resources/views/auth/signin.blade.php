@@ -21,6 +21,8 @@
     {{-- ajax cdn link --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
     {{-- laravel ajax meta link --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -150,13 +152,13 @@
                         <h1 class="h3 mb-3 fw-normal text-center">Login to Photogram</h1>
 
                         <div class="form-floating">
-                            <input name="email" type="email" class="form-control" id="floatingInput"
-                                placeholder="name@example.com" required>
+                            <input name="email" type="email" class="form-control" id="email"
+                                placeholder="name@example.com">
                             <label for="floatingInput">Email address</label>
                         </div>
                         <div class="form-floating">
-                            <input name="password" type="password" class="form-control" id="floatingPassword"
-                                placeholder="Password" required>
+                            <input name="password" type="password" class="form-control" id="password"
+                                placeholder="Password">
                             <label for="floatingPassword">Password</label>
                         </div>
 
@@ -171,7 +173,6 @@
                                 new account</a></p>
 
                         {{-- javascript validation alert for error --}}
-
                         <div class="alert alert-danger text-center" role="alert" id="jsalerterror">
 
                         </div>
@@ -213,24 +214,36 @@
         $("#login_form").on('submit', function(e) {
             e.preventDefault();
 
-            // ajax call start
-            $.ajax({
-                url: $(this).attr('action'),
-                method: $(this).attr('method'),
-                data: new FormData(this),
-                processData: false,
-                dataType: 'json',
-                contentType: false,
-                beforeSend: function() {
-                    $(document).find('span.error-text').text('');
-                },
-                success: function(data) {
+            var email = $('#email').val();
+            var password = $('#password').val();
 
-                    alert(data.email);
+            // empty check validation
+            if (email == "") {
+                $("#jsalerterror").show();
+                $("#jsalerterror").html("Enter Email!");
+            } else if (password == "") {
+                $("#jsalerterror").show();
+                $("#jsalerterror").html("Enter Password!");
+            } else {
+                // ajax call start
+                $.ajax({
+                    url: $(this).attr('action'),
+                    method: $(this).attr('method'),
+                    data: new FormData(this),
+                    processData: false,
+                    dataType: 'json',
+                    contentType: false,
+                    beforeSend: function() {
+                        $(document).find('span.error-text').text('');
+                    },
+                    success: function(data) {
 
-                }
-            });
-            // ajax call end
+                        alert(data.email);
+
+                    }
+                });
+                // ajax call end
+            }
 
         });
     });
