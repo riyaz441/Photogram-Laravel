@@ -27,8 +27,6 @@ class LoginController extends Controller
         foreach ($delete as $del) {
             if ($del->deleted == 1) {
                 return response()->json(['status' => 1]);
-            } else {
-                return response()->json(['status' => 0]);
             }
         }
     }

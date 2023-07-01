@@ -239,9 +239,8 @@
                     success: function(data) {
 
                         if (data.status == 1) {
-                            alert("your account has been deleted");
-                        } else if (data.status == 0) {
-                            alert("good");
+                            $("#jsalerterror").show();
+                            $("#jsalerterror").html("Your account is deleted!");
                         }
 
                     }
