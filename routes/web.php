@@ -31,3 +31,6 @@ Route::post('/formsubmit', [SignupController::class, 'signupsave']);
 
 // login check route
 Route::post('/logincheck', [LoginController::class, 'logincheck']);
+
+// home page route
+Route::view('/home', 'home');

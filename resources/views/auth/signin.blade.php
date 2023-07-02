@@ -241,6 +241,11 @@
                         if (data.status == 1) {
                             $("#jsalerterror").show();
                             $("#jsalerterror").html("Your account is deleted!");
+                        } else if (data.login_status == 0) {
+                            window.location = '/home';
+                        } else if (data.login_status == 1) {
+                            $("#jsalerterror").show();
+                            $("#jsalerterror").html("Login Failed!");
                         }
 
                     }

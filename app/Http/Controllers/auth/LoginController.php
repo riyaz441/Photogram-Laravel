@@ -5,6 +5,9 @@ namespace App\Http\Controllers\auth;
 use App\Http\Controllers\Controller;
 use App\Models\Signup;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 
 class LoginController extends Controller
 {
@@ -28,6 +31,14 @@ class LoginController extends Controller
             if ($del->deleted == 1) {
                 return response()->json(['status' => 1]);
             }
+        }
+
+        // check login
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            // Authentication passed...
+            return response()->json(['login_status' => 0]);
+        } else {
+            return response()->json(['login_status' => 1]);
         }
     }
 }
