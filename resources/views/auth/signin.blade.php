@@ -152,19 +152,22 @@
                         <h1 class="h3 mb-3 fw-normal text-center">Login to Photogram</h1>
 
                         <div class="form-floating">
-                            <input name="email" type="email" class="form-control" id="email"
-                                placeholder="name@example.com" required>
+                            <input name="email" type="email"
+                                @if (Cookie::has('email')) value="{{ Cookie::get('email') }}" @endif
+                                class="form-control" id="email" placeholder="name@example.com" required>
                             <label for="floatingInput">Email address</label>
                         </div>
                         <div class="form-floating">
-                            <input name="password" type="password" class="form-control" id="password"
-                                placeholder="Password" required>
+                            <input name="password" type="password"
+                                @if (Cookie::has('userpassword')) value="{{ Cookie::get('userpassword') }}" @endif
+                                class="form-control" id="password" placeholder="Password" required>
                             <label for="floatingPassword">Password</label>
                         </div>
 
                         <div class="checkbox mb-3">
                             <label>
-                                <input type="checkbox" value="remember-me"> Remember me
+                                <input type="checkbox" value="remember-me" name="rememberme" id="rememberme"> Remember
+                                me
                             </label>
                         </div>
                         <button class="w-100 btn btn-lg btn-dark mb-3" type="submit" name="submit"

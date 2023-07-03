@@ -7,6 +7,7 @@ use App\Models\Signup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Cookie;
 
 
 class LoginController extends Controller
@@ -18,10 +19,8 @@ class LoginController extends Controller
 
         // server side validation
         $validator = Validator::make($request->all(), [
-            'username' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:8',
-            'mobile' => 'required|numeric|digits:10'
         ]);
 
         if (!$validator->passes()) {
@@ -36,6 +35,12 @@ class LoginController extends Controller
             $data = $request->input();
             $request->session()->put('email', $data['email']);
             //echo session('email');
+
+            // rememberme check
+            if ($request->has('rememberme')) {
+                Cookie::queue('email', $email, 1440);
+                Cookie::queue('userpassword', $password, 1440);
+            }
 
 
             // check deleted or not
