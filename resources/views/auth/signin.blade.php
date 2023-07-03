@@ -153,12 +153,12 @@
 
                         <div class="form-floating">
                             <input name="email" type="email" class="form-control" id="email"
-                                placeholder="name@example.com">
+                                placeholder="name@example.com" required>
                             <label for="floatingInput">Email address</label>
                         </div>
                         <div class="form-floating">
                             <input name="password" type="password" class="form-control" id="password"
-                                placeholder="Password">
+                                placeholder="Password" required>
                             <label for="floatingPassword">Password</label>
                         </div>
 
@@ -243,6 +243,18 @@
                             $("#jsalerterror").html("Your account is deleted!");
                         } else if (data.login_status == 0) {
                             window.location = '/home';
+                        } else if (data.error['email'] ==
+                            "The email field is required." || data.error['email'] ==
+                            "The email field must be a valid email address."
+                        ) { // server side validation response
+                            $("#jsalerterror").show();
+                            $("#jsalerterror").html(data.error['email']);
+                        } else if (data.error['password'] ==
+                            "The password field is required." || data.error['password'] ==
+                            "The password field must be at least 8 characters."
+                        ) { // server side validation response
+                            $("#jsalerterror").show();
+                            $("#jsalerterror").html(data.error['password']);
                         } else if (data.login_status == 1) {
                             $("#jsalerterror").show();
                             $("#jsalerterror").html("Login Failed!");
