@@ -169,6 +169,12 @@
                                 <input type="checkbox" value="remember-me" name="rememberme" id="rememberme"> Remember
                                 me
                             </label>
+
+                            <label class="checkbox-wrap checkbox-dark" for="checkbox" style="margin-left:45px">Show
+                                Password
+                                <input type="checkbox" id="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
                         </div>
                         <button class="w-100 btn btn-lg btn-dark mb-3" type="submit" name="submit"
                             id="submit">Login</button>
@@ -267,7 +273,11 @@
                 });
                 // ajax call end
             }
+        });
 
+        // password show and hide
+        $('#checkbox').on('change', function() {
+            $('#password').attr('type', $('#checkbox').prop('checked') == true ? "text" : "password");
         });
     });
 </script>
