@@ -34,3 +34,6 @@ Route::post('/logincheck', [LoginController::class, 'logincheck']);
 
 // home page route
 Route::view('/home', 'home');
+
+// show forgot password page
+Route::view('/forgotpassword', 'auth/forgotpassword');
