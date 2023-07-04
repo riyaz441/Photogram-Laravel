@@ -130,6 +130,16 @@
             border-top-left-radius: 0;
             border-top-right-radius: 0;
         }
+
+        .form-signin input[type="text"] {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+
+        input[type=checkbox] {
+            accent-color: #212529;
+        }
     </style>
 
 
