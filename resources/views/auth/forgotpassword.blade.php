@@ -134,7 +134,7 @@
             </div>
             <div class="col-sm-6 mt-5">
                 <main class="form-signin w-100 m-auto">
-                    <form action="/logincheck" method="post" id="login_form">
+                    <form action="/forgotpassword" method="post" id="forgotpassword_form">
                         <img class="mx-auto d-block mb-4" src="../assets/brand/camera.png" alt="" width="72"
                             height="65">
                         <h1 class="h3 mb-3 fw-normal text-center">Forgot Password</h1>
@@ -190,19 +190,17 @@
 
 
         // click submit button
-        $("#login_form").on('submit', function(e) {
+        $("#forgotpassword_form").on('submit', function(e) {
             e.preventDefault();
 
+            $("#submit").html("<div class='spinner-border text-light' role='status'></div>")
+
             var email = $('#email').val();
-            var password = $('#password').val();
 
             // empty check validation
             if (email == "") {
                 $("#jsalerterror").show();
                 $("#jsalerterror").html("Enter Email!");
-            } else if (password == "") {
-                $("#jsalerterror").show();
-                $("#jsalerterror").html("Enter Password!");
             } else {
                 // ajax call start
                 $.ajax({
@@ -217,26 +215,23 @@
                     },
                     success: function(data) {
 
-                        if (data.status == 1) {
+                        $("#submit").html("Verify")
+
+                        if (data.forgotpasswordstatus == 1) {
                             $("#jsalerterror").show();
-                            $("#jsalerterror").html("Your account is deleted!");
-                        } else if (data.login_status == 0) {
-                            window.location = '/home';
+                            $("#jsalerterror").html('Email not found');
+                        } else if (data.mailsentstatus == 0) {
+                            $("#jsalertsuccess").show();
+                            $("#jsalertsuccess").html('Vertification Mail Sent');
+                        } else if (data.mailsentstatus == 1) {
+                            $("#jsalerterror").show();
+                            $("#jsalerterror").html('Vertification Mail Not Sent');
                         } else if (data.error['email'] ==
                             "The email field is required." || data.error['email'] ==
                             "The email field must be a valid email address."
                         ) { // server side validation response
                             $("#jsalerterror").show();
                             $("#jsalerterror").html(data.error['email']);
-                        } else if (data.error['password'] ==
-                            "The password field is required." || data.error['password'] ==
-                            "The password field must be at least 8 characters."
-                        ) { // server side validation response
-                            $("#jsalerterror").show();
-                            $("#jsalerterror").html(data.error['password']);
-                        } else if (data.login_status == 1) {
-                            $("#jsalerterror").show();
-                            $("#jsalerterror").html("Login Failed!");
                         }
 
                     }

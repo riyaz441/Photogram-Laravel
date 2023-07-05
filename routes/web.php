@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\auth\ForgotController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\SignupController;
 use Illuminate\Support\Facades\Route;
@@ -37,3 +38,9 @@ Route::view('/home', 'home');
 
 // show forgot password page
 Route::view('/forgotpassword', 'auth/forgotpassword');
+
+// forgot password route
+Route::post(
+    '/forgotpassword',
+    [ForgotController::class, 'forgotcheck']
+);
