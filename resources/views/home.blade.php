@@ -154,6 +154,18 @@
                     </svg>
                 </button>
             </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto"
+                    aria-pressed="true" id="auto">
+                    <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                        <use href="#circle-half"></use>
+                    </svg>
+                    Auto
+                    <svg class="bi ms-auto d-none" width="1em" height="1em">
+                        <use href="#check2"></use>
+                    </svg>
+                </button>
+            </li>
         </ul>
     </div>
 
@@ -445,6 +457,20 @@
 {{-- js code --}}
 <script>
     $(document).ready(function() {
+
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: Dark)').matches;
+
+        if (prefersDark == true) {
+            $("html").attr("data-bs-theme", "dark");
+        }
+
+        $("#auto").click(function() {
+            if (prefersDark == true) {
+                $("html").attr("data-bs-theme", "dark");
+            } else {
+                $("html").attr("data-bs-theme", "light");
+            }
+        });
 
         $("#light").click(function() {
             $("html").attr("data-bs-theme", "light");
