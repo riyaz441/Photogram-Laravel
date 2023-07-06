@@ -193,6 +193,7 @@
         $("#forgotpassword_form").on('submit', function(e) {
             e.preventDefault();
 
+            // spinner for loading...
             $("#submit").html("<div class='spinner-border text-light' role='status'></div>")
 
             var email = $('#email').val();

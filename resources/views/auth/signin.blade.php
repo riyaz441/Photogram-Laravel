@@ -237,6 +237,9 @@
         $("#login_form").on('submit', function(e) {
             e.preventDefault();
 
+            // spinner for loading...
+            $("#submit").html("<div class='spinner-border text-light' role='status'></div>")
+
             var email = $('#email').val();
             var password = $('#password').val();
 
@@ -260,6 +263,8 @@
                         $(document).find('span.error-text').text('');
                     },
                     success: function(data) {
+
+                        $("#submit").html("Login")
 
                         if (data.status == 1) {
                             $("#jsalerterror").show();
