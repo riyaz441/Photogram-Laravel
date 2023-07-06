@@ -245,9 +245,6 @@
             $("#signup_form").on('submit', function(e) {
                 e.preventDefault();
 
-                // spinner for loading...
-                $("#submit").html("<div class='spinner-border text-light' role='status'></div>")
-
                 // get all input values using jquery for empty check validation
                 var username = $("#username").val();
                 var email = $("#email").val();
@@ -268,6 +265,9 @@
                     $("#jsalerterror").show();
                     $("#jsalerterror").html("Enter Mobile Number!");
                 } else {
+                    // spinner for loading...
+                    $("#submit").html("<div class='spinner-border text-light' role='status'></div>")
+
                     // ajax call start
                     $.ajax({
                         url: $(this).attr('action'),

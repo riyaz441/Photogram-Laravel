@@ -53,7 +53,7 @@ class ForgotController extends Controller
                 // Compose a simple HTML email message
                 $message = '<html><body>';
                 $message .= '<h2 style="color:#010101;">Forgot Password</h2>';
-                $message .= '<p style="color:#010101;"><a href="http://127.0.0.1:8000/change_password">Click Here!</a></p>';
+                $message .= '<p style="color:#010101;"><a href="http://127.0.0.1:8000/changepassword">Click Here!</a></p>';
                 $message .= '</body></html>';
 
                 // Sending email

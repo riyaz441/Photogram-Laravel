@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.112.5">
-    <title>Photogram Login</title>
+    <title>Photogram Change Password</title>
     <link rel="shortcut icon" href="../assets/brand/camera.png" type="image/x-icon">
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
@@ -119,13 +119,13 @@
             z-index: 2;
         }
 
-        .form-signin input[type="email"] {
+        .form-signin #password {
             margin-bottom: -1px;
             border-bottom-right-radius: 0;
             border-bottom-left-radius: 0;
         }
 
-        .form-signin input[type="password"] {
+        .form-signin #passwordcrm {
             margin-bottom: 10px;
             border-top-left-radius: 0;
             border-top-right-radius: 0;
@@ -156,44 +156,34 @@
             </div>
             <div class="col-sm-6 mt-5">
                 <main class="form-signin w-100 m-auto">
-                    <form action="/logincheck" method="post" id="login_form">
+                    <form action="/changepassword" method="post" id="changepassword_form">
                         <img class="mx-auto d-block mb-4" src="../assets/brand/camera.png" alt="" width="72"
                             height="65">
-                        <h1 class="h3 mb-3 fw-normal text-center">Login to Photogram</h1>
+                        <h1 class="h3 mb-3 fw-normal text-center">Change Password</h1>
 
                         <div class="form-floating">
-                            <input name="email" type="email"
-                                @if (Cookie::has('email')) value="{{ Cookie::get('email') }}" @endif
-                                class="form-control" id="email" placeholder="name@example.com" required>
-                            <label for="floatingInput">Email address</label>
+                            <input name="password" type="password" class="form-control" id="password"
+                                placeholder="name@example.com" required>
+                            <label for="floatingInput">New Password</label>
                         </div>
                         <div class="form-floating">
-                            <input name="password" type="password"
-                                @if (Cookie::has('userpassword')) value="{{ Cookie::get('userpassword') }}" @endif
-                                class="form-control" id="password" placeholder="Password" required>
-                            <label for="floatingPassword">Password</label>
+                            <input name="password_confirmation" type="password" class="form-control" id="passwordcrm"
+                                placeholder="Password" required>
+                            <label for="floatingPassword">Confirm Password</label>
                         </div>
 
                         <div class="checkbox mb-3">
-                            <label>
-                                <input type="checkbox" value="remember-me" name="rememberme" id="rememberme"> Remember
-                                me
-                            </label>
-
-                            <label class="checkbox-wrap checkbox-dark" for="checkbox" style="margin-left:45px">Show
+                            <label class="checkbox-wrap checkbox-dark" for="checkbox">Show
                                 Password
                                 <input type="checkbox" id="checkbox">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
                         <button class="w-100 btn btn-lg btn-dark mb-3" type="submit" name="submit"
-                            id="submit">Login</button>
+                            id="submit">Change Password</button>
 
-                        <p class="text-center"><a href="/forgotpassword" class="link-dark"
-                                style="text-decoration: none;">Forgotten your password?</a></p>
-
-                        <p class="text-center"><a href="/signup" class="link-dark" style="text-decoration: none;">Create
-                                new account</a></p>
+                        <p class="text-center"><a href="/" class="link-dark" style="text-decoration: none;">Go to
+                                Signin</a></p>
 
                         {{-- javascript validation alert for error --}}
                         <div class="alert alert-danger text-center" role="alert" id="jsalerterror">
@@ -234,19 +224,19 @@
 
 
         // click submit button
-        $("#login_form").on('submit', function(e) {
+        $("#changepassword_form").on('submit', function(e) {
             e.preventDefault();
 
-            var email = $('#email').val();
             var password = $('#password').val();
+            var passwordcrm = $('#passwordcrm').val();
 
             // empty check validation
-            if (email == "") {
+            if (password == "") {
                 $("#jsalerterror").show();
-                $("#jsalerterror").html("Enter Email!");
-            } else if (password == "") {
+                $("#jsalerterror").html("Enter New Password!");
+            } else if (passwordcrm == "") {
                 $("#jsalerterror").show();
-                $("#jsalerterror").html("Enter Password!");
+                $("#jsalerterror").html("Enter Confirm Password!");
             } else {
                 // spinner for loading...
                 $("#submit").html("<div class='spinner-border text-light' role='status'></div>")
@@ -264,28 +254,24 @@
                     },
                     success: function(data) {
 
-                        $("#submit").html("Login")
+                        $("#submit").html("Change Password")
 
-                        if (data.status == 1) {
-                            $("#jsalerterror").show();
-                            $("#jsalerterror").html("Your account is deleted!");
-                        } else if (data.login_status == 0) {
-                            window.location = '/home';
-                        } else if (data.login_status == 1) {
-                            $("#jsalerterror").show();
-                            $("#jsalerterror").html("Login Failed!");
-                        } else if (data.error['email'] ==
-                            "The email field is required." || data.error['email'] ==
-                            "The email field must be a valid email address."
-                        ) { // server side validation response
-                            $("#jsalerterror").show();
-                            $("#jsalerterror").html(data.error['email']);
-                        } else if (data.error['password'] ==
+                        if (data.error['password'] ==
                             "The password field is required." || data.error['password'] ==
+                            "The password field must be at least 8 characters." || data
+                            .error[
+                                'password'] ==
+                            "The password field confirmation does not match.",
                             "The password field must be at least 8 characters."
                         ) { // server side validation response
                             $("#jsalerterror").show();
                             $("#jsalerterror").html(data.error['password']);
+                        } else if (data.changepassword_status == 0) {
+                            $("#jsalertsuccess").show();
+                            $("#jsalertsuccess").html("Password Changed Successfully");
+                        } else {
+                            $("#jsalerterror").show();
+                            $("#jsalerterror").html("Password Not Changed!");
                         }
 
                     }
@@ -296,7 +282,8 @@
 
         // password show and hide
         $('#checkbox').on('change', function() {
-            $('#password').attr('type', $('#checkbox').prop('checked') == true ? "text" : "password");
+            $('#passwordcrm').attr('type', $('#checkbox').prop('checked') == true ? "text" :
+                "password");
         });
     });
 </script>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\auth\ChangePasswordController;
 use App\Http\Controllers\auth\ForgotController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\SignupController;
@@ -44,3 +45,9 @@ Route::post(
     '/forgotpassword',
     [ForgotController::class, 'forgotcheck']
 );
+
+// show change password page
+Route::view('/changepassword', 'auth/changepassword');
+
+// change password route
+Route::post('/changepassword', [ChangePasswordController::class, 'changepassword']);

@@ -193,9 +193,6 @@
         $("#forgotpassword_form").on('submit', function(e) {
             e.preventDefault();
 
-            // spinner for loading...
-            $("#submit").html("<div class='spinner-border text-light' role='status'></div>")
-
             var email = $('#email').val();
 
             // empty check validation
@@ -203,6 +200,9 @@
                 $("#jsalerterror").show();
                 $("#jsalerterror").html("Enter Email!");
             } else {
+                // spinner for loading...
+                $("#submit").html("<div class='spinner-border text-light' role='status'></div>")
+
                 // ajax call start
                 $.ajax({
                     url: $(this).attr('action'),
