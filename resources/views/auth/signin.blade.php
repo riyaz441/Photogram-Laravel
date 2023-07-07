@@ -173,13 +173,13 @@
                         <div class="form-floating">
                             <input name="email" type="email"
                                 @if (Cookie::has('email')) value="{{ Cookie::get('email') }}" @endif
-                                class="form-control" id="email" placeholder="name@example.com">
+                                class="form-control" id="email" placeholder="name@example.com" required>
                             <label for="floatingInput">Email address</label>
                         </div>
                         <div class="form-floating">
                             <input name="password" type="password"
                                 @if (Cookie::has('userpassword')) value="{{ Cookie::get('userpassword') }}" @endif
-                                class="form-control" id="password" placeholder="Password">
+                                class="form-control" id="password" placeholder="Password" required>
                             <label for="floatingPassword">Password</label>
                         </div>
 
