@@ -256,7 +256,10 @@
 
                         $("#submit").html("Change Password")
 
-                        if (data.error['password'] ==
+                        if (data.changepassword_status == 0) {
+                            $("#jsalertsuccess").show();
+                            $("#jsalertsuccess").html("Password Changed Successfully");
+                        } else if (data.error['password'] ==
                             "The password field is required." || data.error['password'] ==
                             "The password field must be at least 8 characters." || data
                             .error[
@@ -266,9 +269,6 @@
                         ) { // server side validation response
                             $("#jsalerterror").show();
                             $("#jsalerterror").html(data.error['password']);
-                        } else if (data.changepassword_status == 0) {
-                            $("#jsalertsuccess").show();
-                            $("#jsalertsuccess").html("Password Changed Successfully");
                         } else {
                             $("#jsalerterror").show();
                             $("#jsalerterror").html("Password Not Changed!");
