@@ -14,6 +14,15 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
 
+    {{-- bootstrap css cdn link --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    {{-- bootstrap js cdn link --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
+    </script>
+
     {{-- jquery cdn link --}}
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
@@ -164,13 +173,13 @@
                         <div class="form-floating">
                             <input name="email" type="email"
                                 @if (Cookie::has('email')) value="{{ Cookie::get('email') }}" @endif
-                                class="form-control" id="email" placeholder="name@example.com" required>
+                                class="form-control" id="email" placeholder="name@example.com">
                             <label for="floatingInput">Email address</label>
                         </div>
                         <div class="form-floating">
                             <input name="password" type="password"
                                 @if (Cookie::has('userpassword')) value="{{ Cookie::get('userpassword') }}" @endif
-                                class="form-control" id="password" placeholder="Password" required>
+                                class="form-control" id="password" placeholder="Password">
                             <label for="floatingPassword">Password</label>
                         </div>
 
@@ -236,6 +245,15 @@
         // click submit button
         $("#login_form").on('submit', function(e) {
             e.preventDefault();
+
+            // close alert in 5 sec
+            setTimeout(function() {
+                $('#jsalerterror').fadeOut('slow');
+            }, 5000); // <-- time in milliseconds
+
+            setTimeout(function() {
+                $('#jsalertsuccess').fadeOut('slow');
+            }, 5000); // <-- time in milliseconds
 
             var email = $('#email').val();
             var password = $('#password').val();

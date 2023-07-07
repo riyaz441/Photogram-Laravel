@@ -227,6 +227,15 @@
         $("#changepassword_form").on('submit', function(e) {
             e.preventDefault();
 
+            // close alert in 5 sec
+            setTimeout(function() {
+                $('#jsalerterror').fadeOut('slow');
+            }, 5000); // <-- time in milliseconds
+
+            setTimeout(function() {
+                $('#jsalertsuccess').fadeOut('slow');
+            }, 5000); // <-- time in milliseconds
+
             var password = $('#password').val();
             var passwordcrm = $('#passwordcrm').val();
 

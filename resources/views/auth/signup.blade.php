@@ -245,6 +245,15 @@
             $("#signup_form").on('submit', function(e) {
                 e.preventDefault();
 
+                // close alert in 5 sec
+                setTimeout(function() {
+                    $('#jsalerterror').fadeOut('slow');
+                }, 5000); // <-- time in milliseconds
+
+                setTimeout(function() {
+                    $('#jsalertsuccess').fadeOut('slow');
+                }, 5000); // <-- time in milliseconds
+
                 // get all input values using jquery for empty check validation
                 var username = $("#username").val();
                 var email = $("#email").val();
