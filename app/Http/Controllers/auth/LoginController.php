@@ -56,6 +56,7 @@ class LoginController extends Controller
                 // Authentication passed...
                 return response()->json(['login_status' => 0]);
             } else {
+                $request->session()->flush();
                 return response()->json(['login_status' => 1]);
             }
         }
