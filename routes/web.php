@@ -51,3 +51,6 @@ Route::view('/changepassword', 'auth/changepassword');
 
 // change password route
 Route::post('/changepassword', [ChangePasswordController::class, 'changepassword']);
+
+// logout route
+Route::get('/logout', [LoginController::class, 'logout']);
