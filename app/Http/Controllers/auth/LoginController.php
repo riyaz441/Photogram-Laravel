@@ -31,11 +31,6 @@ class LoginController extends Controller
             $email = $request->input('email');
             $password = $request->input('password');
 
-            // session
-            $data = $request->input();
-            $request->session()->put('email', $data['email']);
-            //echo session('email');
-
             // rememberme check
             if ($request->has('rememberme')) {
                 Cookie::queue('email', $email, 1440);
@@ -53,10 +48,13 @@ class LoginController extends Controller
 
             // check login
             if (Auth::attempt(['email' => $email, 'password' => $password])) {
+                // session
+                $data = $request->input();
+                $request->session()->put('email', $data['email']);
+                //echo session('email');
                 // Authentication passed...
                 return response()->json(['login_status' => 0]);
             } else {
-                $request->session()->flush();
                 return response()->json(['login_status' => 1]);
             }
         }
