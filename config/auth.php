@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'adminuser' => [
+            'driver' => 'session',
+            'provider' => 'adminusers',
+        ],
     ],
 
     /*
@@ -65,7 +70,7 @@ return [
             'model' => App\Models\Signup::class,
         ],
 
-        'users' => [
+        'adminusers' => [
             'driver' => 'eloquent',
             'model' => App\Models\AdminLogin::class,
         ],
@@ -98,6 +103,13 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'adminusers' => [
+            'provider' => 'adminusers',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,

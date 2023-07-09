@@ -29,7 +29,7 @@ class AdminLoginController extends Controller
             $password = $request->input('password');
 
             // check login
-            if (Auth::attempt(['username' => $username, 'password' => $password])) {
+            if (Auth::guard('adminuser')->attempt(['username' => $username, 'password' => $password])) {
                 // Authentication passed...
                 return response()->json(['login_status' => 0]);
             } else {
