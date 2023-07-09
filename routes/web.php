@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\auth\AdminLoginController;
+use App\Http\Controllers\auth\AdminRegisterController;
 use App\Http\Controllers\auth\ChangePasswordController;
 use App\Http\Controllers\auth\ForgotController;
 use App\Http\Controllers\auth\LoginController;
@@ -54,3 +56,16 @@ Route::post('/changepassword', [ChangePasswordController::class, 'changepassword
 
 // logout route
 Route::get('/logout', [LoginController::class, 'logout']);
+
+// show admin login page
+Route::view('/adminlogin', 'auth/adminlogin');
+
+// admin login route
+Route::post('/adminlogincheck', [AdminLoginController::class, 'adminlogin']);
+
+
+// show admin register page
+Route::view('/adminregister', 'auth/adminregister');
+
+// admin register route
+Route::post('adminregistersubmit', [AdminRegisterController::class, 'adminregister']);

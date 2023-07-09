@@ -65,6 +65,11 @@ return [
             'model' => App\Models\Signup::class,
         ],
 
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\AdminLogin::class,
+        ],
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
