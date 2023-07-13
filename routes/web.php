@@ -69,3 +69,6 @@ Route::view('/adminregister', 'auth/adminregister');
 
 // admin register route
 Route::post('adminregistersubmit', [AdminRegisterController::class, 'adminregister']);
+
+// show admin dashboard
+Route::view('/admindashboard', 'admindashboard');
