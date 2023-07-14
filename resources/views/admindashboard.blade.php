@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Admin Dashboard</title>
+    <title>Photogram Admin Dashboard</title>
+    <link rel="shortcut icon" href="../assets/brand/camera.png" type="image/x-icon">
     <link rel="shortcut icon" href="images/person-circle.svg" type="image/x-icon">
     <link href="dashboard_style/css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -21,7 +22,8 @@
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="/admin_dashboard"> <i class="fa-solid fa-graduation-cap me-2"></i> TCE</a>
+        <a class="navbar-brand ps-3" href="/admin_dashboard"> <i class="fa-solid fa-camera me-2"></i>
+            Photogram</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
                 class="fas fa-bars"></i></button>
@@ -76,29 +78,28 @@
                             <thead>
                                 <tr>
                                     <th scope="col">S.No</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Roll No</th>
-                                    <th scope="col">Department</th>
+                                    <th scope="col">User Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Mobile</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                                {{-- @foreach ($users as $user)
+                                @foreach ($users as $user)
                                     <tr>
-                                        <th>{{ $user->id }}</th>
-                                        <td>{{ $user->firstname . ' ' . $user->lastname }}</td>
-                                        <td>{{ $user->rollno }}</td>
-                                        <td>{{ $user->department }}</td>
+                                        <th>{{ $loop->iteration }}</th>
+                                        {{-- this loop interation is used to create serial no. --}}
+                                        <td>{{ $user->username }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $user->mobile }}</td>
                                         <td><a href="admin_show/{{ $user->id }}"><button type="button"
-                                                    class="btn btn-success btn-sm">View</button></a>
+                                                    class="btn btn-danger btn-sm">Block</button></a>
                                             <a href="admin_edit/{{ $user->id }}"><button type="button"
-                                                    class="btn btn-primary btn-sm">Update</button></a>
-                                            <a href="admin_delete/{{ $user->id }}"><button type="button"
-                                                    class="btn btn-danger btn-sm">Delete</button></a>
+                                                    class="btn btn-success btn-sm">Unblock</button></a>
                                         </td>
                                     </tr>
-                                @endforeach --}}
+                                @endforeach
 
                             </tbody>
                         </table>

@@ -255,7 +255,7 @@
                         $("#submit").html("Login")
 
                         if (data.login_status == 0) {
-                            window.location = '/admindashboard';
+                            window.location = '/admindashboardview';
                         } else if (data.login_status == 1) {
                             $("#jsalerterror").show();
                             $("#jsalerterror").html("Login Failed!");

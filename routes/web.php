@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\auth\AdminLoginController;
 use App\Http\Controllers\auth\AdminRegisterController;
 use App\Http\Controllers\auth\ChangePasswordController;
@@ -68,7 +69,13 @@ Route::post('/adminlogincheck', [AdminLoginController::class, 'adminlogin']);
 Route::view('/adminregister', 'auth/adminregister');
 
 // admin register route
-Route::post('adminregistersubmit', [AdminRegisterController::class, 'adminregister']);
+Route::post('/adminregistersubmit', [AdminRegisterController::class, 'adminregister']);
 
 // show admin dashboard
 Route::view('/admindashboard', 'admindashboard');
+
+// admin dashboard route
+Route::get('/admindashboardview', [AdminDashboardController::class, 'admindashboard']);
+
+// admin logout route
+Route::get('/adminlogout', [AdminLoginController::class, 'logout']);
