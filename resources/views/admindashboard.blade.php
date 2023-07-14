@@ -55,10 +55,6 @@
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-gauge"></i></div>
                             Admin Dashboard
                         </a>
-                        <a class="nav-link" href="/department_management">
-                            <div class="sb-nav-link-icon"><i class="fas fa-building-columns"></i></div>
-                            Department Management
-                        </a>
                         <a class="nav-link" href="/admin_feedback">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-comments"></i></div>
                             Feedback Management
@@ -87,6 +83,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 {{-- @foreach ($users as $user)
                                     <tr>
                                         <th>{{ $user->id }}</th>
