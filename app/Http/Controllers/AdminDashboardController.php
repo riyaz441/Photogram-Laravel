@@ -12,4 +12,10 @@ class AdminDashboardController extends Controller
         $allusers = Signup::all();
         return view('/admindashboard', ['users' => $allusers]);
     }
+
+    public function accountstatus(Request $request)
+    {
+        return $request->post();
+        exit;
+    }
 }

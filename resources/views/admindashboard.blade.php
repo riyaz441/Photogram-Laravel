@@ -13,6 +13,16 @@
     <link href="dashboard_style/css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
+    {{-- ajax cdn link --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+    {{-- laravel ajax meta link --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    {{-- jquery cdn link --}}
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
     <!-- data table cdn -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
@@ -86,7 +96,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-
                                 @foreach ($users as $user)
                                     <tr>
                                         <th>{{ $loop->iteration }}</th>
@@ -95,10 +104,10 @@
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->mobile }}</td>
                                         <td>{{ $user->active_status }}</td>
-                                        <td><a href="admin_show/{{ $user->id }}"><button type="button"
-                                                    class="btn btn-danger btn-sm">Block</button></a>
-                                            <a href="admin_edit/{{ $user->id }}"><button type="button"
-                                                    class="btn btn-success btn-sm">Unblock</button></a>
+                                        <td><button type="button" class="btn btn-danger btn-sm block"
+                                                value="{{ $user->id }}">Block</button>
+                                            <button type="button" class="btn btn-success btn-sm unblock"
+                                                value="{{ $user->id }}">Unblock</button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -132,6 +141,7 @@
 
     <script>
         $(document).ready(function() {
+            // datatable code start
             $('#example').DataTable({
                 dom: 'Bfrtip',
                 buttons: [{
@@ -167,6 +177,60 @@
                     'colvis'
                 ]
             });
+            // datatable code end
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+
+            $(".block").click(function() {
+                var blockvalues = $(this).val();
+
+                //ajax call start
+                $.ajax({
+                    url: '/accountstatus',
+                    type: 'POST',
+                    data: {
+                        id: blockvalues,
+                        status: 'block'
+                    },
+                    success: function(response) {
+                        // handle response
+                    }
+                });
+
+                // $.ajax({
+                //     url: "/accountstatus",
+                //     method: "POST",
+                //     data: {
+                //         id: blockvalues,
+                //         status: 'block'
+                //     },
+                //     processData: false,
+                //     dataType: 'json',
+                //     contentType: false,
+                //     beforeSend: function() {
+                //         $(document).find('span.error-text').text('');
+                //     },
+                //     success: function(data) {
+
+                //         alert(data);
+
+
+
+                //     }
+                // });
+                // ajax call end
+
+                //https://www.w3docs.com/snippets/php/sending-multiple-data-parameters-with-jquery-ajax.html
+            });
+
+
+
+
         });
     </script>
     {{-- datatable script over --}}

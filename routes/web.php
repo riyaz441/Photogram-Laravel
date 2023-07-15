@@ -79,3 +79,6 @@ Route::get('/admindashboardview', [AdminDashboardController::class, 'admindashbo
 
 // admin logout route
 Route::get('/adminlogout', [AdminLoginController::class, 'logout']);
+
+// block and unblock route
+Route::post('/accountstatus', [AdminDashboardController::class, 'accountstatus']);
