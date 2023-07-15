@@ -22,7 +22,7 @@
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="/admin_dashboard"> <i class="fa-solid fa-camera me-2"></i>
+        <a class="navbar-brand ps-3" href="/admindashboardview"> <i class="fa-solid fa-camera me-2"></i>
             Photogram</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
@@ -81,6 +81,7 @@
                                     <th scope="col">User Name</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Mobile</th>
+                                    <th scope="col">Active Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -93,6 +94,7 @@
                                         <td>{{ $user->username }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->mobile }}</td>
+                                        <td>{{ $user->active_status }}</td>
                                         <td><a href="admin_show/{{ $user->id }}"><button type="button"
                                                     class="btn btn-danger btn-sm">Block</button></a>
                                             <a href="admin_edit/{{ $user->id }}"><button type="button"
