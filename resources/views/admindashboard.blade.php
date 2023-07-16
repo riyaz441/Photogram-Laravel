@@ -103,7 +103,11 @@
                                         <td>{{ $user->username }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->mobile }}</td>
-                                        <td>{{ $user->active_status }}</td>
+                                        @if ($user->active_status == 0)
+                                            <td>Active</td>
+                                        @else
+                                            <td>Inactive</td>
+                                        @endif
                                         <td><button type="button" class="btn btn-danger btn-sm block"
                                                 value="{{ $user->id }}">Block</button>
                                             <button type="button" class="btn btn-success btn-sm unblock"
@@ -202,17 +206,21 @@
                     },
                     success: function(data) {
 
-                        //window.location = '/admindashboardview';
                         var tbody = $('#example tbody');
                         tbody.empty();
                         var sno = 1;
                         data.forEach(function(user) {
+                            if (user.active_status == 0) {
+                                var status = "Active";
+                            } else {
+                                status = "Inactive";
+                            }
                             var row = `<tr>
                             <td>${sno}</td>
                             <td>${user.username}</td>
                             <td>${user.email}</td>
                             <td>${user.mobile}</td>
-                            <td>${user.active_status}</td>
+                            <td>${status}</td>
                             <td>
                                 <button type="button" class="btn btn-danger btn-sm block"
                                                 value="(${user.id})">Block</button>
@@ -250,12 +258,17 @@
                         tbody.empty();
                         var sno = 1;
                         data.forEach(function(user) {
+                            if (user.active_status == 0) {
+                                var status = "Active";
+                            } else {
+                                status = "Inactive";
+                            }
                             var row = `<tr>
                             <td>${sno}</td>
                             <td>${user.username}</td>
                             <td>${user.email}</td>
                             <td>${user.mobile}</td>
-                            <td>${user.active_status}</td>
+                            <td>${status}</td>
                             <td>
                                 <button type="button" class="btn btn-danger btn-sm block"
                                                 value="(${user.id})">Block</button>
