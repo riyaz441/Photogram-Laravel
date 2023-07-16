@@ -185,50 +185,92 @@
                 }
             });
 
-
+            // click block button action
             $(".block").click(function() {
                 var blockvalues = $(this).val();
 
-                //ajax call start
                 $.ajax({
-                    url: '/accountstatus',
-                    type: 'POST',
+                    url: "/accountstatus",
+                    method: "POST",
+                    dataType: "json",
                     data: {
                         id: blockvalues,
                         status: 'block'
                     },
-                    success: function(response) {
-                        // handle response
+                    beforeSend: function() {
+                        $(document).find('span.error-text').text('');
+                    },
+                    success: function(data) {
+
+                        //window.location = '/admindashboardview';
+                        var tbody = $('#example tbody');
+                        tbody.empty();
+                        var sno = 1;
+                        data.forEach(function(user) {
+                            var row = `<tr>
+                            <td>${sno}</td>
+                            <td>${user.username}</td>
+                            <td>${user.email}</td>
+                            <td>${user.mobile}</td>
+                            <td>${user.active_status}</td>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-sm block"
+                                                value="(${user.id})">Block</button>
+                                <button type="button" class="btn btn-success btn-sm unblock"
+                                                value="(${user.id})">Unblock</button>
+                            </td>
+                        </tr>`;
+                            tbody.append(row);
+                            sno++;
+                        });
+
                     }
                 });
-
-                // $.ajax({
-                //     url: "/accountstatus",
-                //     method: "POST",
-                //     data: {
-                //         id: blockvalues,
-                //         status: 'block'
-                //     },
-                //     processData: false,
-                //     dataType: 'json',
-                //     contentType: false,
-                //     beforeSend: function() {
-                //         $(document).find('span.error-text').text('');
-                //     },
-                //     success: function(data) {
-
-                //         alert(data);
-
-
-
-                //     }
-                // });
                 // ajax call end
-
-                //https://www.w3docs.com/snippets/php/sending-multiple-data-parameters-with-jquery-ajax.html
             });
 
 
+            // click unblock button action
+            $(".unblock").click(function() {
+                var unblockvalues = $(this).val();
+
+                $.ajax({
+                    url: "/accountstatus",
+                    method: "POST",
+                    data: {
+                        id: unblockvalues,
+                        status: 'unblock'
+                    },
+                    beforeSend: function() {
+                        $(document).find('span.error-text').text('');
+                    },
+                    success: function(data) {
+
+                        var tbody = $('#example tbody');
+                        tbody.empty();
+                        var sno = 1;
+                        data.forEach(function(user) {
+                            var row = `<tr>
+                            <td>${sno}</td>
+                            <td>${user.username}</td>
+                            <td>${user.email}</td>
+                            <td>${user.mobile}</td>
+                            <td>${user.active_status}</td>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-sm block"
+                                                value="(${user.id})">Block</button>
+                                <button type="button" class="btn btn-success btn-sm unblock"
+                                                value="(${user.id})">Unblock</button>
+                            </td>
+                        </tr>`;
+                            tbody.append(row);
+                            sno++;
+                        });
+
+                    }
+                });
+                // ajax call end
+            });
 
 
         });
