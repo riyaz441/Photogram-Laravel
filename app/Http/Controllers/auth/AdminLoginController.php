@@ -31,6 +31,10 @@ class AdminLoginController extends Controller
             // check login
             if (Auth::guard('adminuser')->attempt(['username' => $username, 'password' => $password])) {
                 // Authentication passed...
+
+                // session
+                $request->session()->put('username', $username);
+
                 return response()->json(['login_status' => 0]);
             } else {
                 return response()->json(['login_status' => 1]);

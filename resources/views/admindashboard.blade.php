@@ -1,3 +1,11 @@
+<?php
+// url direct access
+if (session('username') == '') {
+    // Redirect browser
+    header('Location: /adminlogin');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
