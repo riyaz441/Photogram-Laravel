@@ -46,6 +46,14 @@ class LoginController extends Controller
                 }
             }
 
+            // check account blocked or not
+            $blocked_status = Signup::where('email', '=', $email)->get('active_status');
+            foreach ($blocked_status as $accstatus) {
+                if ($accstatus->active_status == 1) {
+                    return response()->json(['block_status' => 1]);
+                }
+            }
+
             // check login
             if (Auth::attempt(['email' => $email, 'password' => $password])) {
                 // session

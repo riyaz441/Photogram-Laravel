@@ -287,6 +287,9 @@
                         if (data.status == 1) {
                             $("#jsalerterror").show();
                             $("#jsalerterror").html("Your account is deleted!");
+                        } else if (data.block_status == 1) {
+                            $("#jsalerterror").show();
+                            $("#jsalerterror").html("Your account is blocked!");
                         } else if (data.login_status == 0) {
                             window.location = '/home';
                         } else if (data.login_status == 1) {
