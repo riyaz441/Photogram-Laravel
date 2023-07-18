@@ -59,7 +59,12 @@ class LoginController extends Controller
                 // session
                 $data = $request->input();
                 $request->session()->put('email', $data['email']);
+                $session_email = session('email');
+                $get_user_id = Signup::where('email', '=', $session_email)->first('id');
+                session()->put('user_id', $get_user_id['id']);
+                session('user_id');
                 //echo session('email');
+
                 // Authentication passed...
                 return response()->json(['login_status' => 0]);
             } else {
