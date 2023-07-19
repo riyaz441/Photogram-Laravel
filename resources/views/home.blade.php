@@ -168,7 +168,7 @@ if (session('email') == '') {
                     <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
                         <use href="#circle-half"></use>
                     </svg>
-                    Auto
+                    System
                     <svg class="bi ms-auto d-none" width="1em" height="1em">
                         <use href="#check2"></use>
                     </svg>
@@ -208,7 +208,7 @@ if (session('email') == '') {
                         <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
                         <circle cx="12" cy="13" r="4" />
                     </svg>
-                    <strong>Album</strong>
+                    <strong>Photogram</strong>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false"
@@ -222,18 +222,24 @@ if (session('email') == '') {
     <main>
 
         <section class="py-5 text-center container">
-            <div class="row py-lg-5">
-                <div class="col-lg-6 col-md-8 mx-auto">
-                    <h1 class="fw-light">Album example</h1>
-                    <p class="lead text-body-secondary">Something short and leading about the collection below—its
-                        contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply
-                        skip over it entirely.</p>
-                    <p>
-                        <a href="#" class="btn btn-primary my-2">Main call to action</a>
-                        <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-                    </p>
+            <form action="" method="post">
+                <div class="row py-lg-5">
+                    <div class="col-lg-6 col-md-8 mx-auto">
+                        <h1 class="fw-light">Share Photo</h1>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload Photo</label>
+                            <input class="form-control" type="file" id="formFile">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Caption</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                        <a href="#" class="btn btn-success my-2">Share</a>
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </form>
+
         </section>
 
         <div class="album py-5 bg-body-tertiary">
