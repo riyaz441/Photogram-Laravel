@@ -26,6 +26,12 @@ if (session('email') == '') {
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
+    {{-- ajax cdn link --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+    {{-- laravel ajax meta link --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
 
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -222,22 +228,36 @@ if (session('email') == '') {
     <main>
 
         <section class="py-5 text-center container">
-            <form action="" method="post">
+            <form action="/photoupload" method="post" id="photoupload" enctype="multipart/form-data">
                 <div class="row py-lg-5">
                     <div class="col-lg-6 col-md-8 mx-auto">
                         <h1 class="fw-light">Share Photo</h1>
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Upload Photo</label>
-                            <input class="form-control" type="file" id="formFile">
+                            <input class="form-control" type="file" id="formFile" name="photo">
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Caption</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="caption"></textarea>
                         </div>
-                        <a href="#" class="btn btn-success my-2">Share</a>
+                        <button class="btn btn-secondary my-2" type="submit" id="submit"
+                            name="submit">Share</button>
                         </p>
+
+                        {{-- javascript validation alert for error --}}
+
+                        <div class="alert alert-danger text-center" role="alert" id="jsalerterror">
+
+                        </div>
+
+                        {{-- success alert message --}}
+                        <div class="alert alert-success text-center" role="alert" id="jsalertsuccess">
+
+                        </div>
+
                     </div>
                 </div>
+                @csrf
             </form>
 
         </section>
@@ -492,6 +512,73 @@ if (session('email') == '') {
 
         $("#dark").click(function() {
             $("html").attr("data-bs-theme", "dark");
+        });
+
+
+        // hide the js alert load the page
+        $("#jsalerterror").hide();
+        $("#jsalertsuccess").hide();
+
+        // laravel ajax code
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        // click submit button
+        $("#photoupload").on('submit', function(e) {
+            e.preventDefault();
+
+            // close alert in 5 sec
+            setTimeout(function() {
+                $('#jsalerterror').fadeOut('slow');
+            }, 5000); // <-- time in milliseconds
+
+            setTimeout(function() {
+                $('#jsalertsuccess').fadeOut('slow');
+            }, 5000); // <-- time in milliseconds
+
+            // get all input values using jquery for empty check validation
+            // spinner for loading...
+            $("#submit").html("<div class='spinner-border text-light' role='status'></div>")
+
+            // ajax call start
+            $.ajax({
+                url: $(this).attr('action'),
+                method: $(this).attr('method'),
+                data: new FormData(this),
+                contentType: 'multipart/form-data',
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                beforeSend: function() {
+                    $(document).find('span.error-text').text('');
+                },
+                success: function(data) {
+
+                    $("#submit").html("Share")
+
+                    if (data.status == 0) {
+                        $("#jsalerterror").show();
+                        $("#jsalerterror").html(data.error['photo']);
+                    }
+                    if (data.message == 0) {
+                        $("#jsalertsuccess").show();
+                        $("#jsalertsuccess").html("Photo Shared!");
+
+                        // reset the form
+                        $("#photoupload")[0].reset();
+                    }
+
+                }
+            });
+            // ajax call end
+            // https://www.webslesson.info/2018/09/upload-image-in-laravel-using-ajax.html
+
+
+
+
         });
 
     });

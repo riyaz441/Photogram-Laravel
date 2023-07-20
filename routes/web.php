@@ -7,6 +7,7 @@ use App\Http\Controllers\auth\ChangePasswordController;
 use App\Http\Controllers\auth\ForgotController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\SignupController;
+use App\Http\Controllers\PhotoUploadController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -82,3 +83,6 @@ Route::get('/adminlogout', [AdminLoginController::class, 'logout']);
 
 // block and unblock route
 Route::post('/accountstatus', [AdminDashboardController::class, 'accountstatus']);
+
+// photo upload route
+Route::post('/photoupload', [PhotoUploadController::class, 'photoupload']);
