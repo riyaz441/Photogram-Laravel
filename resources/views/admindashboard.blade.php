@@ -77,7 +77,7 @@ if (session('username') == '') {
                         </a>
                         <a class="nav-link" href="/admin_feedback">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-comments"></i></div>
-                            Feedback Management
+                            Feedback Management (comming soon)
                         </a>
                     </div>
                 </div>
