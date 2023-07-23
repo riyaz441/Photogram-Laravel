@@ -28,7 +28,13 @@ class PhotoUploadController extends Controller
         } else {
             // get input from user
             $caption = $request->input('caption');
-            $imagePath = $request->file('photo')->store('user_images');
+            //$imagePath = $request->file('photo')->storeAs('user_images', 'public');
+
+            // image upload process
+            $image = $request->file('photo')->getClientOriginalName();
+            $path = $request->file('photo')->storeAs('images', $image, 'public');
+            $finalimage = '/storage/' . $path;
+
             // main table
             $user = new Signup();
 
@@ -36,7 +42,7 @@ class PhotoUploadController extends Controller
             $userImage = new Photo();
             $userImage->userid = session('user_id');
             $userImage->caption = $caption;
-            $userImage->photo = $imagePath;
+            $userImage->photo = $finalimage;
             $userImage->save();
             return response()->json(['message' => 0]);
         }

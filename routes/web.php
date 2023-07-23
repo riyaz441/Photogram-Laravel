@@ -7,7 +7,9 @@ use App\Http\Controllers\auth\ChangePasswordController;
 use App\Http\Controllers\auth\ForgotController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\SignupController;
+use App\Http\Controllers\HomeViewController;
 use App\Http\Controllers\PhotoUploadController;
+use App\Models\Signup;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -86,3 +88,11 @@ Route::post('/accountstatus', [AdminDashboardController::class, 'accountstatus']
 
 // photo upload route
 Route::post('/photoupload', [PhotoUploadController::class, 'photoupload']);
+
+// homeview route
+Route::get('/homeview', [HomeViewController::class, 'homeview']);
+
+Route::get('/test', function () {
+    $user = Signup::find(1);
+    dd($user->photo);
+});

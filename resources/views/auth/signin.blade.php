@@ -291,7 +291,7 @@
                             $("#jsalerterror").show();
                             $("#jsalerterror").html("Your account is blocked!");
                         } else if (data.login_status == 0) {
-                            window.location = '/home';
+                            window.location = '/homeview';
                         } else if (data.login_status == 1) {
                             $("#jsalerterror").show();
                             $("#jsalerterror").html("Login Failed!");
