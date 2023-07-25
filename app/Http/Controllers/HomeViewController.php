@@ -19,8 +19,5 @@ class HomeViewController extends Controller
         return view('/home', ['userspost' => $usersWithPosts]);
         // $user = Signup::find(1);
         // dd($user->photo);
-
-        // $photo = Photo::find(1);
-        // dd($photo);
     }
 }

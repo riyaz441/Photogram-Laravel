@@ -91,8 +91,3 @@ Route::post('/photoupload', [PhotoUploadController::class, 'photoupload']);
 
 // homeview route
 Route::get('/homeview', [HomeViewController::class, 'homeview']);
-
-Route::get('/test', function () {
-    $user = Signup::find(1);
-    dd($user->photo);
-});
