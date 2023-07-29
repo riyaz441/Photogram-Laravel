@@ -1,15 +1,21 @@
-<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-    <div class="sb-sidenav-menu">
-        <div class="nav">
-            <div class="sb-sidenav-menu-heading">Student</div>
-            <a class="nav-link" href="/home">
-                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                Dashboard
-            </a>
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Admin</div>
+                        <a class="nav-link active" href="/admin_dashboard">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-gauge"></i></div>
+                            Admin Dashboard
+                        </a>
+                        <a class="nav-link" href="/admin_feedback">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-comments"></i></div>
+                            Feedback Management (comming soon)
+                        </a>
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    ADMIN
+                </div>
+            </nav>
         </div>
-    </div>
-    <div class="sb-sidenav-footer">
-        <div class="small">Logged in as:</div>
-        STUDENT
-    </div>
-</nav>
