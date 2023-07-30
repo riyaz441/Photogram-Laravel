@@ -115,6 +115,10 @@ if (session('email') == '') {
             border-top-left-radius: 5px;
             border-top-right-radius: 5px;
         }
+
+        a {
+            text-decoration: none;
+        }
     </style>
 
 
@@ -191,6 +195,49 @@ if (session('email') == '') {
 
 
     @include('layouts.includes.usertopbar')
+
+    {{-- profile model code start --}}
+
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Profile</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 90px"></textarea>
+                        <label for="floatingTextarea2">About me</label>
+                    </div>
+                    <div class="mt-3">
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Gender</option>
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                            <option value="3">Others</option>
+                        </select>
+                    </div>
+                    <div class="mt-3">
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload Profile Picture</label>
+                            <input class="form-control" type="file" id="formFile" name="photo">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- profile model code end --}}
+
 
     <main>
 
