@@ -9,6 +9,7 @@ use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\SignupController;
 use App\Http\Controllers\HomeViewController;
 use App\Http\Controllers\PhotoUploadController;
+use App\Http\Controllers\ProfileController;
 use App\Models\Signup;
 use Illuminate\Support\Facades\Route;
 
@@ -91,3 +92,6 @@ Route::post('/photoupload', [PhotoUploadController::class, 'photoupload']);
 
 // homeview route
 Route::get('/homeview', [HomeViewController::class, 'homeview']);
+
+// profile update route
+Route::post('/profileupdate', [ProfileController::class, 'profile']);

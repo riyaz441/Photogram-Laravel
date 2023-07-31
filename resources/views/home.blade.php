@@ -203,36 +203,41 @@ if (session('email') == '') {
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Profile</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-floating">
-                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 90px"></textarea>
-                        <label for="floatingTextarea2">About me</label>
+            <form action="/profileupdate" method="post" id="profileupdate" enctype="multipart/form-data">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Profile</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
-                    <div class="mt-3">
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Gender</option>
-                            <option value="1">Male</option>
-                            <option value="2">Female</option>
-                            <option value="3">Others</option>
-                        </select>
-                    </div>
-                    <div class="mt-3">
-                        <div class="mb-3">
-                            <label for="formFile" class="form-label">Upload Profile Picture</label>
-                            <input class="form-control" type="file" id="formFile" name="photo">
+                    <div class="modal-body">
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 90px"
+                                name="about"></textarea>
+                            <label for="floatingTextarea2">About me</label>
+                        </div>
+                        <div class="mt-3">
+                            <select class="form-select" aria-label="Default select example" name="gender">
+                                <option selected>Gender</option>
+                                <option value="1">Male</option>
+                                <option value="2">Female</option>
+                                <option value="3">Others</option>
+                            </select>
+                        </div>
+                        <div class="mt-3">
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Upload Profile Picture</label>
+                                <input class="form-control" type="file" id="formFile" name="profilephoto">
+                            </div>
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" id="submit" name="submit" class="btn btn-primary">Save</button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save</button>
-                </div>
-            </div>
+                @csrf
+            </form>
         </div>
     </div>
 
@@ -422,9 +427,62 @@ if (session('email') == '') {
             });
             // ajax call end
             // https://www.webslesson.info/2018/09/upload-image-in-laravel-using-ajax.html
+        });
 
 
+        // click submit button for profile upload
+        $("#profileupdate").on('submit', function(e) {
+            e.preventDefault();
 
+            // close alert in 5 sec
+            setTimeout(function() {
+                $('#jsalerterror').fadeOut('slow');
+            }, 5000); // <-- time in milliseconds
+
+            setTimeout(function() {
+                $('#jsalertsuccess').fadeOut('slow');
+            }, 5000); // <-- time in milliseconds
+
+            // get all input values using jquery for empty check validation
+            // spinner for loading...
+            $("#submit").html("<div class='spinner-border text-light' role='status'></div>")
+
+            //ajax call start
+            $.ajax({
+                url: $(this).attr('action'),
+                method: $(this).attr('method'),
+                data: new FormData(this),
+                contentType: 'multipart/form-data',
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                beforeSend: function() {
+                    $(document).find('span.error-text').text('');
+                },
+                success: function(data) {
+
+                    $("#submit").html("Save")
+
+                    if (data.status == 0) {
+                        $("#jsalerterror").show();
+                        $("#jsalerterror").html(data.error['profilephoto']);
+
+                        // reset the form
+                        $("#profileupdate")[0].reset();
+                        $('#exampleModal').modal('hide');
+                    }
+                    if (data.message == 0) {
+                        $("#jsalertsuccess").show();
+                        $("#jsalertsuccess").html("Profile Saved!");
+
+                        // reset the form
+                        $("#profileupdate")[0].reset();
+                        $('#exampleModal').modal('hide');
+                    }
+
+                }
+            });
+            // ajax call end
 
         });
 
