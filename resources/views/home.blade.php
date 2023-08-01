@@ -478,6 +478,11 @@ if (session('email') == '') {
                         // reset the form
                         $("#profileupdate")[0].reset();
                         $('#exampleModal').modal('hide');
+
+                        // reload page after 5 sec
+                        setTimeout(function() {
+                            location.reload(true);
+                        }, 5000);
                     }
 
                 }
