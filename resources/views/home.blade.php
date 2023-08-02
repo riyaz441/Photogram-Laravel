@@ -1,11 +1,21 @@
 <?php
 use Carbon\Carbon;
+use App\Models\Signup;
+use App\Models\Profile;
 // url direct access
 if (session('email') == '') {
     // Redirect browser
     header('Location: /');
     exit();
 }
+
+// check profile status
+$profile_update_status = Signup::where('id', session('user_id'))
+    ->pluck('profile_update_status')
+    ->first();
+
+// auto fill profile details
+$profile_details = Profile::where('id', session('user_id'))->first();
 ?>
 <!doctype html>
 <html lang="en" data-bs-theme="light">
@@ -201,45 +211,112 @@ if (session('email') == '') {
     <!-- Button trigger modal -->
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <form action="/profileupdate" method="post" id="profileupdate" enctype="multipart/form-data">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Profile</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-floating">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 90px"
-                                name="about"></textarea>
-                            <label for="floatingTextarea2">About me</label>
+    @if ($profile_update_status == 0)
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <form action="/profileupdate" method="post" id="profileupdate" enctype="multipart/form-data">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Profile</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
-                        <div class="mt-3">
-                            <select class="form-select" aria-label="Default select example" name="gender">
-                                <option selected>Gender</option>
-                                <option value="1">Male</option>
-                                <option value="2">Female</option>
-                                <option value="3">Others</option>
-                            </select>
-                        </div>
-                        <div class="mt-3">
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">Upload Profile Picture</label>
-                                <input class="form-control" type="file" id="formFile" name="profilephoto">
+                        <div class="modal-body">
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 90px"
+                                    name="about"></textarea>
+                                <label for="floatingTextarea2">About me</label>
+                            </div>
+                            <div class="mt-3">
+                                <select class="form-select" aria-label="Default select example" name="gender">
+                                    <option selected>Gender</option>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                    <option value="3">Others</option>
+                                </select>
+                            </div>
+                            <div class="mt-3">
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">Upload Profile Picture</label>
+                                    <input class="form-control" type="file" id="formFile" name="profilephoto">
+                                </div>
                             </div>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" id="submit" name="submit"
+                                class="btn btn-primary">Save</button>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" id="submit" name="submit" class="btn btn-primary">Save</button>
-                    </div>
-                </div>
-                @csrf
-            </form>
+                    @csrf
+                </form>
+            </div>
         </div>
-    </div>
+    @endif
+    @if ($profile_update_status == 1)
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <form action="/profileupdate" method="post" id="profileupdate" enctype="multipart/form-data">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Profile Update</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 90px"
+                                    name="about">{{ $profile_details->about }}</textarea>
+                                <label for="floatingTextarea2">About me</label>
+                            </div>
+                            <div class="mt-3">
+                                <select class="form-select" aria-label="Default select example" name="gender">
+
+                                    <option selected>Gender</option>
+                                    @if ($profile_details->gender == 1)
+                                        <option value="{{ $profile_details->gender }}" selected>
+                                            Male
+                                        </option>
+                                        <option value="2">Female</option>
+                                        <option value="3">Others</option>
+                                    @endif
+                                    @if ($profile_details->gender == 2)
+                                        <option value="{{ $profile_details->gender }}" selected>
+                                            Female
+                                        </option>
+                                        <option value="1">Male</option>
+                                        <option value="3">Others</option>
+                                    @endif
+                                    @if ($profile_details->gender == 3)
+                                        <option value="{{ $profile_details->gender }}" selected>
+                                            Others
+                                        </option>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                    @endif
+
+                                </select>
+                            </div>
+                            <div class="mt-3">
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">Upload Profile Picture</label>
+                                    <input class="form-control" type="file" id="formFile" name="profilephoto">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" id="submit" name="submit"
+                                class="btn btn-primary">Update</button>
+                        </div>
+                    </div>
+                    @csrf
+                </form>
+            </div>
+        </div>
+    @endif
+
 
     {{-- profile model code end --}}
 

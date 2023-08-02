@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Profile;
+use App\Models\Signup;
 
 class ProfileController extends Controller
 {
@@ -37,6 +38,10 @@ class ProfileController extends Controller
             $profile->gender = $gender;
             $profile->profile_photo = $finalprofileimage;
             $profile->save();
+
+            // profile update flag make 1
+            Signup::where('id', session('user_id'))->update(['profile_update_status' => 1]);
+
             return response()->json(['message' => 0]);
         }
     }
