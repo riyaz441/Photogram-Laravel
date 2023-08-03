@@ -1,6 +1,8 @@
 @php
     use App\Models\Profile;
+    use App\Models\Signup;
     $user = Profile::where('id', session('user_id'))->first();
+    $user_profile_update = Signup::where('id', session('user_id'))->first();
 @endphp
 <header data-bs-theme="dark">
     <div class="collapse" id="navbarHeader">
@@ -13,8 +15,15 @@
                 <div class="col-sm-4 py-4">
                     <h4>Contact</h4>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-white" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">Profile</a></li>
+                        @if ($user_profile_update->profile_update_status == 0)
+                            <li><a href="#" class="text-white" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">Profile</a></li>
+                        @endif
+                        @if ($user_profile_update->profile_update_status == 1)
+                            <li><a href="#" class="text-white" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModalUpdate">Profile</a></li>
+                        @endif
+
                         <li><a href="/logout" class="text-white">Logout</a></li>
                     </ul>
                 </div>

@@ -95,3 +95,6 @@ Route::get('/homeview', [HomeViewController::class, 'homeview']);
 
 // profile update route
 Route::post('/profileupdate', [ProfileController::class, 'profile']);
+
+// profile change route
+Route::post('/profilechange', [ProfileController::class, 'profilechange']);

@@ -223,7 +223,7 @@ $profile_details = Profile::where('id', session('user_id'))->first();
                         </div>
                         <div class="modal-body">
                             <div class="form-floating">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 90px"
+                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 120px"
                                     name="about"></textarea>
                                 <label for="floatingTextarea2">About me</label>
                             </div>
@@ -254,10 +254,10 @@ $profile_details = Profile::where('id', session('user_id'))->first();
         </div>
     @endif
     @if ($profile_update_status == 1)
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="exampleModalUpdate" class="modelupdate" tabindex="-1"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <form action="/profileupdate" method="post" id="profileupdate" enctype="multipart/form-data">
+                <form action="/profilechange" method="post" id="profilechange" enctype="multipart/form-data">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">Profile Update</h1>
@@ -266,7 +266,7 @@ $profile_details = Profile::where('id', session('user_id'))->first();
                         </div>
                         <div class="modal-body">
                             <div class="form-floating">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 90px"
+                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 120px"
                                     name="about">{{ $profile_details->about }}</textarea>
                                 <label for="floatingTextarea2">About me</label>
                             </div>
@@ -559,7 +559,69 @@ $profile_details = Profile::where('id', session('user_id'))->first();
                         // reload page after 5 sec
                         setTimeout(function() {
                             location.reload(true);
-                        }, 5000);
+                        }, 3000);
+                    }
+
+                }
+            });
+            // ajax call end
+
+        });
+
+
+        // click submit button for profile change (update)
+        $("#profilechange").on('submit', function(e) {
+            e.preventDefault();
+
+            // close alert in 5 sec
+            setTimeout(function() {
+                $('#jsalerterror').fadeOut('slow');
+            }, 5000); // <-- time in milliseconds
+
+            setTimeout(function() {
+                $('#jsalertsuccess').fadeOut('slow');
+            }, 5000); // <-- time in milliseconds
+
+            // get all input values using jquery for empty check validation
+            // spinner for loading...
+            $("#submit").html("<div class='spinner-border text-light' role='status'></div>")
+
+            //ajax call start
+            $.ajax({
+                url: $(this).attr('action'),
+                method: $(this).attr('method'),
+                data: new FormData(this),
+                contentType: 'multipart/form-data',
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                beforeSend: function() {
+                    $(document).find('span.error-text').text('');
+                },
+                success: function(data) {
+
+                    $("#submit").html("Update")
+
+                    if (data.status == 0) {
+                        $("#jsalerterror").show();
+                        $("#jsalerterror").html(data.error['profilephoto']);
+
+                        // reset the form
+                        $("#profilechange")[0].reset();
+                        $('#exampleModalUpdate').modal('hide');
+                    }
+                    if (data.message == 0) {
+                        $("#jsalertsuccess").show();
+                        $("#jsalertsuccess").html("Profile Updated!");
+
+                        // reset the form
+                        $("#profilechange")[0].reset();
+                        $('#exampleModalUpdate').modal('hide');
+
+                        // reload page after 5 sec
+                        setTimeout(function() {
+                            location.reload(true);
+                        }, 3000);
                     }
 
                 }
