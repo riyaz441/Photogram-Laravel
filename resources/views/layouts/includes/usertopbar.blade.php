@@ -15,6 +15,7 @@
                 <div class="col-sm-4 py-4">
                     <h4>Contact</h4>
                     <ul class="list-unstyled">
+
                         @if ($user_profile_update->profile_update_status == 0)
                             <li><a href="#" class="text-white" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">Profile</a></li>
@@ -28,8 +29,8 @@
                     </ul>
                 </div>
                 <div class="col-sm-4 py-4">
-                    <img src="{{ asset($user->profile_photo ?? '') }}" class="rounded" height="100" width="100"
-                        alt="profile picture">
+                    <img src="{{ asset($user->profile_photo ?? '../assets/brand/person.svg') }}" class="rounded"
+                        height="100" width="100" alt="profile picture">
                 </div>
             </div>
         </div>
