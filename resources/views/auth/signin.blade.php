@@ -214,12 +214,12 @@
                         </div>
 
                         {{-- javascript validation alert for error --}}
-                        <div class="alert alert-danger text-center" role="alert" id="jsalerterror">
+                        <div class="alert alert-danger text-center mt-3" role="alert" id="jsalerterror">
 
                         </div>
 
                         {{-- success alert message --}}
-                        <div class="alert alert-success text-center" role="alert" id="jsalertsuccess">
+                        <div class="alert alert-success text-center mt-3" role="alert" id="jsalertsuccess">
 
                         </div>
 
