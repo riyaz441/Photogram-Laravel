@@ -57,6 +57,7 @@ if (session('username') == '') {
                                     <th scope="col">User Name</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Mobile</th>
+                                    <th scope="col">Google Id</th>
                                     <th scope="col">Active Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -68,7 +69,8 @@ if (session('username') == '') {
                                         {{-- this loop interation is used to create serial no. --}}
                                         <td>{{ $user->username }}</td>
                                         <td>{{ $user->email }}</td>
-                                        <td>{{ $user->mobile }}</td>
+                                        <td>{{ $user->mobile ?? '---' }}</td>
+                                        <td>{{ $user->google_id ?? '---' }}</td>
                                         @if ($user->active_status == 0)
                                             <td>Active</td>
                                         @else
