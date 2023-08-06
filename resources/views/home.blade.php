@@ -317,6 +317,33 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
         </div>
     @endif
 
+    <div class="modal fade" id="exampleModalFeedback" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <form action="/userfeedback" method="post" id="userfeedback" enctype="multipart/form-data">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Feedback</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                                style="height: 200px; width: 400px" name="feedback"></textarea>
+                            <label for="floatingTextarea2">Feedback</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" id="submit" name="submit" class="btn btn-primary">Send</button>
+                    </div>
+                </div>
+                @csrf
+            </form>
+        </div>
+    </div>
+
 
     {{-- profile model code end --}}
 
@@ -617,6 +644,68 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                         // reset the form
                         $("#profilechange")[0].reset();
                         $('#exampleModalUpdate').modal('hide');
+
+                        // reload page after 5 sec
+                        setTimeout(function() {
+                            location.reload(true);
+                        }, 3000);
+                    }
+
+                }
+            });
+            // ajax call end
+
+        });
+
+
+        // click submit button for profile change (update)
+        $("#userfeedback").on('submit', function(e) {
+            e.preventDefault();
+
+            // close alert in 5 sec
+            setTimeout(function() {
+                $('#jsalerterror').fadeOut('slow');
+            }, 5000); // <-- time in milliseconds
+
+            setTimeout(function() {
+                $('#jsalertsuccess').fadeOut('slow');
+            }, 5000); // <-- time in milliseconds
+
+            // get all input values using jquery for empty check validation
+            // spinner for loading...
+            $("#submit").html("<div class='spinner-border text-light' role='status'></div>")
+
+            //ajax call start
+            $.ajax({
+                url: $(this).attr('action'),
+                method: $(this).attr('method'),
+                data: new FormData(this),
+                contentType: 'multipart/form-data',
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                beforeSend: function() {
+                    $(document).find('span.error-text').text('');
+                },
+                success: function(data) {
+
+                    $("#submit").html("Send")
+
+                    if (data.status == 0) {
+                        $("#jsalerterror").show();
+                        $("#jsalerterror").html(data.error['feedback']);
+
+                        // reset the form
+                        $("#profilechange")[0].reset();
+                        $('#exampleModalFeedback').modal('hide');
+                    }
+                    if (data.message == 0) {
+                        $("#jsalertsuccess").show();
+                        $("#jsalertsuccess").html("Feedback Sent!");
+
+                        // reset the form
+                        $("#profilechange")[0].reset();
+                        $('#exampleModalFeedback').modal('hide');
 
                         // reload page after 5 sec
                         setTimeout(function() {

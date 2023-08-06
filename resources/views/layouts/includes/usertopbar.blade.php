@@ -25,6 +25,8 @@
                                     data-bs-target="#exampleModalUpdate">Profile</a></li>
                         @endif
 
+                        <li><a href="#" class="text-white" data-bs-toggle="modal"
+                                data-bs-target="#exampleModalFeedback">Feedback</a></li>
                         <li><a href="/logout" class="text-white">Logout</a></li>
                     </ul>
                 </div>

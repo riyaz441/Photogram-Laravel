@@ -8,6 +8,7 @@ use App\Http\Controllers\auth\ForgotController;
 use App\Http\Controllers\auth\GoogleAuthController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\SignupController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeViewController;
 use App\Http\Controllers\PhotoUploadController;
 use App\Http\Controllers\ProfileController;
@@ -103,3 +104,6 @@ Route::post('/profilechange', [ProfileController::class, 'profilechange']);
 // google oauth route
 Route::get('auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');
 Route::get('auth/google/call-back', [GoogleAuthController::class, 'callbackGoogle']);
+
+// user feedback route
+Route::post('/userfeedback', [FeedbackController::class, 'userfeedback']);
