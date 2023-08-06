@@ -22,7 +22,9 @@ class GoogleAuthController extends Controller
         $google_user = Socialite::driver('google')->user();
 
 
-        $check_google_id = Signup::where('google_id', $google_user->id)->pluck('profile_update_status')->first();
+        $check_google_id = Signup::where('google_id', $google_user->id)->pluck('google_id')->first();
+
+        $check_user_status = Signup::where('google_id', $google_user->id)->pluck('active_status')->first();
 
         if ($check_google_id == "") {
 
@@ -45,14 +47,18 @@ class GoogleAuthController extends Controller
             return redirect('/homeview');
         } else {
 
-            session()->put('google_id', $google_user->id);
-            $sess_google_id = session('google_id');
+            if ($check_user_status == 0) {
+                session()->put('google_id', $google_user->id);
+                $sess_google_id = session('google_id');
 
-            $get_user_id = Signup::where('google_id', '=', $sess_google_id)->first('id');
-            session()->put('user_id', $get_user_id['id']);
-            session('user_id');
+                $get_user_id = Signup::where('google_id', '=', $sess_google_id)->first('id');
+                session()->put('user_id', $get_user_id['id']);
+                session('user_id');
 
-            return redirect('/homeview');
+                return redirect('/homeview');
+            } else {
+                return redirect('/')->with('errormessage', 'Your account is blocked!');
+            }
         }
     }
 }

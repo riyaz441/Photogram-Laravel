@@ -188,6 +188,7 @@ if (session('username') == '') {
                             <td>${user.username}</td>
                             <td>${user.email}</td>
                             <td>${user.mobile}</td>
+                            <td>${user.google_id}</td>
                             <td>${status}</td>
                             <td>
                                 <button type="button" class="btn btn-danger btn-sm block"
@@ -236,6 +237,7 @@ if (session('username') == '') {
                             <td>${user.username}</td>
                             <td>${user.email}</td>
                             <td>${user.mobile}</td>
+                            <td>${user.google_id}</td>
                             <td>${status}</td>
                             <td>
                                 <button type="button" class="btn btn-danger btn-sm block"

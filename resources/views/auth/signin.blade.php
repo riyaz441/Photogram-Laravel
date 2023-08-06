@@ -223,6 +223,15 @@
 
                         </div>
 
+                        @if (\Session::has('errormessage'))
+                            <div class="alert alert-danger text-center mt-3 alert-dismissible fade show"
+                                role="alert">
+                                {!! \Session::get('errormessage') !!}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endif
+
                     </form>
                 </main>
 
