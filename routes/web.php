@@ -5,6 +5,7 @@ use App\Http\Controllers\auth\AdminLoginController;
 use App\Http\Controllers\auth\AdminRegisterController;
 use App\Http\Controllers\auth\ChangePasswordController;
 use App\Http\Controllers\auth\ForgotController;
+use App\Http\Controllers\auth\GoogleAuthController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\SignupController;
 use App\Http\Controllers\HomeViewController;
@@ -98,3 +99,7 @@ Route::post('/profileupdate', [ProfileController::class, 'profile']);
 
 // profile change route
 Route::post('/profilechange', [ProfileController::class, 'profilechange']);
+
+// google oauth route
+Route::get('auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');
+Route::get('auth/google/call-back', [GoogleAuthController::class, 'callbackGoogle']);

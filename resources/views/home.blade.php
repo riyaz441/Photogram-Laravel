@@ -3,7 +3,7 @@ use Carbon\Carbon;
 use App\Models\Signup;
 use App\Models\Profile;
 // url direct access
-if (session('email') == '') {
+if (session('email') == '' and session('google_id') == '') {
     // Redirect browser
     header('Location: /');
     exit();
@@ -15,7 +15,7 @@ $profile_update_status = Signup::where('id', session('user_id'))
     ->first();
 
 // auto fill profile details
-$profile_details = Profile::where('id', session('user_id'))->first();
+$profile_details = Profile::where('userid', session('user_id'))->first();
 ?>
 <!doctype html>
 <html lang="en" data-bs-theme="light">

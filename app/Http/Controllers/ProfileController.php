@@ -64,7 +64,7 @@ class ProfileController extends Controller
             $about = $request->input('about');
             $gender = $request->input('gender');
 
-            Profile::where('id', session('user_id'))->update(['about' => $about, 'gender' => $gender]);
+            Profile::where('userid', session('user_id'))->update(['about' => $about, 'gender' => $gender]);
 
             $image = $request->file('profilephoto');
 

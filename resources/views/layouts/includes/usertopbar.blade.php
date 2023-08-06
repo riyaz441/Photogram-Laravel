@@ -1,7 +1,7 @@
 @php
     use App\Models\Profile;
     use App\Models\Signup;
-    $user = Profile::where('id', session('user_id'))->first();
+    $user = Profile::where('userid', session('user_id'))->first();
     $user_profile_update = Signup::where('id', session('user_id'))->first();
 @endphp
 <header data-bs-theme="dark">
