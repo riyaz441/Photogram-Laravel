@@ -3,7 +3,7 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Admin</div>
-                        <a class="nav-link active" href="/admin_dashboard">
+                        <a class="nav-link active" href="/admindashboardview">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-gauge"></i></div>
                             Admin Dashboard
                         </a>
