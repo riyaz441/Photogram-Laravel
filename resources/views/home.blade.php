@@ -658,7 +658,7 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
         });
 
 
-        // click submit button for profile change (update)
+        // click submit button for user feedback
         $("#userfeedback").on('submit', function(e) {
             e.preventDefault();
 
@@ -707,10 +707,6 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                         $("#profilechange")[0].reset();
                         $('#exampleModalFeedback').modal('hide');
 
-                        // reload page after 5 sec
-                        setTimeout(function() {
-                            location.reload(true);
-                        }, 3000);
                     }
 
                 }

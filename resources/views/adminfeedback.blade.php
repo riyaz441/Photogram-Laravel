@@ -61,6 +61,7 @@ $usersfeedback = Signup::join('user_feedbacks', 'signups.id', '=', 'user_feedbac
                                     <th scope="col">User Name</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Mobile</th>
+                                    <th scope="col">Google Id</th>
                                     <th scope="col">Feedback</th>
                                 </tr>
                             </thead>
@@ -71,7 +72,8 @@ $usersfeedback = Signup::join('user_feedbacks', 'signups.id', '=', 'user_feedbac
                                         {{-- this loop interation is used to create serial no. --}}
                                         <td>{{ $uf->username }}</td>
                                         <td>{{ $uf->email }}</td>
-                                        <td>{{ $uf->mobile }}</td>
+                                        <td>{{ $uf->mobile ?? '---' }}</td>
+                                        <td>{{ $uf->google_id ?? '---' }}</td>
                                         <td>{{ $uf->feedback }}</td>
                                     </tr>
                                 @endforeach
