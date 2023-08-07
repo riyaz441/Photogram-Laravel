@@ -107,3 +107,6 @@ Route::get('auth/google/call-back', [GoogleAuthController::class, 'callbackGoogl
 
 // user feedback route
 Route::post('/userfeedback', [FeedbackController::class, 'userfeedback']);
+
+// admin feedback route
+Route::view('/adminfeedback', 'adminfeedback');

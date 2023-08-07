@@ -7,9 +7,9 @@
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-gauge"></i></div>
                             Admin Dashboard
                         </a>
-                        <a class="nav-link" href="/admin_feedback">
+                        <a class="nav-link" href="/adminfeedback">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-comments"></i></div>
-                            Feedback Management (comming soon)
+                            Feedback Management
                         </a>
                     </div>
                 </div>
