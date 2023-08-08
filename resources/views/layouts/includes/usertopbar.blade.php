@@ -22,7 +22,7 @@
                         @endif
                         @if ($user_profile_update->profile_update_status == 1)
                             <li><a href="#" class="text-white" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModalUpdate">Profile</a></li>
+                                    data-bs-target="#exampleModalUpdate">Profile Update</a></li>
                         @endif
 
                         <li><a href="#" class="text-white" data-bs-toggle="modal"
