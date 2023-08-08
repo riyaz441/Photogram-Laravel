@@ -25,6 +25,7 @@
                                     data-bs-target="#exampleModalUpdate">Profile Update</a></li>
                         @endif
 
+                        <li><a href="/viewprofile" class="text-white">View Profile</a></li>
                         <li><a href="#" class="text-white" data-bs-toggle="modal"
                                 data-bs-target="#exampleModalFeedback">Feedback</a></li>
                         <li><a href="/logout" class="text-white">Logout</a></li>
@@ -39,7 +40,7 @@
     </div>
     <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container">
-            <a href="#" class="navbar-brand d-flex align-items-center">
+            <a href="/homeview" class="navbar-brand d-flex align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
                     stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     aria-hidden="true" class="me-2" viewBox="0 0 24 24">
