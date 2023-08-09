@@ -392,7 +392,7 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                     <div class="row">
 
                         @foreach ($userspost as $up)
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 mt-4">
                                 <div class="card shadow-sm">
                                     <img src="{{ asset($up->photo) }}" alt="image" height="350" width="100%"
                                         id="photo">
