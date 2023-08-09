@@ -715,6 +715,12 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
 
         });
 
+        // search js code start
+        $("#searchbox").keyup(function() {
+            var search = $("#searchbox").val();
+            alert(search);
+        });
+
     });
 </script>
 {{-- js code end --}}
