@@ -112,4 +112,4 @@ Route::post('/userfeedback', [FeedbackController::class, 'userfeedback']);
 Route::view('/adminfeedback', 'adminfeedback');
 
 // view profile
-Route::view('/viewprofile', 'viewprofile');
+Route::view('/viewprofile/{username}', 'viewprofile');

@@ -25,7 +25,8 @@
                                     data-bs-target="#exampleModalUpdate">Profile Update</a></li>
                         @endif
 
-                        <li><a href="/viewprofile" class="text-white">View Profile</a></li>
+                        <li><a href="/viewprofile/{{ $user_profile_update->username }}" class="text-white">View
+                                Profile</a></li>
                         <li><a href="#" class="text-white" data-bs-toggle="modal"
                                 data-bs-target="#exampleModalFeedback">Feedback</a></li>
                         <li><a href="/logout" class="text-white">Logout</a></li>

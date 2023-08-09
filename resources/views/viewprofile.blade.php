@@ -160,6 +160,13 @@ $getfeedbackcount = user_feedback::where('userid', session('user_id'))->count();
         a {
             text-decoration: none;
         }
+
+        #myToast {
+            position: absolute;
+            top: 75px;
+            right: 0;
+            margin-right: 10px;
+        }
     </style>
 
 
@@ -382,6 +389,21 @@ $getfeedbackcount = user_feedback::where('userid', session('user_id'))->count();
     <main>
 
         <div class="album py-5 bg-body-tertiary">
+            @if ($profile_update_status == 0)
+                <div class="toast position-fixed end-2 p-3" id="myToast" role="alert" aria-live="assertive"
+                    aria-atomic="true">
+                    <div class="toast-header">
+                        <img src="../assets/brand/camera.png" class="rounded me-2" alt="..." height="20px"
+                            width="20px">
+                        <strong class="me-auto">Notification</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        Fill the profile
+                    </div>
+                </div>
+            @endif
             <div class="container">
 
                 <div class="col">
@@ -390,18 +412,19 @@ $getfeedbackcount = user_feedback::where('userid', session('user_id'))->count();
                         <div class="container mt-5">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <img src="{{ asset($userimage) }}" class="rounded mx-auto d-block" alt="image"
-                                        height="250" width="250" id="photo">
+                                    <img src="{{ asset($userimage ?? '../assets/brand/person.svg') }}"
+                                        class="rounded mx-auto d-block" alt="image" height="250" width="250"
+                                        id="photo">
                                 </div>
                             </div>
                         </div>
                         <div class="container mt-5">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    Username : <b>{{ $username }}</b>
+                                    Username : <b>{{ $username ?? '---' }}</b>
                                 </div>
                                 <div class="col-sm-6">
-                                    Email : <b>{{ $useremail }}</b>
+                                    Email : <b>{{ $useremail ?? '---' }}</b>
                                 </div>
                             </div>
                         </div>
@@ -411,24 +434,24 @@ $getfeedbackcount = user_feedback::where('userid', session('user_id'))->count();
                                     Mobile : <b>{{ $usermobile ?? '---' }}</b>
                                 </div>
                                 <div class="col-sm-6">
-                                    Gender : <b>{{ $usergender }}</b>
+                                    Gender : <b>{{ $usergender ?? '---' }}</b>
                                 </div>
                             </div>
                         </div>
                         <div class="container mt-5">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    About : <b>{{ $userabout }}</b>
+                                    About : <b>{{ $userabout ?? '---' }}</b>
                                 </div>
                                 <div class="col-sm-6">
-                                    Post Count : <b>{{ $getpostcount }}</b>
+                                    Post Count : <b>{{ $getpostcount ?? '---' }}</b>
                                 </div>
                             </div>
                         </div>
                         <div class="container mt-5">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    Feedback Count : <b>{{ $getfeedbackcount }}</b>
+                                    Feedback Count : <b>{{ $getfeedbackcount ?? '---' }}</b>
                                 </div>
                             </div>
                         </div>
@@ -462,6 +485,8 @@ $getfeedbackcount = user_feedback::where('userid', session('user_id'))->count();
 {{-- js code --}}
 <script>
     $(document).ready(function() {
+
+        $('#myToast').toast('show');
 
         const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: Dark)').matches;
 
