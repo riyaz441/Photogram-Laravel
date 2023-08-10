@@ -129,6 +129,34 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
         a {
             text-decoration: none;
         }
+
+        /* Style for the search results container */
+
+        #searchResults {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #212529;
+            background-color: #3c3f42;
+            z-index: 1;
+            margin-top: 40px;
+            border-radius: 10px;
+        }
+
+        /* Style for each search result item */
+        #searchResults li {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        /* Style for selected search result item */
+        #searchResults li:hover {
+            background-color: #212529;
+        }
     </style>
 
 
@@ -716,9 +744,43 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
         });
 
         // search js code start
-        $("#searchbox").keyup(function() {
-            var search = $("#searchbox").val();
-            alert(search);
+        $('#searchbox').on('keyup', function(e) {
+            //ajax call start
+            var search = $('#searchbox').val();
+            var _token = $('input[name="_token"]').val();
+
+            $.ajax({
+                url: '/search',
+                method: 'post',
+                data: {
+                    searchdata: search,
+                    _token: _token
+                },
+                dataType: 'json',
+                beforeSend: function() {
+                    $(document).find('span.error-text').text('');
+                },
+                success: function(data) {
+
+                    var resultsContainer = $('#searchResults');
+                    resultsContainer.empty();
+
+                    if (data.message == 0) {
+                        $("#searchResults").hide();
+                    } else {
+                        $("#searchResults").show();
+                        $.each(data, function(index, item) {
+                            resultsContainer.append(
+                                '<li class="srkey"><a href= /viewprofilee/' +
+                                item.id + '>' +
+                                item.username +
+                                '</li>');
+                        });
+                    }
+
+                }
+            });
+            // ajax call end
         });
 
     });

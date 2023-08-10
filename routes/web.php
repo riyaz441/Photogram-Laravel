@@ -12,6 +12,7 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeViewController;
 use App\Http\Controllers\PhotoUploadController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 use App\Models\Signup;
 use Illuminate\Support\Facades\Route;
 
@@ -113,3 +114,9 @@ Route::view('/adminfeedback', 'adminfeedback');
 
 // view profile
 Route::view('/viewprofile/{username}', 'viewprofile');
+
+// search route
+Route::post('/search', [SearchController::class, 'usersearch']);
+
+// test
+Route::get('/viewprofilee/{id}', [SearchController::class, 'user']);
