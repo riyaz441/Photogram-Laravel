@@ -143,7 +143,7 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
             border: 1px solid #212529;
             background-color: #3c3f42;
             z-index: 1;
-            margin-top: 40px;
+            margin-top: 55px;
             border-radius: 10px;
         }
 

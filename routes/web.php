@@ -118,5 +118,5 @@ Route::view('/viewprofile/{username}', 'viewprofile');
 // search route
 Route::post('/search', [SearchController::class, 'usersearch']);
 
-// test
+// user click the search result route
 Route::get('/viewprofilee/{id}', [SearchController::class, 'user']);

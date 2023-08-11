@@ -24,6 +24,8 @@ class SearchController extends Controller
 
     public function user($id)
     {
-        return redirect('/viewprofile/' . $id)->with($id);
+        $userid = $id;
+
+        return view('viewprofile', compact('userid'));
     }
 }

@@ -20,10 +20,18 @@ $profile_update_status = Signup::where('id', session('user_id'))
 $profile_details = Profile::where('userid', session('user_id'))->first();
 
 // get user details for show profile
-$usersfeedback = Signup::join('profiles', 'signups.id', '=', 'profiles.userid')
-    ->join('photos', 'signups.id', '=', 'photos.userid')
-    ->where('signups.id', '=', session('user_id'))
-    ->get(['signups.*', 'profiles.*', 'photos.photo']);
+$userid = $userid ?? '';
+if ($userid != '') {
+    $usersfeedback = Signup::join('profiles', 'signups.id', '=', 'profiles.userid')
+        ->join('photos', 'signups.id', '=', 'photos.userid')
+        ->where('signups.id', '=', $userid)
+        ->get(['signups.*', 'profiles.*', 'photos.photo']);
+} else {
+    $usersfeedback = Signup::join('profiles', 'signups.id', '=', 'profiles.userid')
+        ->join('photos', 'signups.id', '=', 'photos.userid')
+        ->where('signups.id', '=', session('user_id'))
+        ->get(['signups.*', 'profiles.*', 'photos.photo']);
+}
 
 foreach ($usersfeedback as $uf) {
     $username = $uf['username'];
