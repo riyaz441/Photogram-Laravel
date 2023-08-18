@@ -74,7 +74,7 @@ $usersfeedback = Signup::join('user_feedbacks', 'signups.id', '=', 'user_feedbac
                                         <td>{{ $uf->email }}</td>
                                         <td>{{ $uf->mobile ?? '---' }}</td>
                                         <td>{{ $uf->google_id ?? '---' }}</td>
-                                        <td>{{ $uf->feedback }}</td>
+                                        <td>{!! $uf->feedback !!}</td>
                                     </tr>
                                 @endforeach
 

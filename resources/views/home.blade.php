@@ -40,6 +40,9 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
     {{-- ajax cdn link --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
+    <!-- rich text editor -->
+    <script src="//cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
+
     {{-- laravel ajax meta link --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -156,6 +159,11 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
         /* Style for selected search result item */
         #searchResults li:hover {
             background-color: #212529;
+        }
+
+        #cke_1_top,
+        #cke_1_bottom {
+            background-color: #c3c6ca;
         }
     </style>
 
@@ -357,9 +365,8 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                     </div>
                     <div class="modal-body">
                         <div class="form-floating">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                                style="height: 200px; width: 400px" name="feedback"></textarea>
-                            <label for="floatingTextarea2">Feedback</label>
+                            <textarea class="form-control" placeholder="Leave a comment here" id="feedback" style="height: 200px; width: 400px"
+                                name="feedback"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -470,6 +477,13 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
 {{-- js code --}}
 <script>
     $(document).ready(function() {
+
+        // Initialize CKEditor
+        CKEDITOR.replace('feedback', {
+            height: "200px"
+        });
+
+        CKEDITOR.addCss('.cke_editable { background-color: #212529; color: white }');
 
         const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: Dark)').matches;
 
@@ -690,6 +704,10 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
         $("#userfeedback").on('submit', function(e) {
             e.preventDefault();
 
+            for (instance in CKEDITOR.instances) {
+                CKEDITOR.instances[instance].updateElement();
+            }
+
             // close alert in 5 sec
             setTimeout(function() {
                 $('#jsalerterror').fadeOut('slow');
@@ -724,7 +742,7 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                         $("#jsalerterror").html(data.error['feedback']);
 
                         // reset the form
-                        $("#profilechange")[0].reset();
+                        CKEDITOR.instances['feedback'].setData('');
                         $('#exampleModalFeedback').modal('hide');
                     }
                     if (data.message == 0) {
@@ -732,7 +750,7 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                         $("#jsalertsuccess").html("Feedback Sent!");
 
                         // reset the form
-                        $("#profilechange")[0].reset();
+                        CKEDITOR.instances['feedback'].setData('');
                         $('#exampleModalFeedback').modal('hide');
 
                     }

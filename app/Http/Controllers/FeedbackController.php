@@ -10,6 +10,10 @@ class FeedbackController extends Controller
 {
     public function userfeedback(Request $request)
     {
+
+        // return $request->post();
+        // exit;
+
         // server side validation
         $validator = Validator::make($request->all(), [
             'feedback' => 'required',
