@@ -392,7 +392,8 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                         <h1 class="fw-light">Share Photo</h1>
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Upload Photo</label>
-                            <input class="form-control" type="file" id="formFile" name="photo">
+                            <input class="form-control mb-2" type="file" id="formFile" name="photo">
+                            <img src="" alt="photoedit" height="100" width="100" id="photoedit">
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Caption</label>
@@ -450,6 +451,21 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                                                         <path
                                                             d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
                                                     </svg> &nbsp; Share</button>
+                                                <div class="btn-group" role="group">
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        More
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><button class="dropdown-item postedit"
+                                                                value="{{ $up->id }}">Edit</button>
+                                                        </li>
+                                                        <li><button class="dropdown-item postdelete"
+                                                                value="{{ $up->id }}">Delete</button>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                             <small
                                                 class="text-body-secondary">{{ $up->created_at->diffForHumans() }}</small>
@@ -511,6 +527,9 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
         // hide the js alert load the page
         $("#jsalerterror").hide();
         $("#jsalertsuccess").hide();
+
+        // hide photo due to first time load page
+        $("#photoedit").hide();
 
         // laravel ajax code
         $.ajaxSetup({
@@ -799,6 +818,32 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                 }
             });
             // ajax call end
+        });
+
+
+        // post edit ajax call
+        $(".postedit").click(function() {
+            var postedit = $(this).val();
+
+            $.ajax({
+                url: "/postedit",
+                method: "POST",
+                data: {
+                    id: postedit,
+                    status: 'postedit'
+                },
+                beforeSend: function() {
+                    $(document).find('span.error-text').text('');
+                },
+                success: function(data) {
+
+                    $("#photoedit").show();
+
+                    $("#photoedit").attr('src', data.photo);
+                    $("#exampleFormControlTextarea1").val(data.caption);
+
+                }
+            });
         });
 
     });

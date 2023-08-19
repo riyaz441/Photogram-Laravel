@@ -120,3 +120,6 @@ Route::post('/search', [SearchController::class, 'usersearch']);
 
 // user click the search result route
 Route::get('/viewprofilee/{id}', [SearchController::class, 'user']);
+
+//post edit route
+Route::post('/postedit', [PhotoUploadController::class, 'postedit']);

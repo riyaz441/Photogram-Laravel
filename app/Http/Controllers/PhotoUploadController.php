@@ -47,4 +47,17 @@ class PhotoUploadController extends Controller
             return response()->json(['message' => 0]);
         }
     }
+
+    public function postedit(Request $request)
+    {
+        $id = $request->input('id');
+
+        $post_edit_details = Photo::where('id', $id)->first();
+
+        $uid = $post_edit_details->id;
+        $uphoto = $post_edit_details->photo;
+        $ucaption = $post_edit_details->caption;
+
+        return response()->json(['id' => $uid, 'photo' => $uphoto, 'caption' => $ucaption]);
+    }
 }
