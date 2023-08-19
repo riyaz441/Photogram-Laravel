@@ -483,7 +483,7 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
             height: "200px"
         });
 
-        CKEDITOR.addCss('.cke_editable { background-color: #212529; color: white }');
+        CKEDITOR.addCss('.cke_editable { background-color: #e9e9e9; color: black }');
 
         const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: Dark)').matches;
 

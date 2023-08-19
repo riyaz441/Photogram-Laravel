@@ -14,7 +14,7 @@ class HomeViewController extends Controller
 
 
         $usersWithPosts = Photo::select('photos.*')
-            ->join('signups', 'signups.id', '=', 'photos.userid')->where('userid', '=', session('user_id'))
+            ->join('signups', 'signups.id', '=', 'photos.userid')->where('photos.userid', '=', session('user_id'))->where('photos.deleted', '=', 0)
             ->get();
         return view('/home', ['userspost' => $usersWithPosts]);
         // $user = Signup::find(1);
