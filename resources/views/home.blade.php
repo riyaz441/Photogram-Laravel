@@ -410,10 +410,12 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                                 name="caption"></textarea>
                             <label for="floatingTextarea3">Caption</label>
                         </div>
+                        <input type="hidden" class="form-control mt-2" id="uid" name="uid"
+                            value="" readonly>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" id="posteditsubmit" name="submit" value=""
+                        <button type="submit" id="posteditsubmit" name="posteditsubmit"
                             class="btn btn-primary">Update</button>
                     </div>
                 </div>
@@ -879,10 +881,73 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
 
                     $("#photoedit").attr('src', data.photo);
                     $("#floatingTextarea3").val(data.caption);
-                    $("#posteditsubmit").val(data.id);
+                    $("#uid").val(data.id);
 
                 }
             });
+        });
+
+
+        // click submit button for profile change (update)
+        $("#postupdate").on('submit', function(e) {
+            e.preventDefault();
+
+            // close alert in 5 sec
+            setTimeout(function() {
+                $('#jsalerterror').fadeOut('slow');
+            }, 5000); // <-- time in milliseconds
+
+            setTimeout(function() {
+                $('#jsalertsuccess').fadeOut('slow');
+            }, 5000); // <-- time in milliseconds
+
+            // get all input values using jquery for empty check validation
+            // spinner for loading...
+            $("#posteditsubmit").html("<div class='spinner-border text-light' role='status'></div>")
+
+            //ajax call start
+            $.ajax({
+                url: $(this).attr('action'),
+                method: $(this).attr('method'),
+                data: new FormData(this),
+                contentType: 'multipart/form-data',
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                beforeSend: function() {
+                    $(document).find('span.error-text').text('');
+                },
+                success: function(data) {
+
+                    $("#posteditsubmit").html("Update");
+                    window.location = '#'
+
+                    if (data.status == 0) {
+                        $("#jsalerterror").show();
+                        $("#jsalerterror").html(data.error['postphoto']);
+
+                        // reset the form
+                        $("#postupdate")[0].reset();
+                        $('#exampleModalPostedit').modal('hide');
+                    }
+                    if (data.message == 0) {
+                        $("#jsalertsuccess").show();
+                        $("#jsalertsuccess").html("Post Updated!");
+
+                        // reset the form
+                        $("#postupdate")[0].reset();
+                        $('#exampleModalPostedit').modal('hide');
+
+                        // reload page after 5 sec
+                        setTimeout(function() {
+                            location.reload(true);
+                        }, 3000);
+                    }
+
+                }
+            });
+            // ajax call end
+
         });
 
     });

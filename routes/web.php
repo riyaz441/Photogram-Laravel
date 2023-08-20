@@ -123,3 +123,6 @@ Route::get('/viewprofilee/{id}', [SearchController::class, 'user']);
 
 //post edit route
 Route::post('/postedit', [PhotoUploadController::class, 'postedit']);
+
+//post update route
+Route::post('/postupdate', [PhotoUploadController::class, 'postupdate']);

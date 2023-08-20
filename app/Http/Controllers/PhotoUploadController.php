@@ -60,4 +60,42 @@ class PhotoUploadController extends Controller
 
         return response()->json(['id' => $uid, 'photo' => $uphoto, 'caption' => $ucaption]);
     }
+
+    public function postupdate(Request $request)
+    {
+        // return $request->post();
+        // exit;
+        // $image = $request->file('postphoto');
+        // echo $image;
+        // exit;
+
+        // server side validation
+        $validator = Validator::make($request->all(), [
+            'postphoto' => 'image|mimes:jpeg,png,jpg|max:5000'
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json([
+                'status' => 0, 'error' => $validator->errors()->toArray()
+            ]);
+        } else {
+            $caption = $request->input('caption');
+            $uid = $request->input('uid');
+
+            Photo::where('id', $uid)->update(['caption' => $caption]);
+
+            $postimage = $request->file('postphoto');
+
+            if ($postimage != "") {
+                $postimage = $request->file('postphoto')->getClientOriginalName();
+                $path = $request->file('postphoto')->storeAs('profileimages', $postimage, 'public');
+                $finalprofileimage = '/storage/' . $path;
+
+                Photo::where('id', $uid)->update(['photo' => $finalprofileimage]);
+                return response()->json(['message' => 0]);
+            }
+
+            return response()->json(['message' => 0]);
+        }
+    }
 }
