@@ -353,6 +353,11 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
         </div>
     @endif
 
+
+
+    {{-- profile model code end --}}
+
+    {{-- feedback model start --}}
     <div class="modal fade" id="exampleModalFeedback" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -378,10 +383,45 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
             </form>
         </div>
     </div>
+    {{-- feedback model end --}}
 
-
-    {{-- profile model code end --}}
-
+    {{-- post edit model start --}}
+    <div class="modal fade" id="exampleModalPostedit" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <form action="/postupdate" method="post" id="postupdate" enctype="multipart/form-data">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Post Update</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="" alt="photoedit" height="100" width="100" id="photoedit"
+                            class="rounded mx-auto d-block">
+                        <div class="mt-3">
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Upload Photo</label>
+                                <input class="form-control" type="file" id="formFile" name="postphoto">
+                            </div>
+                        </div>
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea3" style="height: 120px"
+                                name="caption"></textarea>
+                            <label for="floatingTextarea3">Caption</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" id="posteditsubmit" name="submit" value=""
+                            class="btn btn-primary">Update</button>
+                    </div>
+                </div>
+                @csrf
+            </form>
+        </div>
+    </div>
+    {{-- post edit model end --}}
 
     <main>
 
@@ -393,7 +433,6 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Upload Photo</label>
                             <input class="form-control mb-2" type="file" id="formFile" name="photo">
-                            <img src="" alt="photoedit" height="100" width="100" id="photoedit">
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Caption</label>
@@ -459,9 +498,12 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                                                     </button>
                                                     <ul class="dropdown-menu">
                                                         <li><button class="dropdown-item postedit"
-                                                                value="{{ $up->id }}">Edit</button>
+                                                                value="{{ $up->id }}" data-bs-toggle="modal"
+                                                                data-bs-target="#exampleModalPostedit">Edit</button>
                                                         </li>
-                                                        <li><button class="dropdown-item postdelete"
+                                                        <li><button
+                                                                class="dropdown-item
+                                                                postdelete"
                                                                 value="{{ $up->id }}">Delete</button>
                                                         </li>
                                                     </ul>
@@ -528,8 +570,6 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
         $("#jsalerterror").hide();
         $("#jsalertsuccess").hide();
 
-        // hide photo due to first time load page
-        $("#photoedit").hide();
 
         // laravel ajax code
         $.ajaxSetup({
@@ -837,10 +877,9 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                 },
                 success: function(data) {
 
-                    $("#photoedit").show();
-
                     $("#photoedit").attr('src', data.photo);
-                    $("#exampleFormControlTextarea1").val(data.caption);
+                    $("#floatingTextarea3").val(data.caption);
+                    $("#posteditsubmit").val(data.id);
 
                 }
             });
