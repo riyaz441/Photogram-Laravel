@@ -98,4 +98,29 @@ class PhotoUploadController extends Controller
             return response()->json(['message' => 0]);
         }
     }
+
+    public function postdelete(Request $request)
+    {
+        // return $request->post();
+        // exit;
+
+        $id = $request->input('id');
+
+        $post_delete_details = Photo::where('id', $id)->first();
+
+        $uid = $post_delete_details->id;
+
+        return response()->json(['id' => $uid]);
+    }
+
+    public function postdeletefinal(Request $request)
+    {
+        // return $request->post();
+        // exit;
+
+        $udid = $request->input('udid');
+
+        Photo::where('id', $udid)->update(['deleted' => 1]);
+        return response()->json(['message' => 0]);
+    }
 }

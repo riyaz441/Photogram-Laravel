@@ -425,6 +425,36 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
     </div>
     {{-- post edit model end --}}
 
+    {{-- post delete model start --}}
+    <div class="modal fade" id="exampleModalPostdelete" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <form action="/postdeletefinal" method="post" id="postdelete" enctype="multipart/form-data">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Post Delete</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <p>If you want to delete this post?</p>
+
+                        <input type="hidden" class="form-control mt-2" id="udid" name="udid"
+                            value="" readonly>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" id="postdeletesubmit" name="postdeletesubmit"
+                            class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+                @csrf
+            </form>
+        </div>
+    </div>
+    {{-- post delete model end --}}
+
     <main>
 
         <section class="py-5 text-center container">
@@ -506,7 +536,8 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                                                         <li><button
                                                                 class="dropdown-item
                                                                 postdelete"
-                                                                value="{{ $up->id }}">Delete</button>
+                                                                value="{{ $up->id }}" data-bs-toggle="modal"
+                                                                data-bs-target="#exampleModalPostdelete">Delete</button>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -920,7 +951,7 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                 success: function(data) {
 
                     $("#posteditsubmit").html("Update");
-                    window.location = '#'
+                    window.location = '#';
 
                     if (data.status == 0) {
                         $("#jsalerterror").show();
@@ -937,6 +968,109 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                         // reset the form
                         $("#postupdate")[0].reset();
                         $('#exampleModalPostedit').modal('hide');
+
+                        // reload page after 5 sec
+                        setTimeout(function() {
+                            location.reload(true);
+                        }, 3000);
+                    }
+
+                }
+            });
+            // ajax call end
+
+        });
+
+
+        // post delete get id ajax call
+        $(".postdelete").click(function() {
+            var postdelete = $(this).val();
+
+            $.ajax({
+                url: "/postdelete",
+                method: "POST",
+                data: {
+                    id: postdelete,
+                    status: 'postdelete'
+                },
+                beforeSend: function() {
+                    $(document).find('span.error-text').text('');
+                },
+                success: function(data) {
+
+                    $("#udid").val(data.id);
+
+                }
+            });
+        });
+
+
+        // post edit ajax call
+        $(".postedit").click(function() {
+            var postedit = $(this).val();
+
+            $.ajax({
+                url: "/postedit",
+                method: "POST",
+                data: {
+                    id: postedit,
+                    status: 'postedit'
+                },
+                beforeSend: function() {
+                    $(document).find('span.error-text').text('');
+                },
+                success: function(data) {
+
+                    $("#photoedit").attr('src', data.photo);
+                    $("#floatingTextarea3").val(data.caption);
+                    $("#uid").val(data.id);
+
+                }
+            });
+        });
+
+
+        // click submit button for profile change (update)
+        $("#postdelete").on('submit', function(e) {
+            e.preventDefault();
+
+            // close alert in 5 sec
+            setTimeout(function() {
+                $('#jsalerterror').fadeOut('slow');
+            }, 5000); // <-- time in milliseconds
+
+            setTimeout(function() {
+                $('#jsalertsuccess').fadeOut('slow');
+            }, 5000); // <-- time in milliseconds
+
+            // get all input values using jquery for empty check validation
+            // spinner for loading...
+            $("#postdeletesubmit").html("<div class='spinner-border text-light' role='status'></div>")
+
+            //ajax call start
+            $.ajax({
+                url: $(this).attr('action'),
+                method: $(this).attr('method'),
+                data: new FormData(this),
+                contentType: 'multipart/form-data',
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                beforeSend: function() {
+                    $(document).find('span.error-text').text('');
+                },
+                success: function(data) {
+
+                    $("#postdeletesubmit").html("Delete");
+                    window.location = '#';
+
+                    if (data.message == 0) {
+                        $("#jsalerterror").show();
+                        $("#jsalerterror").html("Post Deleted!");
+
+                        // reset the form
+                        $("#postdelete")[0].reset();
+                        $('#exampleModalPostdelete').modal('hide');
 
                         // reload page after 5 sec
                         setTimeout(function() {

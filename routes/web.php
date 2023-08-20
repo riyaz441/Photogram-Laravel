@@ -126,3 +126,9 @@ Route::post('/postedit', [PhotoUploadController::class, 'postedit']);
 
 //post update route
 Route::post('/postupdate', [PhotoUploadController::class, 'postupdate']);
+
+// get delete id route
+Route::post('/postdelete', [PhotoUploadController::class, 'postdelete']);
+
+// post delete route
+Route::post('/postdeletefinal', [PhotoUploadController::class, 'postdeletefinal']);
