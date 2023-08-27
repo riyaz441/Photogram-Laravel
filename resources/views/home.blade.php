@@ -46,6 +46,9 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
     {{-- laravel ajax meta link --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    {{-- copy clipboard link --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -455,6 +458,34 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
     </div>
     {{-- post delete model end --}}
 
+    {{-- post share model start --}}
+    <div class="modal fade" id="exampleModalPostshare" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Post Share</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="btn-group d-flex align-items-center justify-content-center" role="group"
+                        aria-label="Basic example">
+                        <button type="button" class="btn btn-secondary" id="shareid"></button>
+                        <button type="button" class="btn btn-primary" id="button-addon2">Copy</button>
+                    </div>
+
+                    {{-- <div class="input-group mb-3">
+                        <div id="shareid"></div>
+                        <button class="btn btn-outline-secondary">Copy</button>
+                    </div> --}}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- post share model end --}}
+
     <main>
 
         <section class="py-5 text-center container">
@@ -515,7 +546,10 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                                                         <path
                                                             d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z" />
                                                     </svg> &nbsp; Like</button>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary"><svg
+                                                <button type="button" value="{{ $up->id }}"
+                                                    class="btn btn-sm btn-outline-secondary share"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModalPostshare"><svg
                                                         xmlns="http://www.w3.org/2000/svg" width="16"
                                                         height="16" fill="currentColor" class="bi bi-share-fill"
                                                         viewBox="0 0 16 16">
@@ -568,6 +602,27 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
 {{-- js code --}}
 <script>
     $(document).ready(function() {
+
+        // copy clipboard
+        // Add click event handler to the copy button
+        $("#button-addon2").click(function() {
+            // Get the text to copy
+            var textToCopy = $("#shareid").text();
+
+            // Create a temporary input element to copy the text
+            var $tempInput = $("<input>");
+            $("body").append($tempInput);
+            $tempInput.val(textToCopy).select();
+
+            // Copy the text to the clipboard
+            document.execCommand("copy");
+
+            // Remove the temporary input element
+            $tempInput.remove();
+
+            // Provide user feedback (optional)
+            alert("Text copied to clipboard: " + textToCopy);
+        });
 
         // Initialize CKEditor
         CKEDITOR.replace('feedback', {
@@ -1081,6 +1136,16 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                 }
             });
             // ajax call end
+
+        });
+
+
+        // post share ajax call
+        $(".share").click(function() {
+            var share = "";
+            share = $(this).val();
+
+            $("#shareid").html("http://127.0.0.1:8000/sharepage/" + share);
 
         });
 

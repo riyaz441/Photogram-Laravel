@@ -13,6 +13,7 @@ use App\Http\Controllers\HomeViewController;
 use App\Http\Controllers\PhotoUploadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ShareController;
 use App\Models\Signup;
 use Illuminate\Support\Facades\Route;
 
@@ -132,3 +133,6 @@ Route::post('/postdelete', [PhotoUploadController::class, 'postdelete']);
 
 // post delete route
 Route::post('/postdeletefinal', [PhotoUploadController::class, 'postdeletefinal']);
+
+// share show page route
+Route::view('/sharepage/{id}', 'sharepostshow');
