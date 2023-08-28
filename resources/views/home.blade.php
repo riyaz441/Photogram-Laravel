@@ -46,10 +46,6 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
     {{-- laravel ajax meta link --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    {{-- copy clipboard link --}}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
 
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -471,14 +467,12 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
 
                     <div class="btn-group d-flex align-items-center justify-content-center" role="group"
                         aria-label="Basic example">
-                        <button type="button" class="btn btn-secondary" id="shareid"></button>
-                        <button type="button" class="btn btn-primary" id="button-addon2">Copy</button>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control shareid" placeholder="Recipient's username"
+                                aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <button class="btn btn-primary" id="copybutton">Copy</button>
+                        </div>
                     </div>
-
-                    {{-- <div class="input-group mb-3">
-                        <div id="shareid"></div>
-                        <button class="btn btn-outline-secondary">Copy</button>
-                    </div> --}}
 
                 </div>
             </div>
@@ -603,26 +597,6 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
 <script>
     $(document).ready(function() {
 
-        // copy clipboard
-        // Add click event handler to the copy button
-        $("#button-addon2").click(function() {
-            // Get the text to copy
-            var textToCopy = $("#shareid").text();
-
-            // Create a temporary input element to copy the text
-            var $tempInput = $("<input>");
-            $("body").append($tempInput);
-            $tempInput.val(textToCopy).select();
-
-            // Copy the text to the clipboard
-            document.execCommand("copy");
-
-            // Remove the temporary input element
-            $tempInput.remove();
-
-            // Provide user feedback (optional)
-            alert("Text copied to clipboard: " + textToCopy);
-        });
 
         // Initialize CKEditor
         CKEDITOR.replace('feedback', {
@@ -1145,8 +1119,19 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
             var share = "";
             share = $(this).val();
 
-            $("#shareid").html("http://127.0.0.1:8000/sharepage/" + share);
+            $(".shareid").val("http://127.0.0.1:8000/sharepage/" + share);
 
+        });
+
+
+        // copy clipboard
+        $("#copybutton").click(function() {
+            var copyText = "";
+            copyText = $('.shareid');
+            copyText.select();
+            document.execCommand('copy');
+            $("#copybutton").html("Copied!");
+            setTimeout("jQuery('#copybutton').html('Copy');", 3000);
         });
 
     });
