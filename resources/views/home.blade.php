@@ -46,6 +46,9 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
     {{-- laravel ajax meta link --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    {{-- bootstrap icon cdn --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
 
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -488,12 +491,19 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                     <div class="col-lg-6 col-md-8 mx-auto">
                         <h1 class="fw-light">Share Photo</h1>
                         <div class="mb-3">
-                            <label for="formFile" class="form-label">Upload Photo</label>
+                            <label for="formFile" class="form-label">Upload Photo <button type="button"
+                                    class="btn" data-toggle="tooltip" data-placement="top"
+                                    title="Support only jpeg,jpg,png.  Maximum size 5mb."><i
+                                        class="bi bi-question-circle-fill"></i></button>
+                            </label>
                             <input class="form-control mb-2" type="file" id="formFile" name="photo">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Caption</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="caption"></textarea>
+                            <label for="exampleFormControlTextarea1" class="form-label">Caption <button
+                                    type="button" class="btn" data-toggle="tooltip" data-placement="top"
+                                    title="Maximum length 500."><i
+                                        class="bi bi-question-circle-fill"></i></button></label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="caption" maxlength="500"></textarea>
                         </div>
                         <button class="btn btn-secondary my-2" type="submit" id="submit"
                             name="submit">Share</button>
@@ -596,6 +606,9 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
 {{-- js code --}}
 <script>
     $(document).ready(function() {
+
+        // tooltip
+        $('[data-toggle="tooltip"]').tooltip();
 
 
         // Initialize CKEditor
