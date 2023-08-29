@@ -241,7 +241,7 @@ $caption = $post_details->caption;
     </div>
 
 
-    @include('layouts.includes.usertopbar')
+    {{-- @include('layouts.includes.usertopbar') --}}
 
     <main>
 
