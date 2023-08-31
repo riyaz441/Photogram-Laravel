@@ -136,3 +136,6 @@ Route::post('/postdeletefinal', [PhotoUploadController::class, 'postdeletefinal'
 
 // share show page route
 Route::view('/sharepage/{id}', 'sharepostshow');
+
+// main home route
+Route::view('/mainhome', 'mainhome');

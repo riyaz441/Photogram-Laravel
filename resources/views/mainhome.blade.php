@@ -2,6 +2,7 @@
 use Carbon\Carbon;
 use App\Models\Signup;
 use App\Models\Profile;
+use App\Models\Photo;
 // url direct access
 if (session('email') == '' and session('google_id') == '') {
     // Redirect browser
@@ -16,6 +17,11 @@ $profile_update_status = Signup::where('id', session('user_id'))
 
 // auto fill profile details
 $profile_details = Profile::where('userid', session('user_id'))->first();
+
+// get random post for home page
+$randompost = Photo::inRandomOrder()
+    ->limit(6)
+    ->get();
 ?>
 <!doctype html>
 <html lang="en" data-bs-theme="light">
@@ -485,61 +491,26 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
 
     <main>
 
-        <section class="py-5 text-center container">
-            <form action="/photoupload" method="post" id="photoupload" enctype="multipart/form-data">
-                <div class="row py-lg-5">
-                    <div class="col-lg-6 col-md-8 mx-auto">
-
-                        {{-- main home page button --}}
-                        <button type="button" class="btn btn-outline-secondary btn-lg mt-3 mb-3"> <i
-                                class="bi bi-house-fill"></i> <a href="/mainhome"
-                                class="text-white">Home</a></button>
-
-                        <h1 class="fw-light">Share Photo</h1>
-                        <div class="mb-3">
-                            <label for="formFile" class="form-label">Upload Photo <button type="button"
-                                    class="btn" data-toggle="tooltip" data-placement="top"
-                                    title="Support only jpeg,jpg,png.  Maximum size 5mb."><i
-                                        class="bi bi-question-circle-fill"></i></button>
-                            </label>
-                            <input class="form-control mb-2" type="file" id="formFile" name="photo">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Caption <button
-                                    type="button" class="btn" data-toggle="tooltip" data-placement="top"
-                                    title="Maximum length 500."><i
-                                        class="bi bi-question-circle-fill"></i></button></label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="caption" maxlength="500"></textarea>
-                        </div>
-                        <button class="btn btn-secondary my-2" type="submit" id="submit"
-                            name="submit">Share</button>
-                        </p>
-
-                        {{-- javascript validation alert for error --}}
-
-                        <div class="alert alert-danger text-center" role="alert" id="jsalerterror">
-
-                        </div>
-
-                        {{-- success alert message --}}
-                        <div class="alert alert-success text-center" role="alert" id="jsalertsuccess">
-
-                        </div>
-
-                    </div>
-                </div>
-                @csrf
-            </form>
-
-        </section>
-
         <div class="album py-5 bg-body-tertiary">
             <div class="container">
 
                 <div class="col">
+
+                    {{-- javascript validation alert for error --}}
+
+                    <div class="alert alert-danger text-center" role="alert" id="jsalerterror">
+
+                    </div>
+
+                    {{-- success alert message --}}
+                    <div class="alert alert-success text-center" role="alert" id="jsalertsuccess">
+
+                    </div>
+
+
                     <div class="row">
 
-                        @foreach ($userspost as $up)
+                        @foreach ($randompost as $up)
                             <div class="col-sm-4 mt-4">
                                 <div class="card shadow-sm">
                                     <img src="{{ asset($up->photo) }}" alt="image" height="350" width="100%"
