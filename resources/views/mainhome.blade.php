@@ -173,6 +173,10 @@ $randompost = Photo::inRandomOrder()
         #cke_1_bottom {
             background-color: #c3c6ca;
         }
+
+        .show-read-more .more-text {
+            display: none;
+        }
     </style>
 
 
@@ -517,7 +521,7 @@ $randompost = Photo::inRandomOrder()
                                         id="photo">
 
                                     <div class="card-body">
-                                        <p class="card-text">{{ $up->caption }}</p>
+                                        <p class="card-text show-read-more">{{ $up->caption }}</p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-outline-secondary"><svg
@@ -1122,6 +1126,24 @@ $randompost = Photo::inRandomOrder()
             document.execCommand('copy');
             $("#copybutton").html("Copied!");
             setTimeout("jQuery('#copybutton').html('Copy');", 3000);
+        });
+
+
+        // word wrap
+        var maxLength = 40;
+        $(".show-read-more").each(function() {
+            var myStr = $(this).text();
+            if ($.trim(myStr).length > maxLength) {
+                var newStr = myStr.substring(0, maxLength);
+                var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+                $(this).empty().html(newStr);
+                $(this).append(' <a href="javascript:void(0);" class="read-more">read more...</a>');
+                $(this).append('<span class="more-text">' + removedStr + '</span>');
+            }
+        });
+        $(".read-more").click(function() {
+            $(this).siblings(".more-text").contents().unwrap();
+            $(this).remove();
         });
 
     });
