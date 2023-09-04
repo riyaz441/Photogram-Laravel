@@ -152,12 +152,14 @@
                                 Signin</a></p>
 
                         {{-- javascript validation alert for error --}}
-                        <div class="alert alert-danger text-center" role="alert" id="jsalerterror">
+                        <div class="alert alert-danger text-center" role="alert" id="jsalerterror"
+                            style="visibility:hidden">
 
                         </div>
 
                         {{-- success alert message --}}
-                        <div class="alert alert-success text-center" role="alert" id="jsalertsuccess">
+                        <div class="alert alert-success text-center" role="alert" id="jsalertsuccess"
+                            style="visibility:hidden">
 
                         </div>
 
@@ -207,6 +209,7 @@
             // empty check validation
             if (email == "") {
                 $("#jsalerterror").show();
+                $("#jsalerterror").css("visibility", "visible");
                 $("#jsalerterror").html("Enter Email!");
             } else {
                 // spinner for loading...
@@ -229,18 +232,22 @@
 
                         if (data.forgotpasswordstatus == 1) {
                             $("#jsalerterror").show();
+                            $("#jsalerterror").css("visibility", "visible");
                             $("#jsalerterror").html('Email not found');
                         } else if (data.mailsentstatus == 0) {
                             $("#jsalertsuccess").show();
+                            $("#jsalertsuccess").css("visibility", "visible");
                             $("#jsalertsuccess").html('Vertification Mail Sent');
                         } else if (data.mailsentstatus == 1) {
                             $("#jsalerterror").show();
+                            $("#jsalerterror").css("visibility", "visible");
                             $("#jsalerterror").html('Vertification Mail Not Sent');
                         } else if (data.error['email'] ==
                             "The email field is required." || data.error['email'] ==
                             "The email field must be a valid email address."
                         ) { // server side validation response
                             $("#jsalerterror").show();
+                            $("#jsalerterror").css("visibility", "visible");
                             $("#jsalerterror").html(data.error['email']);
                         }
 

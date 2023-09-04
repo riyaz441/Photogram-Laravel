@@ -195,12 +195,14 @@
 
                         {{-- javascript validation alert for error --}}
 
-                        <div class="alert alert-danger text-center" role="alert" id="jsalerterror">
+                        <div class="alert alert-danger text-center" role="alert" id="jsalerterror"
+                            style="visibility:hidden">
 
                         </div>
 
                         {{-- success alert message --}}
-                        <div class="alert alert-success text-center" role="alert" id="jsalertsuccess">
+                        <div class="alert alert-success text-center" role="alert" id="jsalertsuccess"
+                            style="visibility:hidden">
 
                         </div>
 
@@ -263,15 +265,19 @@
                 // empty check validation
                 if (username == "") {
                     $("#jsalerterror").show();
+                    $("#jsalerterror").css("visibility", "visible");
                     $("#jsalerterror").html("Enter Username!");
                 } else if (email == "") {
                     $("#jsalerterror").show();
+                    $("#jsalerterror").css("visibility", "visible");
                     $("#jsalerterror").html("Enter Email Address!");
                 } else if (password == "") {
                     $("#jsalerterror").show();
+                    $("#jsalerterror").css("visibility", "visible");
                     $("#jsalerterror").html("Enter Password!");
                 } else if (mobile == "") {
                     $("#jsalerterror").show();
+                    $("#jsalerterror").css("visibility", "visible");
                     $("#jsalerterror").html("Enter Mobile Number!");
                 } else {
                     // spinner for loading...
@@ -294,39 +300,47 @@
 
                             if (data.message == 0) {
                                 $("#jsalertsuccess").show();
+                                $("#jsalertsuccess").css("visibility", "visible");
                                 $("#jsalerterror").hide();
+                                $("#jsalerterror").css("visibility", "hidden");
                                 $("#jsalertsuccess").html("Signup Success!");
 
                                 // reset the form
                                 $("#signup_form")[0].reset();
                             } else if (data.message == 23000) {
                                 $("#jsalerterror").show();
+                                $("#jsalerterror").css("visibility", "visible");
                                 $("#jsalerterror").html("Duplicate Values!");
                             } else if (data.error['username'] ==
                                 "The username field is required."
                             ) { // server side validation response
                                 $("#jsalerterror").show();
+                                $("#jsalerterror").css("visibility", "visible");
                                 $("#jsalerterror").html(data.error['username']);
                             } else if (data.error['email'] ==
                                 "The email field is required." || data.error['email'] ==
                                 "The email field must be a valid email address."
                             ) { // server side validation response
                                 $("#jsalerterror").show();
+                                $("#jsalerterror").css("visibility", "visible");
                                 $("#jsalerterror").html(data.error['email']);
                             } else if (data.error['password'] ==
                                 "The password field is required." || data.error['password'] ==
                                 "The password field must be at least 8 characters."
                             ) { // server side validation response
                                 $("#jsalerterror").show();
+                                $("#jsalerterror").css("visibility", "visible");
                                 $("#jsalerterror").html(data.error['password']);
                             } else if (data.error['mobile'] ==
                                 "The mobile field is required." || data.error['mobile'] ==
                                 "The mobile field must be 10 digits."
                             ) { // server side validation response
                                 $("#jsalerterror").show();
+                                $("#jsalerterror").css("visibility", "visible");
                                 $("#jsalerterror").html(data.error['mobile']);
                             } else {
                                 $("#jsalerterror").show();
+                                $("#jsalerterror").css("visibility", "visible");
                                 $("#jsalerterror").html("Signup Failed!");
                             }
 

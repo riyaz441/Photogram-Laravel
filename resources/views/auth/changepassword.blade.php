@@ -186,12 +186,14 @@
                                 Signin</a></p>
 
                         {{-- javascript validation alert for error --}}
-                        <div class="alert alert-danger text-center" role="alert" id="jsalerterror">
+                        <div class="alert alert-danger text-center" role="alert" id="jsalerterror"
+                            style="visibility:hidden">
 
                         </div>
 
                         {{-- success alert message --}}
-                        <div class="alert alert-success text-center" role="alert" id="jsalertsuccess">
+                        <div class="alert alert-success text-center" role="alert" id="jsalertsuccess"
+                            style="visibility:hidden">
 
                         </div>
 
@@ -242,9 +244,11 @@
             // empty check validation
             if (password == "") {
                 $("#jsalerterror").show();
+                $("#jsalerterror").css("visibility", "visible");
                 $("#jsalerterror").html("Enter New Password!");
             } else if (passwordcrm == "") {
                 $("#jsalerterror").show();
+                $("#jsalerterror").css("visibility", "visible");
                 $("#jsalerterror").html("Enter Confirm Password!");
             } else {
                 // spinner for loading...
@@ -267,6 +271,8 @@
 
                         if (data.changepassword_status == 0) {
                             $("#jsalertsuccess").show();
+                            $("#jsalertsuccess").css("visibility", "visible");
+                            $("#jsalerterror").css("visibility", "hidden");
                             $("#jsalertsuccess").html("Password Changed Successfully");
                         } else if (data.error['password'] ==
                             "The password field is required." || data.error['password'] ==
@@ -277,9 +283,11 @@
                             "The password field must be at least 8 characters."
                         ) { // server side validation response
                             $("#jsalerterror").show();
+                            $("#jsalerterror").css("visibility", "visible");
                             $("#jsalerterror").html(data.error['password']);
                         } else {
                             $("#jsalerterror").show();
+                            $("#jsalerterror").css("visibility", "visible");
                             $("#jsalerterror").html("Password Not Changed!");
                         }
 

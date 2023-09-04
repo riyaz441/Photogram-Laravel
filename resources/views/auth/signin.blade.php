@@ -214,12 +214,14 @@
                         </div>
 
                         {{-- javascript validation alert for error --}}
-                        <div class="alert alert-danger text-center mt-3" role="alert" id="jsalerterror">
+                        <div class="alert alert-danger text-center mt-3" role="alert" id="jsalerterror"
+                            style="visibility:hidden">
 
                         </div>
 
                         {{-- success alert message --}}
-                        <div class="alert alert-success text-center mt-3" role="alert" id="jsalertsuccess">
+                        <div class="alert alert-success text-center mt-3" role="alert" id="jsalertsuccess"
+                            style="visibility:hidden">
 
                         </div>
 
@@ -304,26 +306,31 @@
 
                         if (data.status == 1) {
                             $("#jsalerterror").show();
+                            $("#jsalerterror").css("visibility", "visible");
                             $("#jsalerterror").html("Your account is deleted!");
                         } else if (data.block_status == 1) {
                             $("#jsalerterror").show();
+                            $("#jsalerterror").css("visibility", "visible");
                             $("#jsalerterror").html("Your account is blocked!");
                         } else if (data.login_status == 0) {
                             window.location = '/homeview';
                         } else if (data.login_status == 1) {
                             $("#jsalerterror").show();
+                            $("#jsalerterror").css("visibility", "visible");
                             $("#jsalerterror").html("Login Failed!");
                         } else if (data.error['email'] ==
                             "The email field is required." || data.error['email'] ==
                             "The email field must be a valid email address."
                         ) { // server side validation response
                             $("#jsalerterror").show();
+                            $("#jsalerterror").css("visibility", "visible");
                             $("#jsalerterror").html(data.error['email']);
                         } else if (data.error['password'] ==
                             "The password field is required." || data.error['password'] ==
                             "The password field must be at least 8 characters."
                         ) { // server side validation response
                             $("#jsalerterror").show();
+                            $("#jsalerterror").css("visibility", "visible");
                             $("#jsalerterror").html(data.error['password']);
                         }
 

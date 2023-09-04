@@ -175,12 +175,14 @@
                             id="submit">Login</button>
 
                         {{-- javascript validation alert for error --}}
-                        <div class="alert alert-danger text-center" role="alert" id="jsalerterror">
+                        <div class="alert alert-danger text-center" role="alert" id="jsalerterror"
+                            style="visibility:hidden">
 
                         </div>
 
                         {{-- success alert message --}}
-                        <div class="alert alert-success text-center" role="alert" id="jsalertsuccess">
+                        <div class="alert alert-success text-center" role="alert" id="jsalertsuccess"
+                            style="visibility:hidden">
 
                         </div>
 
@@ -231,9 +233,11 @@
             // empty check validation
             if (username == "") {
                 $("#jsalerterror").show();
+                $("#jsalerterror").css("visibility", "visible");
                 $("#jsalerterror").html("Enter Username!");
             } else if (password == "") {
                 $("#jsalerterror").show();
+                $("#jsalerterror").css("visibility", "visible");
                 $("#jsalerterror").html("Enter Password!");
             } else {
                 // spinner for loading...
@@ -258,17 +262,20 @@
                             window.location = '/admindashboardview';
                         } else if (data.login_status == 1) {
                             $("#jsalerterror").show();
+                            $("#jsalerterror").css("visibility", "visible");
                             $("#jsalerterror").html("Login Failed!");
                         } else if (data.error['username'] ==
                             "The username field is required."
                         ) { // server side validation response
                             $("#jsalerterror").show();
+                            $("#jsalerterror").css("visibility", "visible");
                             $("#jsalerterror").html(data.error['username']);
                         } else if (data.error['password'] ==
                             "The password field is required." || data.error['password'] ==
                             "The password field must be at least 8 characters."
                         ) { // server side validation response
                             $("#jsalerterror").show();
+                            $("#jsalerterror").css("visibility", "visible");
                             $("#jsalerterror").html(data.error['password']);
                         }
 
