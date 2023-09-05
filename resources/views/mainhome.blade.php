@@ -432,12 +432,14 @@ $randompost = Photo::inRandomOrder()
 
                     {{-- javascript validation alert for error --}}
 
-                    <div class="alert alert-danger text-center" role="alert" id="jsalerterror">
+                    <div class="alert alert-danger text-center" role="alert" id="jsalerterror"
+                        style="visibility:hidden">
 
                     </div>
 
                     {{-- success alert message --}}
-                    <div class="alert alert-success text-center" role="alert" id="jsalertsuccess">
+                    <div class="alert alert-success text-center" role="alert" id="jsalertsuccess"
+                        style="visibility:hidden">
 
                     </div>
 
@@ -545,62 +547,6 @@ $randompost = Photo::inRandomOrder()
             }
         });
 
-        // click submit button
-        $("#photoupload").on('submit', function(e) {
-            e.preventDefault();
-
-            // close alert in 5 sec
-            setTimeout(function() {
-                $('#jsalerterror').fadeOut('slow');
-            }, 5000); // <-- time in milliseconds
-
-            setTimeout(function() {
-                $('#jsalertsuccess').fadeOut('slow');
-            }, 5000); // <-- time in milliseconds
-
-            // get all input values using jquery for empty check validation
-            // spinner for loading...
-            $("#submit").html("<div class='spinner-border text-light' role='status'></div>")
-
-            // ajax call start
-            $.ajax({
-                url: $(this).attr('action'),
-                method: $(this).attr('method'),
-                data: new FormData(this),
-                contentType: 'multipart/form-data',
-                processData: false,
-                dataType: 'json',
-                contentType: false,
-                beforeSend: function() {
-                    $(document).find('span.error-text').text('');
-                },
-                success: function(data) {
-
-                    $("#submit").html("Share")
-
-                    if (data.status == 0) {
-                        $("#jsalerterror").show();
-                        $("#jsalerterror").html(data.error['photo']);
-                    }
-                    if (data.message == 0) {
-                        $("#jsalertsuccess").show();
-                        $("#jsalertsuccess").html("Photo Shared!");
-
-                        // reset the form
-                        $("#photoupload")[0].reset();
-
-                        // reload page after 5 sec
-                        setTimeout(function() {
-                            location.reload(true);
-                        }, 5000);
-                    }
-
-                }
-            });
-            // ajax call end
-            // https://www.webslesson.info/2018/09/upload-image-in-laravel-using-ajax.html
-        });
-
 
         // click submit button for profile upload
         $("#profileupdate").on('submit', function(e) {
@@ -637,6 +583,7 @@ $randompost = Photo::inRandomOrder()
 
                     if (data.status == 0) {
                         $("#jsalerterror").show();
+                        $("#jsalerterror").css("visibility", "visible");
                         $("#jsalerterror").html(data.error['profilephoto']);
 
                         // reset the form
@@ -645,6 +592,7 @@ $randompost = Photo::inRandomOrder()
                     }
                     if (data.message == 0) {
                         $("#jsalertsuccess").show();
+                        $("#jsalertsuccess").css("visibility", "visible");
                         $("#jsalertsuccess").html("Profile Saved!");
 
                         // reset the form
@@ -699,6 +647,7 @@ $randompost = Photo::inRandomOrder()
 
                     if (data.status == 0) {
                         $("#jsalerterror").show();
+                        $("#jsalerterror").css("visibility", "visible");
                         $("#jsalerterror").html(data.error['profilephoto']);
 
                         // reset the form
@@ -707,6 +656,7 @@ $randompost = Photo::inRandomOrder()
                     }
                     if (data.message == 0) {
                         $("#jsalertsuccess").show();
+                        $("#jsalertsuccess").css("visibility", "visible");
                         $("#jsalertsuccess").html("Profile Updated!");
 
                         // reset the form
@@ -765,6 +715,7 @@ $randompost = Photo::inRandomOrder()
 
                     if (data.status == 0) {
                         $("#jsalerterror").show();
+                        $("#jsalerterror").css("visibility", "visible");
                         $("#jsalerterror").html(data.error['feedback']);
 
                         // reset the form
@@ -773,6 +724,7 @@ $randompost = Photo::inRandomOrder()
                     }
                     if (data.message == 0) {
                         $("#jsalertsuccess").show();
+                        $("#jsalertsuccess").css("visibility", "visible");
                         $("#jsalertsuccess").html("Feedback Sent!");
 
                         // reset the form
@@ -889,6 +841,7 @@ $randompost = Photo::inRandomOrder()
 
                     if (data.message == 0) {
                         $("#jsalerterror").show();
+                        $("#jsalerterror").css("visibility", "visible");
                         $("#jsalerterror").html("Post Deleted!");
 
                         // reset the form

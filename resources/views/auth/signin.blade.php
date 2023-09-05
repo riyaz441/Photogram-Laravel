@@ -281,9 +281,11 @@
             // empty check validation
             if (email == "") {
                 $("#jsalerterror").show();
+                $("#jsalerterror").css("visibility", "visible");
                 $("#jsalerterror").html("Enter Email!");
             } else if (password == "") {
                 $("#jsalerterror").show();
+                $("#jsalerterror").css("visibility", "visible");
                 $("#jsalerterror").html("Enter Password!");
             } else {
                 // spinner for loading...

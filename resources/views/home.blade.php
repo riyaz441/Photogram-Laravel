@@ -521,12 +521,14 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
 
                         {{-- javascript validation alert for error --}}
 
-                        <div class="alert alert-danger text-center" role="alert" id="jsalerterror">
+                        <div class="alert alert-danger text-center" role="alert" id="jsalerterror"
+                            style="visibility:hidden">
 
                         </div>
 
                         {{-- success alert message --}}
-                        <div class="alert alert-success text-center" role="alert" id="jsalertsuccess">
+                        <div class="alert alert-success text-center" role="alert" id="jsalertsuccess"
+                            style="visibility:hidden">
 
                         </div>
 
@@ -698,10 +700,12 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
 
                     if (data.status == 0) {
                         $("#jsalerterror").show();
+                        $("#jsalerterror").css("visibility", "visible");
                         $("#jsalerterror").html(data.error['photo']);
                     }
                     if (data.message == 0) {
                         $("#jsalertsuccess").show();
+                        $("#jsalertsuccess").css("visibility", "visible");
                         $("#jsalertsuccess").html("Photo Shared!");
 
                         // reset the form
@@ -755,6 +759,7 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
 
                     if (data.status == 0) {
                         $("#jsalerterror").show();
+                        $("#jsalerterror").css("visibility", "visible");
                         $("#jsalerterror").html(data.error['profilephoto']);
 
                         // reset the form
@@ -763,6 +768,7 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                     }
                     if (data.message == 0) {
                         $("#jsalertsuccess").show();
+                        $("#jsalertsuccess").css("visibility", "visible");
                         $("#jsalertsuccess").html("Profile Saved!");
 
                         // reset the form
@@ -817,6 +823,7 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
 
                     if (data.status == 0) {
                         $("#jsalerterror").show();
+                        $("#jsalerterror").css("visibility", "visible");
                         $("#jsalerterror").html(data.error['profilephoto']);
 
                         // reset the form
@@ -825,6 +832,7 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                     }
                     if (data.message == 0) {
                         $("#jsalertsuccess").show();
+                        $("#jsalertsuccess").css("visibility", "visible");
                         $("#jsalertsuccess").html("Profile Updated!");
 
                         // reset the form
@@ -883,6 +891,7 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
 
                     if (data.status == 0) {
                         $("#jsalerterror").show();
+                        $("#jsalerterror").css("visibility", "visible");
                         $("#jsalerterror").html(data.error['feedback']);
 
                         // reset the form
@@ -891,6 +900,7 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                     }
                     if (data.message == 0) {
                         $("#jsalertsuccess").show();
+                        $("#jsalertsuccess").css("visibility", "visible");
                         $("#jsalertsuccess").html("Feedback Sent!");
 
                         // reset the form
@@ -1007,6 +1017,7 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
 
                     if (data.status == 0) {
                         $("#jsalerterror").show();
+                        $("#jsalerterror").css("visibility", "visible");
                         $("#jsalerterror").html(data.error['postphoto']);
 
                         // reset the form
@@ -1015,6 +1026,7 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                     }
                     if (data.message == 0) {
                         $("#jsalertsuccess").show();
+                        $("#jsalertsuccess").css("visibility", "visible");
                         $("#jsalertsuccess").html("Post Updated!");
 
                         // reset the form
@@ -1118,6 +1130,7 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
 
                     if (data.message == 0) {
                         $("#jsalerterror").show();
+                        $("#jsalerterror").css("visibility", "visible");
                         $("#jsalerterror").html("Post Deleted!");
 
                         // reset the form
