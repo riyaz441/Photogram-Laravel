@@ -10,6 +10,7 @@ use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\SignupController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeViewController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PhotoUploadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
@@ -139,3 +140,6 @@ Route::view('/sharepage/{id}', 'sharepostshow');
 
 // main home route
 Route::view('/mainhome', 'mainhome');
+
+// like route
+Route::post('/postlike', [LikeController::class, 'postlike']);
