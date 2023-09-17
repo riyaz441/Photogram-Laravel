@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 12, 2023 at 05:58 PM
+-- Generation Time: Sep 17, 2023 at 08:36 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -46,6 +46,31 @@ INSERT INTO `admin_logins` (`id`, `username`, `email`, `password`, `created_at`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `likes`
+--
+
+CREATE TABLE `likes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `like` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `likes`
+--
+
+INSERT INTO `likes` (`id`, `user_id`, `post_id`, `like`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 1, '2023-09-16 08:22:21', '2023-09-16 08:22:21'),
+(2, 1, 13, 0, '2023-09-16 14:05:58', '2023-09-16 14:05:58'),
+(3, 1, 14, 0, '2023-09-16 14:09:05', '2023-09-16 14:09:05'),
+(4, 1, 13, 1, '2023-09-16 14:10:36', '2023-09-16 14:10:36');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -67,7 +92,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (22, '2023_07_31_155127_create_profiles_table', 2),
 (23, '2023_08_02_165039_2023_06_25_144801_create_signups_table', 3),
 (24, '2023_08_02_170802_add_column_to_signups_table', 4),
-(25, '2023_08_06_172408_create_user_feedbacks_table', 5);
+(25, '2023_08_06_172408_create_user_feedbacks_table', 5),
+(26, '2023_09_13_155112_add_like_to_photos_table', 6),
+(27, '2023_09_14_155811_add_like_to_photos_table', 7),
+(28, '2023_09_15_165945_create_likes_table', 8);
 
 -- --------------------------------------------------------
 
@@ -98,7 +126,7 @@ CREATE TABLE `photos` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `userid` bigint(20) UNSIGNED NOT NULL,
   `photo` blob NOT NULL,
-  `caption` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `caption` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
   `deleted` tinyint(4) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -109,12 +137,20 @@ CREATE TABLE `photos` (
 --
 
 INSERT INTO `photos` (`id`, `userid`, `photo`, `caption`, `deleted`, `created_at`, `updated_at`) VALUES
-(1, 1, 0x2f73746f726167652f696d616765732f6d617872657364656661756c742e6a7067, 'laravel founder', 0, '2023-07-24 12:16:28', '2023-07-24 12:16:28'),
-(2, 10, 0x2f73746f726167652f696d616765732f6c61726176656c206d76632e706e67, 'test', 0, '2023-08-06 01:40:45', '2023-08-06 01:40:45'),
-(3, 1, 0x2f73746f726167652f696d616765732f64656d6f2e6a7067, 'test', 0, '2023-08-08 11:46:16', '2023-08-08 11:46:16'),
+(1, 1, 0x2f73746f726167652f70726f66696c65696d616765732f6d617872657364656661756c742e6a7067, 'laravel founder', 0, '2023-07-24 12:16:28', '2023-09-14 13:53:03'),
+(2, 10, 0x2f73746f726167652f696d616765732f6c61726176656c206d76632e706e67, 'test', 0, '2023-08-06 01:40:45', '2023-09-04 10:19:01'),
+(3, 1, 0x2f73746f726167652f696d616765732f64656d6f2e6a7067, 'test', 0, '2023-08-08 11:46:16', '2023-09-14 13:53:12'),
 (4, 1, 0x2f73746f726167652f696d616765732f746573742e6a7067, 'hi my name is Rehan', 0, '2023-08-09 10:07:25', '2023-08-09 10:07:25'),
-(5, 1, 0x2f73746f726167652f696d616765732f726979617a2070686f746f2068616c662e6a7067, 'hI MY NAME IS rEHAN  2.0', 0, '2023-08-09 10:08:46', '2023-08-09 10:08:46'),
-(6, 2, 0x2f73746f726167652f696d616765732f64656d6f6f6e652e6a7067, 'first', 0, '2023-08-09 10:38:53', '2023-08-09 10:38:53');
+(5, 1, 0x2f73746f726167652f70726f66696c65696d616765732f726568616e2e6a706567, 'hI MY NAME IS rEHAN  2.0', 0, '2023-08-09 10:08:46', '2023-08-20 08:28:07'),
+(6, 2, 0x2f73746f726167652f696d616765732f64656d6f6f6e652e6a7067, 'first', 0, '2023-08-09 10:38:53', '2023-08-09 10:38:53'),
+(7, 1, 0x2f73746f726167652f70726f66696c65696d616765732f726f61642e6a7067, 'road', 0, '2023-08-18 10:10:15', '2023-08-20 08:50:10'),
+(8, 10, 0x2f73746f726167652f696d616765732f436170747572652e504e47, 'laravel folder structure', 0, '2023-08-29 09:23:45', '2023-08-29 09:23:45'),
+(9, 1, 0x2f73746f726167652f696d616765732f64656d6f6f6e652e6a7067, 'demo', 0, '2023-08-29 10:00:37', '2023-08-29 10:00:37'),
+(10, 1, 0x2f73746f726167652f696d616765732f63616d6572612e706e67, 'Etiam posuere tellus mauris, et dignissim nisl rutrum quis. Mauris tincidunt ante sed velit maximus, vel tincidunt leo imperdiet. Morbi nec lacus et metus semper porttitor.', 0, '2023-09-03 03:14:20', '2023-09-03 03:14:20'),
+(11, 1, 0x2f73746f726167652f696d616765732f4453435f343331312e4a5047, 'riyaz mohamed', 0, '2023-09-03 03:15:05', '2023-09-03 03:15:05'),
+(12, 1, 0x2f73746f726167652f696d616765732f436170747572652e504e47, 'test id', 0, '2023-09-16 14:02:43', '2023-09-16 14:02:43'),
+(13, 1, 0x2f73746f726167652f696d616765732f4453435f343330372e4a5047, 'test test test', 0, '2023-09-16 14:05:58', '2023-09-16 14:05:58'),
+(14, 1, 0x2f73746f726167652f696d616765732f4453435f343331332e4a5047, 'test', 0, '2023-09-16 14:09:05', '2023-09-16 14:09:05');
 
 -- --------------------------------------------------------
 
@@ -138,7 +174,7 @@ CREATE TABLE `profiles` (
 --
 
 INSERT INTO `profiles` (`id`, `userid`, `about`, `gender`, `profile_photo`, `deleted`, `created_at`, `updated_at`) VALUES
-(1, 1, 'i am riyaz mohamed from madurai, i am full stack php developer and cyber security engineer, thank you.', '1', 0x2f73746f726167652f70726f66696c65696d616765732f746573742e6a7067, 0, '2023-08-02 12:01:24', '2023-08-06 04:54:36'),
+(1, 1, 'i am riyaz mohamed from madurai, i am full stack php developer and cyber security engineer, thank you.', '1', 0x2f73746f726167652f70726f66696c65696d616765732f746573742e6a7067, 0, '2023-08-02 12:01:24', '2023-08-31 13:57:27'),
 (2, 10, 'this is google login account', '1', 0x2f73746f726167652f70726f66696c65696d616765732f726979617a2070686f746f2068616c662e6a7067, 0, '2023-08-06 01:43:05', '2023-08-06 04:51:21'),
 (3, 2, 'test', '1', 0x2f73746f726167652f70726f66696c65696d616765732f746573746f6e652e706e67, 0, '2023-08-09 10:39:28', '2023-08-09 10:39:28');
 
@@ -199,7 +235,15 @@ INSERT INTO `user_feedbacks` (`id`, `userid`, `feedback`, `deleted`, `created_at
 (5, 1, 'alert test', 0, '2023-08-08 12:31:46', '2023-08-08 12:31:46'),
 (6, 1, 'test', 0, '2023-08-08 12:32:13', '2023-08-08 12:32:13'),
 (7, 1, 'test test', 0, '2023-08-08 12:32:47', '2023-08-08 12:32:47'),
-(8, 1, 'riyaz', 0, '2023-08-08 12:33:17', '2023-08-08 12:33:17');
+(8, 1, 'riyaz', 0, '2023-08-08 12:33:17', '2023-08-08 12:33:17'),
+(9, 1, '<p><strong>riyaz</strong></p>', 0, '2023-08-18 10:41:14', '2023-08-18 10:41:14'),
+(10, 1, '<p><em>mohamed</em></p>', 0, '2023-08-18 10:42:12', '2023-08-18 10:42:12'),
+(11, 1, '<p>ck editor test</p>', 0, '2023-08-18 10:55:46', '2023-08-18 10:55:46'),
+(12, 1, '<p>riyaz good</p>', 0, '2023-08-18 10:57:46', '2023-08-18 10:57:46'),
+(13, 1, '<p><strong>final test</strong></p>', 0, '2023-08-18 11:01:01', '2023-08-18 11:01:01'),
+(14, 1, '<p><strong>kkk</strong></p>', 0, '2023-08-18 11:03:15', '2023-08-18 11:03:15'),
+(15, 1, '<p>pppp</p>', 0, '2023-08-18 11:05:42', '2023-08-18 11:05:42'),
+(16, 1, '<p>mass</p>', 0, '2023-08-19 09:06:50', '2023-08-19 09:06:50');
 
 --
 -- Indexes for dumped tables
@@ -212,6 +256,12 @@ ALTER TABLE `admin_logins`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `admin_logins_username_unique` (`username`),
   ADD UNIQUE KEY `admin_logins_email_unique` (`email`);
+
+--
+-- Indexes for table `likes`
+--
+ALTER TABLE `likes`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -266,10 +316,16 @@ ALTER TABLE `admin_logins`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `likes`
+--
+ALTER TABLE `likes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -281,7 +337,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `photos`
 --
 ALTER TABLE `photos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `profiles`
@@ -293,13 +349,13 @@ ALTER TABLE `profiles`
 -- AUTO_INCREMENT for table `signups`
 --
 ALTER TABLE `signups`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `user_feedbacks`
 --
 ALTER TABLE `user_feedbacks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables

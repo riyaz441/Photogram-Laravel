@@ -1230,7 +1230,8 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
                 success: function(data) {
 
                     if (data.message == 0) {
-                        alert("post liked");
+                        location.reload();
+                    } else {
                         location.reload();
                     }
 

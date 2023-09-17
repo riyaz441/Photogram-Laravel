@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Photo;
 use App\Models\Signup;
+use App\Models\Likes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -44,6 +45,15 @@ class PhotoUploadController extends Controller
             $userImage->caption = $caption;
             $userImage->photo = $finalimage;
             $userImage->save();
+
+            // save data in like table
+            $like = new Likes;
+
+            $like->user_id = session('user_id');
+            $like->post_id = $userImage->id;
+            $like->like = 0;
+            $like->save();
+
             return response()->json(['message' => 0]);
         }
     }
