@@ -2,6 +2,8 @@
 use Carbon\Carbon;
 use App\Models\Signup;
 use App\Models\Profile;
+use App\Models\Photo;
+
 // url direct access
 if (session('email') == '' and session('google_id') == '') {
     // Redirect browser
@@ -16,6 +18,11 @@ $profile_update_status = Signup::where('id', session('user_id'))
 
 // auto fill profile details
 $profile_details = Profile::where('userid', session('user_id'))->first();
+
+// get id for show no post found message
+$get_id = Photo::where('userid', session('user_id'))
+    ->pluck('id')
+    ->first();
 ?>
 <!doctype html>
 <html lang="en" data-bs-theme="light">
@@ -544,7 +551,9 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
 
                 <div class="col">
                     <div class="row">
-
+                        @if ($get_id == '')
+                            <h4 class="text-center">No Post Found!</h4>
+                        @endif
                         @foreach ($userspost as $up)
                             <div class="col-sm-4 mt-4">
                                 <div class="card shadow-sm">
