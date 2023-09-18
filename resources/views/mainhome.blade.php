@@ -22,6 +22,13 @@ $profile_details = Profile::where('userid', session('user_id'))->first();
 $randompost = Photo::inRandomOrder()
     ->limit(6)
     ->get();
+
+$usersWithPosts = Photo::join('signups', 'signups.id', '=', 'photos.userid')
+    ->join('likes', 'likes.post_id', '=', 'photos.id')
+    ->where('photos.deleted', '=', 0)
+    ->inRandomOrder()
+    ->limit(6)
+    ->get(['photos.*', 'likes.like']);
 ?>
 <!doctype html>
 <html lang="en" data-bs-theme="light">
@@ -446,7 +453,7 @@ $randompost = Photo::inRandomOrder()
 
                     <div class="row">
 
-                        @foreach ($randompost as $up)
+                        @foreach ($usersWithPosts as $up)
                             <div class="col-sm-4 mt-4">
                                 <div class="card shadow-sm">
                                     <img src="{{ asset($up->photo) }}" alt="image" height="350" width="100%"
@@ -456,22 +463,25 @@ $randompost = Photo::inRandomOrder()
                                         <p class="card-text show-read-more">{{ $up->caption }}</p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary"><svg
-                                                        xmlns="http://www.w3.org/2000/svg" width="16"
-                                                        height="16" fill="currentColor"
-                                                        class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
+                                                <button type="button" value="{{ $up->id }}"
+                                                    class="btn btn-sm btn-outline-secondary like"
+                                                    data-bs-toggle="button"><svg xmlns="http://www.w3.org/2000/svg"
+                                                        width="24" height="24" viewBox="0 0 24 24"
+                                                        style="fill: rgba(0, 130, 243, 1);transform: ;msFilter:;">
                                                         <path
-                                                            d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z" />
-                                                    </svg> &nbsp; Like</button>
+                                                            d="M4 21h1V8H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2zM20 8h-7l1.122-3.368A2 2 0 0 0 12.225 2H12L7 7.438V21h11l3.912-8.596L22 12v-2a2 2 0 0 0-2-2z">
+                                                        </path>
+                                                    </svg> &nbsp; {{ $up->like }} &nbsp; Like</button>
                                                 <button type="button" value="{{ $up->id }}"
                                                     class="btn btn-sm btn-outline-secondary share"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#exampleModalPostshare"><svg
-                                                        xmlns="http://www.w3.org/2000/svg" width="16"
-                                                        height="16" fill="currentColor" class="bi bi-share-fill"
-                                                        viewBox="0 0 16 16">
+                                                        xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24"
+                                                        style="fill: rgb(215, 107, 241);transform: ;msFilter:;">
                                                         <path
-                                                            d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
+                                                            d="M3 12c0 1.654 1.346 3 3 3 .794 0 1.512-.315 2.049-.82l5.991 3.424c-.018.13-.04.26-.04.396 0 1.654 1.346 3 3 3s3-1.346 3-3-1.346-3-3-3c-.794 0-1.512.315-2.049.82L8.96 12.397c.018-.131.04-.261.04-.397s-.022-.266-.04-.397l5.991-3.423c.537.505 1.255.82 2.049.82 1.654 0 3-1.346 3-3s-1.346-3-3-3-3 1.346-3 3c0 .136.022.266.04.397L8.049 9.82A2.982 2.982 0 0 0 6 9c-1.654 0-3 1.346-3 3z">
+                                                        </path>
                                                     </svg> &nbsp; Share</button>
                                             </div>
                                             <small
@@ -897,6 +907,35 @@ $randompost = Photo::inRandomOrder()
         $(".read-more").click(function() {
             $(this).siblings(".more-text").contents().unwrap();
             $(this).remove();
+        });
+
+
+        // click like button
+        $(".like").click(function() {
+            var like = "";
+            like = $(this).val();
+
+            $.ajax({
+                url: "/postlike",
+                method: "POST",
+                data: {
+                    id: like,
+                    status: 'postlike'
+                },
+                beforeSend: function() {
+                    $(document).find('span.error-text').text('');
+                },
+                success: function(data) {
+
+                    if (data.message == 0) {
+                        location.reload();
+                    } else {
+                        location.reload();
+                    }
+
+                }
+            });
+
         });
 
     });

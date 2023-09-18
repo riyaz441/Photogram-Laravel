@@ -25,7 +25,7 @@ class LikeController extends Controller
         if ($post_like_count == "" || $post_like_count == 0) {
             // not liked
 
-            $like_count = Likes::where('post_id', $post_id)->pluck('like')->first(); // not insert make update
+            $like_count = Likes::where('post_id', $post_id)->pluck('like')->first();
             $like_count_final = $like_count + 1;
 
             // get like primary id
@@ -35,6 +35,8 @@ class LikeController extends Controller
 
             return response()->json(['message' => 0]);
         } else {
+            // liked
+
             $like_count = Likes::where('post_id', $post_id)->pluck('like')->first();
             $like_count_final = $like_count - 1;
 
