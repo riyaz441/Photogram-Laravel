@@ -13,29 +13,18 @@ class LikeController extends Controller
         // return $request->post();
         // exit;
 
+
         $post_id = $request->input('id');
 
-        // get like count
-        $post_like_count = Likes::where('post_id', $post_id)->where('user_id', session('user_id'))
-            ->pluck('like')
+
+
+        // check user id exist array or not
+        $post_like_count = Likes::where('post_id', $post_id)
+            ->pluck('liked_user')
             ->first();
 
 
-        // check liked or not
-        if ($post_like_count == "" || $post_like_count == 0) {
-            // not liked
-
-            $like_count = Likes::where('post_id', $post_id)->pluck('like')->first();
-            $like_count_final = $like_count + 1;
-
-            // get like primary id
-            $get_like_id = Likes::where('post_id', $post_id)->pluck('id')->first();
-
-            Likes::where('id', $get_like_id)->update(['like' => $like_count_final]);
-
-            return response()->json(['message' => 0]);
-        } else {
-            // liked
+        if (in_array(session('user_id'), $post_like_count)) {
 
             $like_count = Likes::where('post_id', $post_id)->pluck('like')->first();
             $like_count_final = $like_count - 1;
@@ -45,14 +34,28 @@ class LikeController extends Controller
 
             Likes::where('id', $get_like_id)->update(['like' => $like_count_final]);
 
+            $key = array_search(session('user_id'), $post_like_count);
+
+            if ($key !== false) {
+                unset($post_like_count[$key]);
+            }
+
+            Likes::where('id', $get_like_id)->update(['liked_user' => $post_like_count]);
+            return response()->json(['message' => 0]);
+        } else {
+
+            $like_count = Likes::where('post_id', $post_id)->pluck('like')->first();
+            $like_count_final = $like_count + 1;
+
+            // get like primary id
+            $get_like_id = Likes::where('post_id', $post_id)->pluck('id')->first();
+
+            Likes::where('id', $get_like_id)->update(['like' => $like_count_final]);
+
+            array_push($post_like_count, session('user_id'));
+            Likes::where('id', $get_like_id)->update(['liked_user' => $post_like_count]);
 
             return response()->json(['message' => 1]);
         }
-
-
-        //$updated_like_count = $post_like_count + 1;
-
-        // Photo::where('id', $post_id)->update(['like' => $updated_like_count]);
-        // return response()->json(['message' => 0]);
     }
 }

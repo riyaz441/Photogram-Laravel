@@ -49,9 +49,13 @@ class PhotoUploadController extends Controller
             // save data in like table
             $like = new Likes;
 
+            // Create an array
+            $dataArray = [];
+
             $like->user_id = session('user_id');
             $like->post_id = $userImage->id;
             $like->like = 0;
+            $like->liked_user = $dataArray;
             $like->save();
 
             return response()->json(['message' => 0]);

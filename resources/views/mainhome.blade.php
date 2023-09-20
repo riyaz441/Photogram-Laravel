@@ -928,8 +928,10 @@ $usersWithPosts = Photo::join('signups', 'signups.id', '=', 'photos.userid')
                 success: function(data) {
 
                     if (data.message == 0) {
+                        alert("unliked");
                         location.reload();
                     } else {
+                        alert("liked");
                         location.reload();
                     }
 

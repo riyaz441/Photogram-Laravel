@@ -1239,8 +1239,10 @@ $get_id = Photo::where('userid', session('user_id'))
                 success: function(data) {
 
                     if (data.message == 0) {
+                        alert("unliked");
                         location.reload();
                     } else {
+                        alert("liked");
                         location.reload();
                     }
 
