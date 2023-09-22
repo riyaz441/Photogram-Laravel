@@ -184,6 +184,22 @@ $usersWithPosts = Photo::join('signups', 'signups.id', '=', 'photos.userid')
         .show-read-more .more-text {
             display: none;
         }
+
+        #myToast {
+            position: absolute;
+            top: 75px;
+            right: 0;
+            margin-right: 10px;
+            width: 15%;
+        }
+
+        #myToastunlike {
+            position: absolute;
+            top: 75px;
+            right: 0;
+            margin-right: 10px;
+            width: 15%;
+        }
     </style>
 
 
@@ -435,6 +451,34 @@ $usersWithPosts = Photo::join('signups', 'signups.id', '=', 'photos.userid')
         <div class="album py-5 bg-body-tertiary">
             <div class="container">
 
+                <div class="toast position-fixed text-bg-success end-2 p-3" id="myToast" role="alert"
+                    aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header text-bg-success">
+                        <img src="../assets/brand/camera.png" class="rounded me-2" alt="..." height="20px"
+                            width="20px">
+                        <strong class="me-auto">Notification</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        Post Liked
+                    </div>
+                </div>
+
+                <div class="toast position-fixed text-bg-info end-2 p-3" id="myToastunlike" role="alert"
+                    aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header text-bg-info">
+                        <img src="../assets/brand/camera.png" class="rounded me-2" alt="..." height="20px"
+                            width="20px">
+                        <strong class="me-auto">Notification</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        Post Unliked
+                    </div>
+                </div>
+
                 <div class="col">
 
                     {{-- javascript validation alert for error --}}
@@ -510,6 +554,11 @@ $usersWithPosts = Photo::join('signups', 'signups.id', '=', 'photos.userid')
 {{-- js code --}}
 <script>
     $(document).ready(function() {
+
+
+        // hide toast
+        $('#myToast').toast('hide');
+        $('#myToastunlike').toast('hide');
 
         // tooltip
         $('[data-toggle="tooltip"]').tooltip();
@@ -928,11 +977,20 @@ $usersWithPosts = Photo::join('signups', 'signups.id', '=', 'photos.userid')
                 success: function(data) {
 
                     if (data.message == 0) {
-                        alert("unliked");
-                        location.reload();
+                        $('#myToastunlike').toast('show');
+
+                        // reload page after 5 sec
+                        setTimeout(function() {
+                            location.reload(true);
+                        }, 5000);
+
                     } else {
-                        alert("liked");
-                        location.reload();
+                        $('#myToast').toast('show');
+
+                        // reload page after 5 sec
+                        setTimeout(function() {
+                            location.reload(true);
+                        }, 5000);
                     }
 
                 }
