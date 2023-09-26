@@ -12,6 +12,10 @@ class HomeViewController extends Controller
     {
         //$usersWithPosts = Photo::where('userid', session('user_id'))->get();
 
+        // $usersWithPosts = Photo::join('signups', 'signups.id', '=', 'photos.userid')->join('likes', 'likes.post_id', '=', 'photos.id')->join('like_button_stages', 'like_button_stages.post_id', '=', 'photos.id')->where('photos.userid', '=', session('user_id'))->where('photos.deleted', '=', 0)
+        // ->get(['photos.*', 'likes.like', 'like_button_stages.like_button_stage']);
+        // return view('/home', ['userspost' => $usersWithPosts]);
+
 
         $usersWithPosts = Photo::join('signups', 'signups.id', '=', 'photos.userid')->join('likes', 'likes.post_id', '=', 'photos.id')->where('photos.userid', '=', session('user_id'))->where('photos.deleted', '=', 0)
             ->get(['photos.*', 'likes.like']);

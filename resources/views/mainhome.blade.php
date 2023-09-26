@@ -3,6 +3,8 @@ use Carbon\Carbon;
 use App\Models\Signup;
 use App\Models\Profile;
 use App\Models\Photo;
+use App\Models\Like_button_stage;
+
 // url direct access
 if (session('email') == '' and session('google_id') == '') {
     // Redirect browser
@@ -29,6 +31,11 @@ $usersWithPosts = Photo::join('signups', 'signups.id', '=', 'photos.userid')
     ->inRandomOrder()
     ->limit(6)
     ->get(['photos.*', 'likes.like']);
+
+// get all user like post id value
+$liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
+    ->where('like_button_stage', '=', 1)
+    ->get(['post_id']);
 ?>
 <!doctype html>
 <html lang="en" data-bs-theme="light">
@@ -509,13 +516,22 @@ $usersWithPosts = Photo::join('signups', 'signups.id', '=', 'photos.userid')
                                             <div class="btn-group">
                                                 <button type="button" value="{{ $up->id }}"
                                                     class="btn btn-sm btn-outline-secondary like"
-                                                    data-bs-toggle="button"><svg xmlns="http://www.w3.org/2000/svg"
-                                                        width="24" height="24" viewBox="0 0 24 24"
-                                                        style="fill: rgba(0, 130, 243, 1);transform: ;msFilter:;">
-                                                        <path
-                                                            d="M4 21h1V8H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2zM20 8h-7l1.122-3.368A2 2 0 0 0 12.225 2H12L7 7.438V21h11l3.912-8.596L22 12v-2a2 2 0 0 0-2-2z">
-                                                        </path>
-                                                    </svg> &nbsp; {{ $up->like }} &nbsp; Like</button>
+                                                    data-bs-toggle="button">
+
+                                                    @foreach ($liked_post_data as $like)
+                                                        @if ($like->post_id == $up->id)
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24"
+                                                                style="fill: rgba(0, 130, 243, 1);transform: ;msFilter:;">
+                                                                <path
+                                                                    d="M4 21h1V8H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2zM20 8h-7l1.122-3.368A2 2 0 0 0 12.225 2H12L7 7.438V21h11l3.912-8.596L22 12v-2a2 2 0 0 0-2-2z">
+                                                                </path>
+                                                            </svg>
+                                                        @endif
+                                                    @endforeach
+
+                                                    &nbsp; {{ $up->like }} &nbsp; Like
+                                                </button>
                                                 <button type="button" value="{{ $up->id }}"
                                                     class="btn btn-sm btn-outline-secondary share"
                                                     data-bs-toggle="modal"
