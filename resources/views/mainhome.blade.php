@@ -515,20 +515,24 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
                                                 <button type="button" value="{{ $up->id }}"
-                                                    class="btn btn-sm btn-outline-secondary like"
-                                                    data-bs-toggle="button">
+                                                    class="btn btn-sm btn-outline-secondary like">
 
-                                                    @foreach ($liked_post_data as $like)
-                                                        @if ($like->post_id == $up->id)
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                height="24" viewBox="0 0 24 24"
-                                                                style="fill: rgba(0, 130, 243, 1);transform: ;msFilter:;">
-                                                                <path
-                                                                    d="M4 21h1V8H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2zM20 8h-7l1.122-3.368A2 2 0 0 0 12.225 2H12L7 7.438V21h11l3.912-8.596L22 12v-2a2 2 0 0 0-2-2z">
-                                                                </path>
-                                                            </svg>
-                                                        @endif
-                                                    @endforeach
+                                                    @php
+                                                        $isLiked = false;
+                                                        foreach ($liked_post_data as $like) {
+                                                            if ($like->post_id == $up->id) {
+                                                                $isLiked = true;
+                                                                break;
+                                                            }
+                                                        }
+                                                    @endphp
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24"
+                                                        style="fill: {{ $isLiked ? '#0082f3' : '#8f959c' }};transform: ;msFilter:;">
+                                                        <path
+                                                            d="M4 21h1V8H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2zM20 8h-7l1.122-3.368A2 2 0 0 0 12.225 2H12L7 7.438V21h11l3.912-8.596L22 12v-2a2 2 0 0 0-2-2z">
+                                                        </path>
+                                                    </svg>
 
                                                     &nbsp; {{ $up->like }} &nbsp; Like
                                                 </button>
