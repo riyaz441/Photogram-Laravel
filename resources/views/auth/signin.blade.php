@@ -161,7 +161,23 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
-                <img src="../assets/brand/cameraone.png" alt="" height="550" width="550">
+                <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="../assets/brand/cameraone.png" class="d-block w-100" alt="..." height="550"
+                                width="550">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../assets/brand/cameratwo.png" class="d-block w-100" alt="..." height="550"
+                                width="550">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../assets/brand/camerathree.png" class="d-block w-100" alt="..."
+                                height="550" width="550">
+                        </div>
+                    </div>
+                </div>
+                {{-- <img src="../assets/brand/cameraone.png" alt="" height="550" width="550"> --}}
             </div>
             <div class="col-sm-6 mt-5">
                 <main class="form-signin w-100 m-auto">
@@ -201,7 +217,8 @@
                         <p class="text-center"><a href="/forgotpassword" class="link-dark"
                                 style="text-decoration: none;">Forgotten your password?</a></p>
 
-                        <p class="text-center"><a href="/signup" class="link-dark" style="text-decoration: none;">Create
+                        <p class="text-center"><a href="/signup" class="link-dark"
+                                style="text-decoration: none;">Create
                                 new account</a></p>
 
                         <div class="row">
