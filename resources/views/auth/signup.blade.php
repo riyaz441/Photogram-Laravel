@@ -160,16 +160,16 @@
                 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="../assets/brand/cameraone.png" class="d-block w-100" alt="..." height="550"
+                            <img src="../assets/brand/camera5.png" class="d-block w-100" alt="..." height="550"
                                 width="550">
                         </div>
                         <div class="carousel-item">
-                            <img src="../assets/brand/cameratwo.png" class="d-block w-100" alt="..." height="550"
+                            <img src="../assets/brand/camera6.png" class="d-block w-100" alt="..." height="550"
                                 width="550">
                         </div>
                         <div class="carousel-item">
-                            <img src="../assets/brand/camerathree.png" class="d-block w-100" alt="..."
-                                height="550" width="550">
+                            <img src="../assets/brand/camera7.png" class="d-block w-100" alt="..." height="550"
+                                width="550">
                         </div>
                     </div>
                 </div>
