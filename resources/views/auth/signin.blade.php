@@ -172,7 +172,7 @@
                                 width="550">
                         </div>
                         <div class="carousel-item">
-                            <img src="../assets/brand/camera7.png" class="d-block w-100" alt="..." height="550"
+                            <img src="../assets/brand/camera8.png" class="d-block w-100" alt="..." height="550"
                                 width="550">
                         </div>
                     </div>

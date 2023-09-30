@@ -152,7 +152,23 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
-                <img src="../assets/brand/cameraone.png" alt="" height="550" width="550">
+                <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="../assets/brand/camera5.png" class="d-block w-100" alt="..." height="550"
+                                width="550">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../assets/brand/camera6.png" class="d-block w-100" alt="..." height="550"
+                                width="550">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../assets/brand/camera8.png" class="d-block w-100" alt="..." height="550"
+                                width="550">
+                        </div>
+                    </div>
+                </div>
+                {{-- <img src="../assets/brand/cameraone.png" alt="" height="550" width="550"> --}}
             </div>
             <div class="col-sm-6 mt-5">
                 <main class="form-signin w-100 m-auto">
