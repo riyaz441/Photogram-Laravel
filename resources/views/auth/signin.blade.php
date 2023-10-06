@@ -152,6 +152,7 @@
 
         #submit {
             background-color: #823bb5 !important;
+            color: white !important;
         }
     </style>
 
