@@ -147,7 +147,7 @@
         }
 
         input[type=checkbox] {
-            accent-color: #212529;
+            accent-color: #823bb5;
         }
 
         #submit {
