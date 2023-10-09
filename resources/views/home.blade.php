@@ -613,7 +613,8 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
                                                 <button type="button" value="{{ $up->id }}"
-                                                    class="btn btn-sm btn-outline-secondary like">
+                                                    class="btn btn-sm btn-outline-secondary like"
+                                                    id="like_{{ $up->id }}">
 
                                                     @php
                                                         $isLiked = false;
@@ -1291,9 +1292,23 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
 
 
         // click like button
+        let isAjaxInProgress = false;
         $(".like").click(function() {
+
+            // Check if an AJAX call is already in progress
+            if (isAjaxInProgress) {
+                return; // AJAX call is still in progress, ignore the click
+            }
+
             var like = "";
             like = $(this).val();
+
+            // Disable the button to prevent multiple clicks
+            $('#like_' + like).prop('disabled', true);
+
+            // Set the flag to indicate an AJAX call is in progress
+            isAjaxInProgress = true;
+
 
             $.ajax({
                 url: "/postlike",
@@ -1326,8 +1341,14 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                         }, 5000);
                     }
 
+                },
+                complete: function() {
+                    // Enable the button and reset the flag after AJAX call is completed
+                    $('#ajax-button').prop('disabled', false);
+                    isAjaxInProgress = false;
                 }
             });
+
 
         });
 
