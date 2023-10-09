@@ -632,7 +632,10 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                                                         </path>
                                                     </svg>
 
-                                                    &nbsp; {{ $up->like }} &nbsp; Like
+                                                    &nbsp; <span
+                                                        id="likecount_{{ $up->id }}">{{ $up->like }}</span>
+                                                    &nbsp;
+                                                    Like
                                                 </button>
                                                 <button type="button" value="{{ $up->id }}"
                                                     class="btn btn-sm btn-outline-secondary share"
@@ -1306,6 +1309,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
 
                     if (data.message == 0) {
                         $('#myToastunlike').toast('show');
+                        $('#likecount_' + like).html(data.like_count);
 
                         // reload page after 5 sec
                         setTimeout(function() {
@@ -1314,6 +1318,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
 
                     } else {
                         $('#myToast').toast('show');
+                        $('#likecount_' + like).html(data.like_count);
 
                         // reload page after 5 sec
                         setTimeout(function() {

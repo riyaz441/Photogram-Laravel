@@ -79,7 +79,9 @@ class LikeController extends Controller
             }
 
             Likes::where('id', $get_like_id)->update(['liked_user' => $post_like_count]);
-            return response()->json(['message' => 0]);
+
+            $like_count = Likes::where('post_id', $post_id)->pluck('like')->first();
+            return response()->json(['message' => 0, 'like_count' => $like_count]);
         } else {
 
             $like_count = Likes::where('post_id', $post_id)->pluck('like')->first();
@@ -93,7 +95,8 @@ class LikeController extends Controller
             array_push($post_like_count, session('user_id'));
             Likes::where('id', $get_like_id)->update(['liked_user' => $post_like_count]);
 
-            return response()->json(['message' => 1]);
+            $like_count = Likes::where('post_id', $post_id)->pluck('like')->first();
+            return response()->json(['message' => 1, 'like_count' => $like_count]);
         }
     }
 }
