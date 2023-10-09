@@ -140,6 +140,11 @@
         input[type=checkbox] {
             accent-color: #212529;
         }
+
+        #submit {
+            background-color: #823bb5 !important;
+            color: white !important;
+        }
     </style>
 
 
@@ -151,30 +156,11 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-6">
-                <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="../assets/brand/camera5.png" class="d-block w-100" alt="..." height="550"
-                                width="550">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../assets/brand/camera6.png" class="d-block w-100" alt="..." height="550"
-                                width="550">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../assets/brand/camera8.png" class="d-block w-100" alt="..." height="550"
-                                width="550">
-                        </div>
-                    </div>
-                </div>
-                {{-- <img src="../assets/brand/cameraone.png" alt="" height="550" width="550"> --}}
-            </div>
-            <div class="col-sm-6 mt-5">
+            <div class="col-sm-12 mt-5">
                 <main class="form-signin w-100 m-auto">
                     <form action="/changepassword" method="post" id="changepassword_form">
-                        <img class="mx-auto d-block mb-4" src="../assets/brand/camera.png" alt="" width="72"
-                            height="65">
+                        <img class="mx-auto d-block mb-4" src="../assets/brand/logo1.png" alt="" width="250"
+                            height="250">
                         <h1 class="h3 mb-3 fw-normal text-center">Change Password</h1>
 
                         <div class="form-floating">
@@ -195,8 +181,8 @@
                                 <span class="checkmark"></span>
                             </label>
                         </div>
-                        <button class="w-100 btn btn-lg btn-dark mb-3" type="submit" name="submit"
-                            id="submit">Change Password</button>
+                        <button class="w-100 btn btn-lg mb-3" type="submit" name="submit" id="submit">Change
+                            Password</button>
 
                         <p class="text-center"><a href="/" class="link-dark" style="text-decoration: none;">Go to
                                 Signin</a></p>

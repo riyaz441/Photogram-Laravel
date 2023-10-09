@@ -145,6 +145,11 @@
             border-top-left-radius: 0;
             border-top-right-radius: 0;
         }
+
+        #submit {
+            background-color: #823bb5 !important;
+            color: white !important;
+        }
     </style>
 
 
@@ -156,31 +161,12 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 mt-3">
-                <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="../assets/brand/camera5.png" class="d-block w-100" alt="..." height="550"
-                                width="550">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../assets/brand/camera6.png" class="d-block w-100" alt="..." height="550"
-                                width="550">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../assets/brand/camera7.png" class="d-block w-100" alt="..." height="550"
-                                width="550">
-                        </div>
-                    </div>
-                </div>
-                {{-- <img src="../assets/brand/cameraone.png" alt="" height="550" width="550"> --}}
-            </div>
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <main class="form-signin w-100 m-auto">
                     <form action="/formsubmit" method="post" id="signup_form">
-                        <img class="mx-auto d-block mb-4" src="../assets/brand/camera.png" alt="" width="72"
-                            height="65">
-                        <h1 class="h3 mb-3 fw-normal text-center">Signup to Photogram</h1>
+                        <img class="mx-auto d-block mb-4" src="../assets/brand/logo1.png" alt="" width="250"
+                            height="250">
+                        <h1 class="h3 mb-3 fw-normal text-center">Sign up</h1>
 
                         <div class="form-floating">
                             <input name="username" type="username" class="form-control" id="username"
@@ -204,7 +190,7 @@
                         </div>
                         @csrf
 
-                        <button class="w-100 btn btn-lg btn-dark mb-3" type="submit" id="submit"
+                        <button class="w-100 btn btn-lg mb-3" type="submit" id="submit"
                             name="submit">Signup</button>
                         <p class="text-center"><a href="/" class="link-dark" style="text-decoration: none;">I have
                                 a account</a></p>
