@@ -195,6 +195,16 @@
                         <p class="text-center"><a href="/" class="link-dark" style="text-decoration: none;">I have
                                 a account</a></p>
 
+
+                        <div class="row">
+                            <a class="btn btn-outline-dark" href="{{ route('google-auth') }}" role="button"
+                                style="text-transform:none">
+                                <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in"
+                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+                                Login with Google
+                            </a>
+                        </div>
+
                         {{-- javascript validation alert for error --}}
 
                         <div class="alert alert-danger text-center" role="alert" id="jsalerterror"
