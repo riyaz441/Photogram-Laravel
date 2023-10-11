@@ -1016,6 +1016,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
         });
 
         // search js code start
+        $("#searchResults").hide();
         $('#searchbox').on('keyup', function(e) {
             //ajax call start
             var search = $('#searchbox').val();

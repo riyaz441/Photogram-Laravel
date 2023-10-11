@@ -5,7 +5,7 @@
     $user_profile_update = Signup::where('id', session('user_id'))->first();
 @endphp
 <header data-bs-theme="dark">
-    <div class="collapse" id="navbarHeader">
+    <div class="collapse bg-info-subtle" id="navbarHeader">
         <div class="container text-center">
             <div class="row">
                 <div class="col-sm-4 py-4">
@@ -41,7 +41,7 @@
             <!-- Navbar Search-->
             <form action="/search" method="post" id="search"
                 class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
+                <div class="input-group p-3">
                     <div class="input-group input-group-lg">
                         <span class="input-group-text" id="inputGroup-sizing-lg"><svg xmlns="http://www.w3.org/2000/svg"
                                 width="16" height="16" fill="currentColor" class="bi bi-search"
@@ -62,7 +62,7 @@
 
         </div>
     </div>
-    <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="navbar navbar-dark bg-info-subtle shadow-sm">
         <div class="container">
             <a href="/homeview" class="navbar-brand d-flex align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
