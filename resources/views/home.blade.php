@@ -546,6 +546,14 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                             name="submit">Share</button>
                         </p>
 
+                        {{-- progress bar --}}
+                        <div class="progress mb-3" style="display: none;">
+                            <div class="progress-bar" role="progressbar" aria-label="Info example"
+                                style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                0%
+                            </div>
+                        </div>
+
                         {{-- javascript validation alert for error --}}
 
                         <div class="alert alert-danger text-center" role="alert" id="jsalerterror"
@@ -604,7 +612,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                         @endif
                         @foreach ($userspost as $up)
                             <div class="col-sm-4 mt-4">
-                                <div class="card shadow-sm">
+                                <div class="card shadow-sm card border-info">
                                     <img src="{{ asset($up->photo) }}" alt="image" height="350" width="100%"
                                         id="photo">
 
@@ -772,18 +780,39 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
             // close alert in 5 sec
             setTimeout(function() {
                 $('#jsalerterror').fadeOut('slow');
+                $(".progress-bar").fadeOut('slow');
             }, 5000); // <-- time in milliseconds
 
             setTimeout(function() {
                 $('#jsalertsuccess').fadeOut('slow');
+                $(".progress-bar").fadeOut('slow');
             }, 5000); // <-- time in milliseconds
 
             // get all input values using jquery for empty check validation
             // spinner for loading...
             $("#submit").html("<div class='spinner-border text-light' role='status'></div>")
 
+            var formData = new FormData($(this)[0]);
+            var progressBar = $('.progress');
+            progressBar.show();
+
             // ajax call start
             $.ajax({
+
+                xhr: function() {
+                    var xhr = new window.XMLHttpRequest();
+                    xhr.upload.addEventListener('progress', function(e) {
+                        if (e.lengthComputable) {
+                            var percent = Math.round((e.loaded / e.total) * 100);
+                            progressBar.find('.progress-bar').width(percent + '%')
+                                .html(
+                                    percent + '%');
+                        }
+                    });
+                    return xhr;
+                },
+
+
                 url: $(this).attr('action'),
                 method: $(this).attr('method'),
                 data: new FormData(this),
@@ -799,11 +828,18 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                     $("#submit").html("Share")
 
                     if (data.status == 0) {
+                        progressBar.find('.progress-bar').addClass('bg-danger');
                         $("#jsalerterror").show();
                         $("#jsalerterror").css("visibility", "visible");
                         $("#jsalerterror").html(data.error['photo']);
+
+                        // reload page after 5 sec
+                        setTimeout(function() {
+                            location.reload(true);
+                        }, 5000);
                     }
                     if (data.message == 0) {
+                        progressBar.find('.progress-bar').addClass('bg-success');
                         $("#jsalertsuccess").show();
                         $("#jsalertsuccess").css("visibility", "visible");
                         $("#jsalertsuccess").html("Photo Shared!");
