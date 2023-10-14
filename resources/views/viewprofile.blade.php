@@ -750,6 +750,7 @@ $getfeedbackcount = user_feedback::where('userid', session('user_id'))->count();
 
 
         // search js code start
+        $("#searchResults").hide();
         $('#searchbox').on('keyup', function(e) {
             //ajax call start
             var search = $('#searchbox').val();
