@@ -512,7 +512,7 @@ $getfeedbackcount = user_feedback::where('userid', session('user_id'))->count();
 
     </main>
 
-    @include('layouts.includes.userfooter')
+    {{-- @include('layouts.includes.userfooter') --}}
 
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 

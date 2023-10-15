@@ -377,7 +377,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" id="submit" name="submit"
-                                class="btn btn-primary">Update</button>
+                                class="btn btn-info">Update</button>
                         </div>
                     </div>
                     @csrf
@@ -409,7 +409,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" id="submit" name="submit" class="btn btn-primary">Send</button>
+                        <button type="submit" id="submit" name="submit" class="btn btn-info">Send</button>
                     </div>
                 </div>
                 @csrf
@@ -449,7 +449,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" id="posteditsubmit" name="posteditsubmit"
-                            class="btn btn-primary">Update</button>
+                            class="btn btn-info">Update</button>
                     </div>
                 </div>
                 @csrf
@@ -522,7 +522,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                     <div class="col-lg-6 col-md-8 mx-auto">
 
                         {{-- main home page button --}}
-                        <button type="button" class="btn btn-outline-secondary btn-lg mt-3 mb-3"> <i
+                        <button type="button" class="btn btn-outline-info btn-lg mt-3 mb-3"> <i
                                 class="bi bi-house-fill"></i> <a href="/mainhome"
                                 class="text-white">Home</a></button>
 
@@ -542,7 +542,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                                         class="bi bi-question-circle-fill"></i></button></label>
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="caption" maxlength="500"></textarea>
                         </div>
-                        <button class="btn btn-secondary my-2" type="submit" id="submit"
+                        <button class="btn btn-info my-2" type="submit" id="submit"
                             name="submit">Share</button>
                         </p>
 
