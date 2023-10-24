@@ -26,6 +26,6 @@ class SearchController extends Controller
     {
         $userid = $id;
 
-        return view('viewprofile', compact('userid'));
+        return view('viewprofilefollow', compact('userid'));
     }
 }

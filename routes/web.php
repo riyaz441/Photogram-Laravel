@@ -9,6 +9,7 @@ use App\Http\Controllers\auth\GoogleAuthController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\SignupController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\FollowController;
 use App\Http\Controllers\HomeViewController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PhotoUploadController;
@@ -143,3 +144,6 @@ Route::view('/mainhome', 'mainhome');
 
 // like route
 Route::post('/postlike', [LikeController::class, 'postlike']);
+
+// follow route
+Route::post('/follow', [FollowController::class, 'follow']);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 15, 2023 at 08:17 AM
+-- Generation Time: Oct 24, 2023 at 06:55 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -46,6 +46,29 @@ INSERT INTO `admin_logins` (`id`, `username`, `email`, `password`, `created_at`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `follow_user_tables`
+--
+
+CREATE TABLE `follow_user_tables` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `follow_count` int(11) NOT NULL DEFAULT 0,
+  `follow_user_id` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `follow_user_tables`
+--
+
+INSERT INTO `follow_user_tables` (`id`, `user_id`, `follow_count`, `follow_user_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, '[\"10\",\"11\"]', '2023-10-23 12:07:54', '2023-10-24 09:41:06'),
+(2, 10, 1, '[\"1\"]', '2023-10-24 09:35:44', '2023-10-24 09:35:44');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `likes`
 --
 
@@ -64,8 +87,8 @@ CREATE TABLE `likes` (
 --
 
 INSERT INTO `likes` (`id`, `user_id`, `post_id`, `like`, `liked_user`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 2, '{\"1\":2,\"2\":1}', '2023-09-26 10:29:36', '2023-10-13 10:32:43'),
-(2, 1, 2, 1, '[2]', '2023-09-26 12:02:13', '2023-10-09 13:01:00'),
+(1, 1, 1, 2, '{\"1\":2,\"2\":1}', '2023-09-26 10:29:36', '2023-10-20 13:06:30'),
+(2, 1, 2, 1, '[2]', '2023-09-26 12:02:13', '2023-10-22 08:54:09'),
 (3, 1, 3, 0, '[]', '2023-09-26 12:43:58', '2023-10-09 09:50:55'),
 (4, 10, 4, 1, '[10]', '2023-10-09 10:00:05', '2023-10-12 12:07:58'),
 (5, 1, 5, 0, '[]', '2023-10-12 13:27:40', '2023-10-12 13:27:40'),
@@ -76,8 +99,9 @@ INSERT INTO `likes` (`id`, `user_id`, `post_id`, `like`, `liked_user`, `created_
 (10, 1, 10, 0, '[]', '2023-10-13 09:50:00', '2023-10-13 09:50:00'),
 (11, 1, 11, 0, '[]', '2023-10-13 09:53:22', '2023-10-13 09:53:22'),
 (12, 1, 12, 0, '[]', '2023-10-13 09:54:12', '2023-10-13 09:54:12'),
-(13, 1, 13, 0, '[]', '2023-10-13 10:01:53', '2023-10-13 10:01:53'),
-(14, 1, 14, 0, '[]', '2023-10-13 10:20:56', '2023-10-13 10:20:56');
+(13, 1, 13, 1, '[1]', '2023-10-13 10:01:53', '2023-10-23 00:55:53'),
+(14, 1, 14, 0, '[]', '2023-10-13 10:20:56', '2023-10-13 10:20:56'),
+(15, 1, 15, 0, '[]', '2023-10-20 13:06:11', '2023-10-20 13:06:11');
 
 -- --------------------------------------------------------
 
@@ -99,13 +123,14 @@ CREATE TABLE `like_button_stages` (
 --
 
 INSERT INTO `like_button_stages` (`id`, `user_id`, `post_id`, `like_button_stage`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, '2023-09-26 11:51:27', '2023-10-13 10:32:43'),
-(2, 1, 2, 0, '2023-09-26 12:03:34', '2023-10-09 13:01:00'),
+(1, 1, 1, 1, '2023-09-26 11:51:27', '2023-10-20 13:06:30'),
+(2, 1, 2, 0, '2023-09-26 12:03:34', '2023-10-22 08:54:09'),
 (3, 2, 2, 1, '2023-09-26 12:47:18', '2023-09-27 11:44:43'),
 (4, 2, 1, 1, '2023-09-26 13:40:51', '2023-09-26 13:40:51'),
 (5, 10, 1, 0, '2023-09-28 10:07:06', '2023-09-28 10:07:14'),
 (6, 1, 3, 0, '2023-10-09 09:50:48', '2023-10-09 09:50:55'),
-(7, 10, 4, 1, '2023-10-12 12:07:58', '2023-10-12 12:07:58');
+(7, 10, 4, 1, '2023-10-12 12:07:58', '2023-10-12 12:07:58'),
+(8, 1, 13, 1, '2023-10-15 00:59:16', '2023-10-23 00:55:53');
 
 -- --------------------------------------------------------
 
@@ -136,7 +161,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (27, '2023_09_14_155811_add_like_to_photos_table', 7),
 (28, '2023_09_15_165945_create_likes_table', 8),
 (29, '2023_09_19_175211_add_liked_user_to_like_table', 9),
-(30, '2023_09_22_155122_create_like_button_stages_table', 10);
+(30, '2023_09_22_155122_create_like_button_stages_table', 10),
+(31, '2023_10_20_154342_create_follow_user_tables_table', 11);
 
 -- --------------------------------------------------------
 
@@ -191,7 +217,8 @@ INSERT INTO `photos` (`id`, `userid`, `photo`, `caption`, `deleted`, `created_at
 (11, 1, 0x2f73746f726167652f696d616765732f32393435373533355f343733382e6a7067, 'camera', 0, '2023-10-13 09:53:22', '2023-10-13 09:53:22'),
 (12, 1, 0x2f73746f726167652f696d616765732f746573742e6a7067, 'ttt', 0, '2023-10-13 09:54:12', '2023-10-13 09:54:12'),
 (13, 1, 0x2f73746f726167652f696d616765732f726568616e2e6a706567, 'rehan', 0, '2023-10-13 10:01:53', '2023-10-13 10:01:53'),
-(14, 1, 0x2f73746f726167652f696d616765732f6c61726176656c206d76632e706e67, 'mvc', 0, '2023-10-13 10:20:56', '2023-10-13 10:20:56');
+(14, 1, 0x2f73746f726167652f696d616765732f6c61726176656c206d76632e706e67, 'mvc', 0, '2023-10-13 10:20:56', '2023-10-13 10:20:56'),
+(15, 1, 0x2f73746f726167652f696d616765732f64656d6f6f6e652e6a7067, 'ddddd', 0, '2023-10-20 13:06:11', '2023-10-20 13:06:11');
 
 -- --------------------------------------------------------
 
@@ -247,7 +274,9 @@ INSERT INTO `signups` (`id`, `username`, `email`, `password`, `mobile`, `google_
 (1, 'riyaz', 'riyaz@gmail.com', '$2y$10$I1Kg8qJ4hFRnTK2SrfJyS.FE456Ip2scpfplQygrKhuDfPduBE.GS', 8012175552, '', 1, 0, 0, '2023-07-22 10:38:13', '2023-08-02 12:01:25'),
 (2, 'mohamed', 'mohamed@gmail.com', '$2y$10$1SxmR7Zs9j7qIKM.JDfQPOj0kNFkiD1N0b/6G/waM1iYtwPUERvn2', 9976660033, '', 1, 0, 0, '2023-07-23 04:17:17', '2023-08-09 10:39:28'),
 (10, 'riyaz mohamed', 'rm15324950@gmail.com', NULL, NULL, '110076416865879665060', 1, 0, 0, '2023-08-06 01:06:43', '2023-08-06 09:01:56'),
-(11, 'test', 'test@gmail.com', '$2y$10$Fiz4ZVp2Lbxjjr3RFV8NYO.fR18RYDju7hY0sjnX7cIupYC0zVRke', 1234567899, NULL, 0, 0, 0, '2023-08-09 12:12:06', '2023-08-09 12:12:06');
+(11, 'test', 'test@gmail.com', '$2y$10$Fiz4ZVp2Lbxjjr3RFV8NYO.fR18RYDju7hY0sjnX7cIupYC0zVRke', 1234567899, NULL, 0, 0, 0, '2023-08-09 12:12:06', '2023-08-09 12:12:06'),
+(13, 'syed', 'syed@gmail.com', '$2y$10$bZ1rlG1mnfxjdeFULqieGu7I9cQ9xPnCkTVodoQegrAyQrfC14YDe', 9976660055, NULL, 0, 0, 0, '2023-10-15 09:41:55', '2023-10-15 09:41:55'),
+(14, 'testtest', 'testtest@gmail.com', '$2y$10$j1fthXCUX8aXDsWMk9zPk.Bx67ihvtZ0YwFa5r0sS6quTcGs5G3l6', 8888888888, NULL, 0, 0, 0, '2023-10-15 13:48:52', '2023-10-15 13:48:52');
 
 -- --------------------------------------------------------
 
@@ -297,6 +326,12 @@ ALTER TABLE `admin_logins`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `admin_logins_username_unique` (`username`),
   ADD UNIQUE KEY `admin_logins_email_unique` (`email`);
+
+--
+-- Indexes for table `follow_user_tables`
+--
+ALTER TABLE `follow_user_tables`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `likes`
@@ -363,22 +398,28 @@ ALTER TABLE `admin_logins`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `follow_user_tables`
+--
+ALTER TABLE `follow_user_tables`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `like_button_stages`
 --
 ALTER TABLE `like_button_stages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -390,7 +431,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `photos`
 --
 ALTER TABLE `photos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `profiles`
@@ -402,7 +443,7 @@ ALTER TABLE `profiles`
 -- AUTO_INCREMENT for table `signups`
 --
 ALTER TABLE `signups`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `user_feedbacks`
