@@ -29,13 +29,15 @@ $userid = $userid ?? '';
 if ($userid != '') {
     $usersfeedback = Signup::join('profiles', 'signups.id', '=', 'profiles.userid')
         ->join('photos', 'signups.id', '=', 'photos.userid')
+        ->join('follow_user_tables', 'signups.id', '=', 'follow_user_tables.user_id')
         ->where('signups.id', '=', $userid)
-        ->get(['signups.*', 'profiles.*', 'photos.photo']);
+        ->get(['signups.*', 'profiles.*', 'photos.photo', 'follow_user_tables.follow_count']);
 } else {
     $usersfeedback = Signup::join('profiles', 'signups.id', '=', 'profiles.userid')
         ->join('photos', 'signups.id', '=', 'photos.userid')
+        ->join('follow_user_tables', 'signups.id', '=', 'follow_user_tables.user_id')
         ->where('signups.id', '=', session('user_id'))
-        ->get(['signups.*', 'profiles.*', 'photos.photo']);
+        ->get(['signups.*', 'profiles.*', 'photos.photo', 'follow_user_tables.follow_count']);
 }
 
 foreach ($usersfeedback as $uf) {
@@ -43,6 +45,7 @@ foreach ($usersfeedback as $uf) {
     $useremail = $uf['email'];
     $usermobile = $uf['mobile'];
     $usergender = $uf['gender'];
+    $follow_count = $uf['follow_count'];
     if ($usergender == 1) {
         $usergender = 'Male';
     } elseif ($usergender == 2) {
@@ -479,6 +482,19 @@ if ($post_follow_count != null or $post_follow_count != '') {
                                 </div>
                             </div>
                         </div>
+
+                        <div class="container mt-5">
+                            <div class="row">
+                                <div class="col-sm-6 text-info">
+                                    <h3>Following : <b>{{ $follow_count ?? '---' }}</b></h3>
+                                </div>
+
+                                <div class="col-sm-6 text-info">
+                                    <h3>Followers : <b>{{ 'comming soon' ?? '---' }}</b></h3>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="container mt-5">
                             <div class="row">
                                 <div class="col-sm-6">
@@ -505,14 +521,14 @@ if ($post_follow_count != null or $post_follow_count != '') {
                                     About : <b>{{ $userabout ?? '---' }}</b>
                                 </div>
                                 <div class="col-sm-6">
-                                    Post Count : <b>{{ $getpostcount ?? '---' }}</b>
+                                    Post : <b>{{ $getpostcount ?? '---' }}</b>
                                 </div>
                             </div>
                         </div>
                         <div class="container mt-5">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    Feedback Count : <b>{{ $getfeedbackcount ?? '---' }}</b>
+                                    Feedback : <b>{{ $getfeedbackcount ?? '---' }}</b>
                                 </div>
                             </div>
                         </div>
