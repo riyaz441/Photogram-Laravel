@@ -5,12 +5,24 @@ use App\Models\Profile;
 use App\Models\Photo;
 use App\Models\user_feedback;
 use App\Models\follow_user_table;
+use App\Models\Follower_count;
+
 // url direct access
 if (session('email') == '' and session('google_id') == '') {
     // Redirect browser
     header('Location: /');
     exit();
 }
+
+// get following count
+$following = follow_user_table::where('user_id', session('user_id'))
+    ->pluck('follow_count')
+    ->first();
+
+// get followers count
+$followers = Follower_count::where('follower_user_id', session('user_id'))
+    ->pluck('follower_count')
+    ->first();
 
 // check profile status
 $profile_update_status = Signup::where('id', session('user_id'))
@@ -30,9 +42,8 @@ if ($userid != '') {
 } else {
     $usersfeedback = Signup::join('profiles', 'signups.id', '=', 'profiles.userid')
         ->join('photos', 'signups.id', '=', 'photos.userid')
-        ->join('follow_user_tables', 'signups.id', '=', 'follow_user_tables.user_id')
         ->where('signups.id', '=', session('user_id'))
-        ->get(['signups.*', 'profiles.*', 'photos.photo', 'follow_user_tables.follow_count']);
+        ->get(['signups.*', 'profiles.*', 'photos.photo']);
 }
 
 foreach ($usersfeedback as $uf) {
@@ -40,7 +51,6 @@ foreach ($usersfeedback as $uf) {
     $useremail = $uf['email'];
     $usermobile = $uf['mobile'];
     $usergender = $uf['gender'];
-    $follow_count = $uf['follow_count'];
     if ($usergender == 1) {
         $usergender = 'Male';
     } elseif ($usergender == 2) {
@@ -461,11 +471,11 @@ $getfeedbackcount = user_feedback::where('userid', session('user_id'))->count();
                         <div class="container mt-5">
                             <div class="row">
                                 <div class="col-sm-6 text-info">
-                                    <h3>Following : <b>{{ $follow_count ?? '---' }}</b></h3>
+                                    <h3>Following : <b>{{ $following ?? '0' }}</b></h3>
                                 </div>
 
                                 <div class="col-sm-6 text-info">
-                                    <h3>Followers : <b>{{ 'comming soon' ?? '---' }}</b></h3>
+                                    <h3>Followers : <b>{{ $followers ?? '0' }}</b></h3>
                                 </div>
                             </div>
                         </div>
