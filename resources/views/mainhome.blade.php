@@ -194,18 +194,20 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
 
         #myToast {
             position: absolute;
-            top: 75px;
+            top: 79%;
             right: 0;
-            margin-right: 10px;
-            width: 15%;
+            margin-right: 86%;
+            width: 13%;
+            padding-right: 10px;
         }
 
         #myToastunlike {
             position: absolute;
-            top: 75px;
+            top: 79%;
             right: 0;
-            margin-right: 10px;
-            width: 15%;
+            margin-right: 86%;
+            width: 13%;
+            padding-right: 10px;
         }
     </style>
 
