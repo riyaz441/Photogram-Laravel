@@ -167,6 +167,11 @@
         <div class="row">
             <div class="col-sm-12 mt-5">
                 <main class="form-signin w-100 m-auto">
+
+                    <div class="alert alert-info text-center" role="alert" id="screensize">
+                        USE BIG SCREEN FOR BETTER EXPERIENCE
+                    </div>
+
                     <form action="/logincheck" method="post" id="login_form">
                         <img class="mx-auto d-block" src="../assets/brand/logo1.png" alt="" width="250"
                             height="250">
@@ -252,6 +257,18 @@
 {{-- js code --}}
 <script>
     $(document).ready(function() {
+
+
+        // hide display size info alert
+        $("#screensize").hide();
+
+        // find user screen size
+        var width = screen.width;
+        var height = screen.height;
+
+        if (width < 500 && height < 800) {
+            $("#screensize").show();
+        }
 
         // hide the js alert load the page
         $("#jsalerterror").hide();
