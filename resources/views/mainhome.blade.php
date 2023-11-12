@@ -192,7 +192,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
             display: none;
         }
 
-        #myToast {
+        /* #myToast {
             position: absolute;
             top: 79%;
             right: 0;
@@ -208,7 +208,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
             margin-right: 86%;
             width: 13%;
             padding-right: 10px;
-        }
+        } */
     </style>
 
 
@@ -445,7 +445,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                         <div class="input-group mb-3">
                             <input type="text" class="form-control shareid" placeholder="Recipient's username"
                                 aria-label="Recipient's username" aria-describedby="button-addon2">
-                            <button class="btn btn-primary" id="copybutton">Copy</button>
+                            <button class="btn btn-info" id="copybutton">Copy</button>
                         </div>
                     </div>
 
@@ -460,7 +460,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
         <div class="album py-5 bg-body-tertiary">
             <div class="container">
 
-                <div class="toast position-fixed text-bg-success end-2 p-3" id="myToast" role="alert"
+                {{-- <div class="toast position-fixed text-bg-success end-2 p-3" id="myToast" role="alert"
                     aria-live="assertive" aria-atomic="true">
                     <div class="toast-header text-bg-success">
                         <img src="../assets/brand/camera.png" class="rounded me-2" alt="..." height="20px"
@@ -486,7 +486,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                     <div class="toast-body">
                         Post Unliked
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="col">
 
@@ -529,13 +529,18 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                                                             }
                                                         }
                                                     @endphp
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                        height="24"
-                                                        style="fill: {{ $isLiked ? '#0082f3' : '#8f959c' }};transform: ;msFilter:;">
-                                                        <path
-                                                            d="M4 21h1V8H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2zM20 8h-7l1.122-3.368A2 2 0 0 0 12.225 2H12L7 7.438V21h11l3.912-8.596L22 12v-2a2 2 0 0 0-2-2z">
-                                                        </path>
-                                                    </svg>
+                                                    <span id="likestatusupdate_{{ $up->id }}">
+
+                                                    </span>
+                                                    <span id="likestatusupdatemain_{{ $up->id }}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24"
+                                                            style="fill: {{ $isLiked ? '#0082f3' : '#8f959c' }};transform: ;msFilter:;">
+                                                            <path
+                                                                d="M4 21h1V8H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2zM20 8h-7l1.122-3.368A2 2 0 0 0 12.225 2H12L7 7.438V21h11l3.912-8.596L22 12v-2a2 2 0 0 0-2-2z">
+                                                            </path>
+                                                        </svg>
+                                                    </span>
 
                                                     &nbsp; <span
                                                         id="likecount_{{ $up->id }}">{{ $up->like }}</span>
@@ -582,8 +587,8 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
 
 
         // hide toast
-        $('#myToast').toast('hide');
-        $('#myToastunlike').toast('hide');
+        // $('#myToast').toast('hide');
+        // $('#myToastunlike').toast('hide');
 
         // tooltip
         $('[data-toggle="tooltip"]').tooltip();
@@ -1020,28 +1025,38 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                 success: function(data) {
 
                     if (data.message == 0) {
-                        $('#myToastunlike').toast('show');
+                        // $('#myToastunlike').toast('show');
                         $('#likecount_' + like).html(data.like_count);
+                        $('#likestatusupdatemain_' + like).hide();
+
+                        $('#likestatusupdate_' + like).html(
+                            "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' style='fill: #8f959c;transform: ;msFilter:;'><path d='M4 21h1V8H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2zM20 8h-7l1.122-3.368A2 2 0 0 0 12.225 2H12L7 7.438V21h11l3.912-8.596L22 12v-2a2 2 0 0 0-2-2z'></path></svg>"
+                        );
 
                         // reload page after 5 sec
-                        setTimeout(function() {
-                            location.reload(true);
-                        }, 5000);
+                        // setTimeout(function() {
+                        //     location.reload(true);
+                        // }, 5000);
 
                     } else {
-                        $('#myToast').toast('show');
+                        //$('#myToast').toast('show');
                         $('#likecount_' + like).html(data.like_count);
+                        $('#likestatusupdatemain_' + like).hide();
+
+                        $('#likestatusupdate_' + like).html(
+                            "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' style='fill: #0082f3;transform: ;msFilter:;'><path d='M4 21h1V8H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2zM20 8h-7l1.122-3.368A2 2 0 0 0 12.225 2H12L7 7.438V21h11l3.912-8.596L22 12v-2a2 2 0 0 0-2-2z'></path></svg>"
+                        );
 
                         // reload page after 5 sec
-                        setTimeout(function() {
-                            location.reload(true);
-                        }, 5000);
+                        // setTimeout(function() {
+                        //     location.reload(true);
+                        // }, 5000);
                     }
 
                 },
                 complete: function() {
                     // Enable the button and reset the flag after AJAX call is completed
-                    $('#ajax-button').prop('disabled', false);
+                    $('#like_' + like).prop('disabled', false);
                     isAjaxInProgress = false;
                 }
             });

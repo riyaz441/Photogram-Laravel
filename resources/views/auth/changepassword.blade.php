@@ -145,6 +145,10 @@
             background-color: #823bb5 !important;
             color: white !important;
         }
+
+        input[type=checkbox] {
+            accent-color: #823bb5;
+        }
     </style>
 
 
@@ -174,7 +178,7 @@
                             <label for="floatingPassword">Confirm Password</label>
                         </div>
 
-                        <div class="checkbox mb-3">
+                        <div class="checkbox mb-3 text-center">
                             <label class="checkbox-wrap checkbox-dark" for="checkbox">Show
                                 Password
                                 <input type="checkbox" id="checkbox">

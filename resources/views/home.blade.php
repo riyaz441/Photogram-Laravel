@@ -508,7 +508,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                         <div class="input-group mb-3">
                             <input type="text" class="form-control shareid" placeholder="Recipient's username"
                                 aria-label="Recipient's username" aria-describedby="button-addon2">
-                            <button class="btn btn-primary" id="copybutton">Copy</button>
+                            <button class="btn btn-info" id="copybutton">Copy</button>
                         </div>
                     </div>
 
