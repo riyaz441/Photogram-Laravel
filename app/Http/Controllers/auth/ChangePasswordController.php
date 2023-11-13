@@ -20,15 +20,20 @@ class ChangePasswordController extends Controller
             'password' => 'required|confirmed|min:8'
         ]);
 
-        if (!$validator->passes()) {
-            return response()->json([
-                'status' => 0, 'error' => $validator->errors()->toArray()
-            ]);
+        // check session email empty
+        if (session('email') != "") {
+            if (!$validator->passes()) {
+                return response()->json([
+                    'status' => 0, 'error' => $validator->errors()->toArray()
+                ]);
+            } else {
+                $newpassword = Hash::make($request->input('password'));
+                $emailSession = session('email');
+                Signup::where('email', '=', $emailSession)->update(array('password' => $newpassword));
+                return response()->json(['changepassword_status' => 0]);
+            }
         } else {
-            $newpassword = Hash::make($request->input('password'));
-            $emailSession = session('email');
-            Signup::where('email', '=', $emailSession)->update(array('password' => $newpassword));
-            return response()->json(['changepassword_status' => 0]);
+            return response()->json(['changepassword_status' => 1]);
         }
     }
 }

@@ -280,6 +280,10 @@
                             $("#jsalertsuccess").css("visibility", "visible");
                             $("#jsalerterror").css("visibility", "hidden");
                             $("#jsalertsuccess").html("Password Changed Successfully");
+                        } else if (data.changepassword_status == 1) {
+                            $("#jsalerterror").show();
+                            $("#jsalerterror").css("visibility", "visible");
+                            $("#jsalerterror").html("Password Can't be Change!");
                         } else if (data.error['password'] ==
                             "The password field is required." || data.error['password'] ==
                             "The password field must be at least 8 characters." || data
