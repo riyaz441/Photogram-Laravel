@@ -66,10 +66,10 @@ foreach ($usersfeedback as $uf) {
 }
 
 // get post count
-$getpostcount = Photo::where('userid', session('user_id'))->count();
+$getpostcount = Photo::where('userid', $user_get_id)->count();
 
 // get user feedback count
-$getfeedbackcount = user_feedback::where('userid', session('user_id'))->count();
+$getfeedbackcount = user_feedback::where('userid', $user_get_id)->count();
 
 // main array for check user follow and not follow
 $post_follow_count = follow_user_table::where('user_id', session('user_id'))
