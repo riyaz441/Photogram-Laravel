@@ -12,6 +12,8 @@ if (session('email') == '' and session('google_id') == '') {
 // get shared used user details using url parameter
 $parameter_id = request()->route('id');
 
+$parameter_id = Crypt::decryptString($parameter_id);
+
 $post_details = Photo::where('id', $parameter_id)->first();
 
 $photo = $post_details->photo;

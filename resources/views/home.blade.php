@@ -4,6 +4,7 @@ use App\Models\Signup;
 use App\Models\Profile;
 use App\Models\Photo;
 use App\Models\Like_button_stage;
+use Illuminate\Support\Facades\Crypt;
 
 // url direct access
 if (session('email') == '' and session('google_id') == '') {
@@ -656,7 +657,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                                                     &nbsp;
                                                     Like
                                                 </button>
-                                                <button type="button" value="{{ $up->id }}"
+                                                <button type="button" value="{{ Crypt::encryptString($up->id) }}"
                                                     class="btn btn-sm btn-outline-secondary share"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#exampleModalPostshare"><svg
