@@ -16,6 +16,7 @@ use App\Http\Controllers\PhotoUploadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ShareController;
+use App\Http\Controllers\AccountDeleteController;
 use App\Models\Signup;
 use Illuminate\Support\Facades\Route;
 
@@ -147,3 +148,6 @@ Route::post('/postlike', [LikeController::class, 'postlike']);
 
 // follow route
 Route::post('/follow', [FollowController::class, 'follow']);
+
+// account delete route
+Route::post('/accountdelete', [AccountDeleteController::class, 'accountdelete']);

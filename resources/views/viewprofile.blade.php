@@ -434,6 +434,42 @@ $getfeedbackcount = user_feedback::where('userid', session('user_id'))->count();
 
     {{-- profile model code end --}}
 
+    {{-- delete account model code start --}}
+    <div class="modal fade" id="exampleModalaccount" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <form action="/accountdelete" method="post" id="accountdelete" enctype="multipart/form-data">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Account
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            I want delete this photogram account
+                        </div>
+                        <div class="mt-5" onselectstart="return false" oncut="return false" oncopy="return false"
+                            onpaste="return false" ondrag="return false" ondrop="return false">
+                            <label for="deleteaccount" class="form-label">To confirm, type <span
+                                    class="badge text-bg-info">{{ $username }}</span> in the
+                                box below</label>
+                            <input type="text" class="form-control" id="deleteaccount" name="deleteaccount"
+                                placeholder="Username" autocomplete="off" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger" id="delete">Delete</button>
+                    </div>
+                </div>
+                @csrf
+            </form>
+        </div>
+    </div>
+
+    {{-- delete accent model code end --}}
 
     <main>
 
@@ -518,6 +554,18 @@ $getfeedbackcount = user_feedback::where('userid', session('user_id'))->count();
                             </div>
                         </div>
 
+                        <div class="container mt-5">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-outline-danger mx-auto d-block"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModalaccount">
+                                        Delete Account
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
                         {{-- javascript validation alert for error --}}
 
                         <div class="alert alert-danger text-center mt-3" role="alert" id="jsalerterror"
@@ -538,7 +586,7 @@ $getfeedbackcount = user_feedback::where('userid', session('user_id'))->count();
 
     </main>
 
-    {{-- @include('layouts.includes.userfooter') --}}
+    @include('layouts.includes.userfooter')
 
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -814,6 +862,44 @@ $getfeedbackcount = user_feedback::where('userid', session('user_id'))->count();
                 }
             });
             // ajax call end
+        });
+
+        // account delete js code start
+        $("#accountdelete").on('submit', function(e) {
+            e.preventDefault();
+
+
+            var user_name_input = $("#deleteaccount").val();
+            var user_name = "<?php echo $username; ?>";
+            var _token = $('input[name="_token"]').val();
+
+            if (user_name_input == user_name) {
+                $.ajax({
+                    url: $(this).attr('action'),
+                    method: $(this).attr('method'),
+                    data: new FormData(this),
+                    contentType: 'multipart/form-data',
+                    processData: false,
+                    dataType: 'json',
+                    contentType: false,
+                    beforeSend: function() {
+                        $(document).find('span.error-text').text('');
+                    },
+                    success: function(data) {
+
+                        if (data.message == 0) {
+                            window.location.href = '/logout';
+                        }
+
+                    }
+                });
+            } else {
+                $("#jsalerterror").show();
+                $("#jsalerterror").css("visibility", "visible");
+                $("#jsalerterror").html("Username not match");
+                $('#exampleModalaccount').modal('hide');
+            }
+
         });
 
     });
