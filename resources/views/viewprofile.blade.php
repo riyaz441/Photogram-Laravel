@@ -897,7 +897,13 @@ $getfeedbackcount = user_feedback::where('userid', session('user_id'))->count();
                 $("#jsalerterror").show();
                 $("#jsalerterror").css("visibility", "visible");
                 $("#jsalerterror").html("Username not match");
+                $("#deleteaccount").val("");
                 $('#exampleModalaccount').modal('hide');
+
+                // close alert in 5 sec
+                setTimeout(function() {
+                    $('#jsalerterror').fadeOut('slow');
+                }, 5000); // <-- time in milliseconds
             }
 
         });
