@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-            // Initialize CKEditor
+        // Initialize CKEditor
         CKEDITOR.replace('viewprofilefeedback', {
             height: "200px"
         });

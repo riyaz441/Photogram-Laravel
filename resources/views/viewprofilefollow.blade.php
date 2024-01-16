@@ -107,6 +107,9 @@ if ($post_follow_count != null or $post_follow_count != '') {
     {{-- laravel ajax meta link --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!-- rich text editor -->
+    <script src="//cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
+
 
 
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -428,9 +431,8 @@ if ($post_follow_count != null or $post_follow_count != '') {
                     </div>
                     <div class="modal-body">
                         <div class="form-floating">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                            <textarea class="form-control" placeholder="Leave a comment here" id="viewprofilefollowfeedback"
                                 style="height: 200px; width: 400px" name="feedback"></textarea>
-                            <label for="floatingTextarea2">Feedback</label>
                         </div>
                     </div>
                     <div class="modal-footer">

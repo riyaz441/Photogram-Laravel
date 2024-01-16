@@ -2,6 +2,13 @@ $(document).ready(function() {
 
         $('#myToast').toast('show');
 
+        // Initialize CKEditor
+        CKEDITOR.replace('viewprofilefollowfeedback', {
+            height: "200px"
+        });
+
+        CKEDITOR.addCss('.cke_editable { background-color: #e9e9e9; color: black }');
+
         const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: Dark)').matches;
 
         if (prefersDark == true) {
@@ -169,6 +176,10 @@ $(document).ready(function() {
         $("#userfeedback").on('submit', function(e) {
             e.preventDefault();
 
+            for (instance in CKEDITOR.instances) {
+                CKEDITOR.instances[instance].updateElement();
+            }
+
             // close alert in 5 sec
             setTimeout(function() {
                 $('#jsalerterror').fadeOut('slow');
@@ -206,6 +217,8 @@ $(document).ready(function() {
                         // reset the form
                         $("#profilechange")[0].reset();
                         $('#exampleModalFeedback').modal('hide');
+
+                        CKEDITOR.instances['viewprofilefollowfeedback'].setData('');
                     }
                     if (data.message == 0) {
                         $("#jsalertsuccess").show();
@@ -216,6 +229,7 @@ $(document).ready(function() {
                         $("#profilechange")[0].reset();
                         $('#exampleModalFeedback').modal('hide');
 
+                        CKEDITOR.instances['viewprofilefollowfeedback'].setData('');
                     }
 
                 }
