@@ -104,7 +104,7 @@
         });
 
         // password show and hide
-        $('#checkbox').on('change', function() {
-            $('#password').attr('type', $('#checkbox').prop('checked') == true ? "text" : "password");
-        });
+        // $('#checkbox').on('change', function() {
+        //     $('#password').attr('type', $('#checkbox').prop('checked') == true ? "text" : "password");
+        // });
     });

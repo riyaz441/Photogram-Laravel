@@ -190,17 +190,17 @@
                             <label for="floatingPassword">Password</label>
                         </div>
 
-                        <div class="checkbox mb-3">
+                        <div class="checkbox text-center mb-3">
                             <label>
                                 <input type="checkbox" value="remember-me" name="rememberme" id="rememberme"> Remember
                                 me
                             </label>
 
-                            <label class="checkbox-wrap checkbox-dark" for="checkbox" style="margin-left:45px">Show
+                            {{-- <label class="checkbox-wrap checkbox-dark" for="checkbox" style="margin-left:45px">Show
                                 Password
                                 <input type="checkbox" id="checkbox">
                                 <span class="checkmark"></span>
-                            </label>
+                            </label> --}}
                         </div>
                         <button class="w-100 btn btn-lg mb-3" type="submit" name="submit"
                             id="submit">Login</button>
