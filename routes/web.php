@@ -35,119 +35,122 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+// this middleware protect the browser back button
+Route::group(['middleware' => 'prevent-back-history'], function () {
 
-// show signin page
-Route::view('/', 'auth/signin');
+    // show signin page
+    Route::view('/', 'auth/signin');
 
-// show signup page
-Route::view('/signup', 'auth/signup');
+    // show signup page
+    Route::view('/signup', 'auth/signup');
 
-// signup route
-Route::post('/formsubmit', [SignupController::class, 'signupsave']);
+    // signup route
+    Route::post('/formsubmit', [SignupController::class, 'signupsave']);
 
-// login check route
-Route::post('/logincheck', [LoginController::class, 'logincheck']);
+    // login check route
+    Route::post('/logincheck', [LoginController::class, 'logincheck']);
 
-// home page route
-Route::view('/home', 'home');
+    // home page route
+    Route::view('/home', 'home');
 
-// show forgot password page
-Route::view('/forgotpassword', 'auth/forgotpassword');
+    // show forgot password page
+    Route::view('/forgotpassword', 'auth/forgotpassword');
 
-// forgot password route
-Route::post(
-    '/forgotpassword',
-    [ForgotController::class, 'forgotcheck']
-);
+    // forgot password route
+    Route::post(
+        '/forgotpassword',
+        [ForgotController::class, 'forgotcheck']
+    );
 
-// show change password page
-Route::view('/changepassword', 'auth/changepassword');
+    // show change password page
+    Route::view('/changepassword', 'auth/changepassword');
 
-// change password route
-Route::post('/changepassword', [ChangePasswordController::class, 'changepassword']);
+    // change password route
+    Route::post('/changepassword', [ChangePasswordController::class, 'changepassword']);
 
-// logout route
-Route::get('/logout', [LoginController::class, 'logout']);
+    // logout route
+    Route::get('/logout', [LoginController::class, 'logout']);
 
-// show admin login page
-Route::view('/adminlogin', 'auth/adminlogin');
+    // show admin login page
+    Route::view('/adminlogin', 'auth/adminlogin');
 
-// admin login route
-Route::post('/adminlogincheck', [AdminLoginController::class, 'adminlogin']);
+    // admin login route
+    Route::post('/adminlogincheck', [AdminLoginController::class, 'adminlogin']);
 
 
-// show admin register page
-Route::view('/adminregister', 'auth/adminregister');
+    // show admin register page
+    Route::view('/adminregister', 'auth/adminregister');
 
-// admin register route
-Route::post('/adminregistersubmit', [AdminRegisterController::class, 'adminregister']);
+    // admin register route
+    Route::post('/adminregistersubmit', [AdminRegisterController::class, 'adminregister']);
 
-// show admin dashboard
-Route::view('/admindashboard', 'admindashboard');
+    // show admin dashboard
+    Route::view('/admindashboard', 'admindashboard');
 
-// admin dashboard route
-Route::get('/admindashboardview', [AdminDashboardController::class, 'admindashboard']);
+    // admin dashboard route
+    Route::get('/admindashboardview', [AdminDashboardController::class, 'admindashboard']);
 
-// admin logout route
-Route::get('/adminlogout', [AdminLoginController::class, 'logout']);
+    // admin logout route
+    Route::get('/adminlogout', [AdminLoginController::class, 'logout']);
 
-// block and unblock route
-Route::post('/accountstatus', [AdminDashboardController::class, 'accountstatus']);
+    // block and unblock route
+    Route::post('/accountstatus', [AdminDashboardController::class, 'accountstatus']);
 
-// photo upload route
-Route::post('/photoupload', [PhotoUploadController::class, 'photoupload']);
+    // photo upload route
+    Route::post('/photoupload', [PhotoUploadController::class, 'photoupload']);
 
-// homeview route
-Route::get('/homeview', [HomeViewController::class, 'homeview']);
+    // homeview route
+    Route::get('/homeview', [HomeViewController::class, 'homeview']);
 
-// profile update route
-Route::post('/profileupdate', [ProfileController::class, 'profile']);
+    // profile update route
+    Route::post('/profileupdate', [ProfileController::class, 'profile']);
 
-// profile change route
-Route::post('/profilechange', [ProfileController::class, 'profilechange']);
+    // profile change route
+    Route::post('/profilechange', [ProfileController::class, 'profilechange']);
 
-// google oauth route
-Route::get('auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');
-Route::get('auth/google/call-back', [GoogleAuthController::class, 'callbackGoogle']);
+    // google oauth route
+    Route::get('auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');
+    Route::get('auth/google/call-back', [GoogleAuthController::class, 'callbackGoogle']);
 
-// user feedback route
-Route::post('/userfeedback', [FeedbackController::class, 'userfeedback']);
+    // user feedback route
+    Route::post('/userfeedback', [FeedbackController::class, 'userfeedback']);
 
-// admin feedback route
-Route::view('/adminfeedback', 'adminfeedback');
+    // admin feedback route
+    Route::view('/adminfeedback', 'adminfeedback');
 
-// view profile
-Route::view('/viewprofile/{username}', 'viewprofile');
+    // view profile
+    Route::view('/viewprofile/{username}', 'viewprofile');
 
-// search route
-Route::post('/search', [SearchController::class, 'usersearch']);
+    // search route
+    Route::post('/search', [SearchController::class, 'usersearch']);
 
-// user click the search result route
-Route::get('/viewprofilee/{id}', [SearchController::class, 'user']);
+    // user click the search result route
+    Route::get('/viewprofilee/{id}', [SearchController::class, 'user']);
 
-//post edit route
-Route::post('/postedit', [PhotoUploadController::class, 'postedit']);
+    //post edit route
+    Route::post('/postedit', [PhotoUploadController::class, 'postedit']);
 
-//post update route
-Route::post('/postupdate', [PhotoUploadController::class, 'postupdate']);
+    //post update route
+    Route::post('/postupdate', [PhotoUploadController::class, 'postupdate']);
 
-// get delete id route
-Route::post('/postdelete', [PhotoUploadController::class, 'postdelete']);
+    // get delete id route
+    Route::post('/postdelete', [PhotoUploadController::class, 'postdelete']);
 
-// post delete route
-Route::post('/postdeletefinal', [PhotoUploadController::class, 'postdeletefinal']);
+    // post delete route
+    Route::post('/postdeletefinal', [PhotoUploadController::class, 'postdeletefinal']);
 
-// share show page route
-Route::view('/sharepage/{id}', 'sharepostshow');
+    // share show page route
+    Route::view('/sharepage/{id}', 'sharepostshow');
 
-// main home route
-Route::view('/mainhome', 'mainhome');
+    // main home route
+    Route::view('/mainhome', 'mainhome');
 
-// like route
-Route::post('/postlike', [LikeController::class, 'postlike']);
+    // like route
+    Route::post('/postlike', [LikeController::class, 'postlike']);
 
-// follow route
-Route::post('/follow', [FollowController::class, 'follow']);
+    // follow route
+    Route::post('/follow', [FollowController::class, 'follow']);
 
-// account delete route
-Route::post('/accountdelete', [AccountDeleteController::class, 'accountdelete']);
+    // account delete route
+    Route::post('/accountdelete', [AccountDeleteController::class, 'accountdelete']);
+});
