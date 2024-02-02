@@ -200,7 +200,7 @@
 </body>
 
 {{-- js code --}}
-<script src="../assets/dist/js/adminlogin.js"></script>
+<script src="../assets/dist/js/adminlogin.min.js"></script>
 {{-- js code end --}}
 
 </html>

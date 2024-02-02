@@ -583,5 +583,5 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
 </html>
 
 {{-- js code --}}
-<script src="../assets/dist/js/mainhome.js"></script>
+<script src="../assets/dist/js/mainhome.min.js"></script>
 {{-- js code end --}}

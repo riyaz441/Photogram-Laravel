@@ -244,7 +244,7 @@
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
     {{-- js code --}}
-    <script src="../assets/dist/js/signup.js"></script>
+    <script src="../assets/dist/js/signup.min.js"></script>
     {{-- js code end --}}
 
 </body>

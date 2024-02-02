@@ -573,5 +573,5 @@ if ($post_follow_count != null or $post_follow_count != '') {
 </html>
 
 {{-- js code --}}
-<script src="../assets/dist/js/viewprofilefollow.js"></script>
+<script src="../assets/dist/js/viewprofilefollow.min.js"></script>
 {{-- js code end --}}

@@ -217,7 +217,7 @@
 </body>
 
 {{-- js code --}}
-<script src="../assets/dist/js/changepassword.js"></script>
+<script src="../assets/dist/js/changepassword.min.js"></script>
 {{-- js code end --}}
 
 </html>

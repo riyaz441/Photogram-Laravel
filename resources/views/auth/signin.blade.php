@@ -270,7 +270,7 @@
 </body>
 
 {{-- js code --}}
-<script src="../assets/dist/js/signin.js"></script>
+<script src="../assets/dist/js/signin.min.js"></script>
 {{-- js code end --}}
 
 </html>

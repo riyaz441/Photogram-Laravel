@@ -202,7 +202,7 @@
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
     {{-- js code --}}
-    <script src="../assets/dist/js/adminregister.js"></script>
+    <script src="../assets/dist/js/adminregister.min.js"></script>
     {{-- js code end --}}
 
 </body>

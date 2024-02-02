@@ -597,5 +597,5 @@ $getfeedbackcount = user_feedback::where('userid', session('user_id'))->count();
 </html>
 
 {{-- js code --}}
-<script src="../assets/dist/js/viewprofile.js"></script>
+<script src="../assets/dist/js/viewprofile.min.js"></script>
 {{-- js code end --}}

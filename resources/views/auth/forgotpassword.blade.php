@@ -179,7 +179,7 @@
 </body>
 
 {{-- js code --}}
-<script src="../assets/dist/js/forgotpassword.js"></script>
+<script src="../assets/dist/js/forgotpassword.min.js"></script>
 {{-- js code end --}}
 
 </html>

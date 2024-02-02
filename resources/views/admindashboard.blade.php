@@ -111,7 +111,7 @@ if (session('username') == '') {
     <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
 
-    <script src="../assets/dist/js/admindashboard.js"></script>
+    <script src="../assets/dist/js/admindashboard.min.js"></script>
     {{-- datatable script over --}}
 </body>
 
