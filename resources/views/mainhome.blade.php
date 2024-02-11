@@ -14,17 +14,13 @@ if (session('email') == '' and session('google_id') == '') {
 }
 
 // check profile status
-$profile_update_status = Signup::where('id', session('user_id'))
-    ->pluck('profile_update_status')
-    ->first();
+$profile_update_status = Signup::where('id', session('user_id'))->pluck('profile_update_status')->first();
 
 // auto fill profile details
 $profile_details = Profile::where('userid', session('user_id'))->first();
 
 // get random post for home page
-$randompost = Photo::inRandomOrder()
-    ->limit(6)
-    ->get();
+$randompost = Photo::inRandomOrder()->limit(6)->get();
 
 $usersWithPosts = Photo::join('signups', 'signups.id', '=', 'photos.userid')
     ->join('likes', 'likes.post_id', '=', 'photos.id')
@@ -508,7 +504,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                     <div class="row">
 
                         @foreach ($usersWithPosts as $up)
-                            <div class="col-sm-4 mt-4">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 col-xxl-3 mt-4">
                                 <div class="card shadow-sm">
                                     <img src="{{ asset($up->photo) }}" alt="image" height="350" width="100%"
                                         id="photo">
@@ -560,7 +556,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                                                     </svg> &nbsp; Share</button>
                                             </div>
                                             <small
-                                                class="text-body-secondary">{{ $up->created_at->diffForHumans() }}</small>
+                                                class="text-body-secondary ps-2">{{ $up->created_at->diffForHumans() }}</small>
                                         </div>
                                     </div>
                                 </div>

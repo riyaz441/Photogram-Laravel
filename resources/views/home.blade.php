@@ -14,17 +14,13 @@ if (session('email') == '' and session('google_id') == '') {
 }
 
 // check profile status
-$profile_update_status = Signup::where('id', session('user_id'))
-    ->pluck('profile_update_status')
-    ->first();
+$profile_update_status = Signup::where('id', session('user_id'))->pluck('profile_update_status')->first();
 
 // auto fill profile details
 $profile_details = Profile::where('userid', session('user_id'))->first();
 
 // get id for show no post found message
-$get_id = Photo::where('userid', session('user_id'))
-    ->pluck('id')
-    ->first();
+$get_id = Photo::where('userid', session('user_id'))->pluck('id')->first();
 
 // get all user like post id value
 $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
@@ -616,7 +612,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                             <h4 class="text-center">No Post Found!</h4>
                         @endif
                         @foreach ($userspost as $up)
-                            <div class="col-sm-4 mt-4">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 col-xxl-3 mt-4">
                                 <div class="card shadow-sm card border-info">
                                     <img src="{{ asset($up->photo) }}" alt="image" height="350" width="100%"
                                         id="photo">
@@ -707,7 +703,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                                                 </div>
                                             </div>
                                             <small
-                                                class="text-body-secondary">{{ $up->created_at->diffForHumans() }}</small>
+                                                class="text-body-secondary ps-2">{{ $up->created_at->diffForHumans() }}</small>
                                         </div>
                                     </div>
                                 </div>

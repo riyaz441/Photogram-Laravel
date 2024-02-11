@@ -15,19 +15,13 @@ if (session('email') == '' and session('google_id') == '') {
 }
 
 // get following count
-$following = follow_user_table::where('user_id', session('user_id'))
-    ->pluck('follow_count')
-    ->first();
+$following = follow_user_table::where('user_id', session('user_id'))->pluck('follow_count')->first();
 
 // get followers count
-$followers = Follower_count::where('follower_user_id', session('user_id'))
-    ->pluck('follower_count')
-    ->first();
+$followers = Follower_count::where('follower_user_id', session('user_id'))->pluck('follower_count')->first();
 
 // check profile status
-$profile_update_status = Signup::where('id', session('user_id'))
-    ->pluck('profile_update_status')
-    ->first();
+$profile_update_status = Signup::where('id', session('user_id'))->pluck('profile_update_status')->first();
 
 // auto fill profile details
 $profile_details = Profile::where('userid', session('user_id'))->first();
@@ -498,60 +492,94 @@ $getfeedbackcount = user_feedback::where('userid', session('user_id'))->count();
 
                         <div class="container mt-5">
                             <div class="row">
-                                <div class="col-sm-12">
+                                <div class="col-sm-6">
                                     <img src="{{ asset($userimage ?? '../assets/brand/person.svg') }}"
                                         class="rounded mx-auto d-block" alt="image" height="250" width="250"
                                         id="photo">
                                 </div>
+
+                                <div class="col-sm-3">
+                                    <h3 class="text-info">Following : <b>{{ $following ?? '0' }}</b></h3>
+
+                                    <div class="pt-5">
+                                        Username : <b>{{ $username ?? '---' }}</b>
+                                    </div>
+
+                                    <div class="pt-5">
+                                        Mobile : <b>{{ $usermobile ?? '---' }}</b>
+                                    </div>
+
+                                    <div class="pt-5">
+                                        About : <b>{{ $userabout ?? '---' }}</b>
+                                    </div>
+
+                                    <div class="pt-5">
+                                        Feedback : <b>{{ $getfeedbackcount ?? '---' }}</b>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <h3 class="text-info">Followers : <b>{{ $followers ?? '0' }}</b></h3>
+
+                                    <div class="pt-4">
+                                        Email : <b>{{ $useremail ?? '---' }}</b>
+                                    </div>
+
+                                    <div class="pt-5">
+                                        Gender : <b>{{ $usergender ?? '---' }}</b>
+                                    </div>
+
+                                    <div class="pt-5">
+                                        Post : <b>{{ $getpostcount ?? '---' }}</b>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="container mt-5">
                             <div class="row">
                                 <div class="col-sm-6 text-info">
-                                    <h3>Following : <b>{{ $following ?? '0' }}</b></h3>
+
                                 </div>
 
-                                <div class="col-sm-6 text-info">
-                                    <h3>Followers : <b>{{ $followers ?? '0' }}</b></h3>
-                                </div>
+
                             </div>
                         </div>
 
                         <div class="container mt-5">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    Username : <b>{{ $username ?? '---' }}</b>
+
                                 </div>
                                 <div class="col-sm-6">
-                                    Email : <b>{{ $useremail ?? '---' }}</b>
+
                                 </div>
                             </div>
                         </div>
                         <div class="container mt-5">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    Mobile : <b>{{ $usermobile ?? '---' }}</b>
+
                                 </div>
                                 <div class="col-sm-6">
-                                    Gender : <b>{{ $usergender ?? '---' }}</b>
+
                                 </div>
                             </div>
                         </div>
                         <div class="container mt-5">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    About : <b>{{ $userabout ?? '---' }}</b>
+
                                 </div>
                                 <div class="col-sm-6">
-                                    Post : <b>{{ $getpostcount ?? '---' }}</b>
+
                                 </div>
                             </div>
                         </div>
-                        <div class="container mt-5">
+                        <div class="container mt-2">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    Feedback : <b>{{ $getfeedbackcount ?? '---' }}</b>
+
                                 </div>
                             </div>
                         </div>
