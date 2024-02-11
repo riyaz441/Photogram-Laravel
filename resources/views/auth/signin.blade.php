@@ -168,7 +168,7 @@
             <div class="col-sm-12 mt-5">
                 <main class="form-signin w-100 m-auto">
 
-                    <div class="alert alert-info text-center" role="alert" id="screensize">
+                    <div class="alert alert-info text-center" role="alert" id="screensize" style="display: none">
                         USE BIG SCREEN FOR BETTER EXPERIENCE
                     </div>
 
