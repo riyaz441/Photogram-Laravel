@@ -612,7 +612,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                             <h4 class="text-center">No Post Found!</h4>
                         @endif
                         @foreach ($userspost as $up)
-                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 col-xxl-3 mt-4">
+                            <div class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 col-xxl-3 mt-4">
                                 <div class="card shadow-sm card border-info">
                                     <img src="{{ asset($up->photo) }}" alt="image" height="350" width="100%"
                                         id="photo">
