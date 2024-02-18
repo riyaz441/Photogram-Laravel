@@ -151,15 +151,15 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
             list-style: none;
             margin: 0;
             padding: 0;
-            position: absolute;
-            width: 100%;
+            position: fixed;
+            width: 205px !important;
             max-height: 200px;
             overflow-y: auto;
             border: 1px solid #212529;
             background-color: #3c3f42;
             z-index: 1;
-            margin-top: 55px;
             border-radius: 10px;
+            display: block;
         }
 
         /* Style for each search result item */
