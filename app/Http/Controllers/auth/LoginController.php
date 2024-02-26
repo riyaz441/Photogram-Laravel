@@ -28,7 +28,7 @@ class LoginController extends Controller
                 'status' => 0, 'error' => $validator->errors()->toArray()
             ]);
         } else {
-            $email = $request->input('email');
+            $email = strip_tags($request->input('email'));
             $password = $request->input('password');
 
             // rememberme check

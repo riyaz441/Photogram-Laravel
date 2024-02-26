@@ -26,8 +26,8 @@ class AdminRegisterController extends Controller
         if (!$validator->passes()) {
             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
         } else {
-            $username = $request->input('username');
-            $email = $request->input('email');
+            $username = strip_tags($request->input('username'));
+            $email = ($request->input('email'));
             $password = Hash::make($request->input('password'));
 
             $adminsignupsave = new AdminLogin;

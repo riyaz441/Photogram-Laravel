@@ -28,10 +28,12 @@ class SignupController extends Controller
         if (!$validator->passes()) {
             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
         } else {
-            $username = $request->input('username');
-            $email = $request->input('email');
+
+            // get all inputs and remove all html tags from user input
+            $username = strip_tags($request->input('username'));
+            $email = strip_tags($request->input('email'));
             $password = Hash::make($request->input('password'));
-            $mobile = $request->input('mobile');
+            $mobile = strip_tags($request->input('mobile'));
 
             $signupsave = new Signup;
 

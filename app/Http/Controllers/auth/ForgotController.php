@@ -25,7 +25,7 @@ class ForgotController extends Controller
             ]);
         } else {
 
-            $email = $request->input('email');
+            $email = strip_tags($request->input('email'));
 
             // session email
             $data = $request->input();

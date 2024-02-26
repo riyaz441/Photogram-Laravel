@@ -24,7 +24,7 @@ class ProfileController extends Controller
         if (!$validator->passes()) {
             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
         } else {
-            $about = $request->input('about');
+            $about = strip_tags($request->input('about'));
             $gender = $request->input('gender');
 
             // upload user profile picture
@@ -61,7 +61,7 @@ class ProfileController extends Controller
                 'status' => 0, 'error' => $validator->errors()->toArray()
             ]);
         } else {
-            $about = $request->input('about');
+            $about = strip_tags($request->input('about'));
             $gender = $request->input('gender');
 
             Profile::where('userid', session('user_id'))->update(['about' => $about, 'gender' => $gender]);

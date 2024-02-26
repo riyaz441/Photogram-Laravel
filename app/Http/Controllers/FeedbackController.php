@@ -22,7 +22,7 @@ class FeedbackController extends Controller
         if (!$validator->passes()) {
             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
         } else {
-            $userfeedback = $request->input('feedback');
+            $userfeedback = strip_tags($request->input('feedback'));
 
             $feedback = new user_feedback;
 

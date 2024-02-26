@@ -28,7 +28,7 @@ class PhotoUploadController extends Controller
             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
         } else {
             // get input from user
-            $caption = $request->input('caption');
+            $caption = strip_tags($request->input('caption'));
             //$imagePath = $request->file('photo')->storeAs('user_images', 'public');
 
             // image upload process
@@ -93,7 +93,7 @@ class PhotoUploadController extends Controller
                 'status' => 0, 'error' => $validator->errors()->toArray()
             ]);
         } else {
-            $caption = $request->input('caption');
+            $caption = strip_tags($request->input('caption'));
             $uid = $request->input('uid');
 
             Photo::where('id', $uid)->update(['caption' => $caption]);

@@ -25,7 +25,7 @@ class AdminLoginController extends Controller
                 'status' => 0, 'error' => $validator->errors()->toArray()
             ]);
         } else {
-            $username = $request->input('username');
+            $username = strip_tags($request->input('username'));
             $password = $request->input('password');
 
             // check login
