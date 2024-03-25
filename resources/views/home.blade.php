@@ -515,6 +515,132 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
     </div>
     {{-- post share model end --}}
 
+    {{-- comments model start --}}
+    <div class="modal fade" id="exampleModalComment" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <form action="/usercomment" method="post" id="usercomment" enctype="multipart/form-data">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Comment</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="comment" style="height: 200px; width: 765px"
+                                name="comment">
+                            </textarea>
+                        </div>
+                        <div class="float-end py-3">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" id="submit" name="submit"
+                                class="btn btn-info">Comment</button>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer overflow-auto" style="max-height: 300px;">
+                        <div class="d-flex text-body-secondary pt-3">
+                            <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
+                                xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
+                                preserveAspectRatio="xMidYMid slice" focusable="false">
+                                <title>Placeholder</title>
+                                <rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%"
+                                    fill="#007bff" dy=".3em">32x32</text>
+                            </svg>
+                            <p class="pb-3 pe-3 mb-0 small lh-sm border-bottom">
+                                <b class="d-block text-gray-dark">@username <small style="font-size:10px">1 month
+                                        ago</small></b>
+                                Some representative placeholder content, with some information about this user. Imagine
+                                this
+                                being some sort of status update, perhaps?
+                            </p>
+                            <div class="dropdown">
+                                <button class="btn" type="button" id="dropdownMenu2" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                        <path
+                                            d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                                    </svg>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <li><button class="dropdown-item" type="button">Action</button></li>
+                                    <li><button class="dropdown-item" type="button">Another action</button></li>
+                                    <li><button class="dropdown-item" type="button">Something else here</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="d-flex text-body-secondary pt-3">
+                            <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
+                                xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
+                                preserveAspectRatio="xMidYMid slice" focusable="false">
+                                <title>Placeholder</title>
+                                <rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%"
+                                    fill="#007bff" dy=".3em">32x32</text>
+                            </svg>
+                            <p class="pb-3 pe-3 mb-0 small lh-sm border-bottom">
+                                <strong class="d-block text-gray-dark">@username</strong>
+                                Some representative placeholder content, with some information about this user. Imagine
+                                this
+                                being some sort of status update, perhaps?
+                            </p>
+                            <div class="dropdown">
+                                <button class="btn" type="button" id="dropdownMenu2" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                        <path
+                                            d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                                    </svg>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <li><button class="dropdown-item" type="button">Action</button></li>
+                                    <li><button class="dropdown-item" type="button">Another action</button></li>
+                                    <li><button class="dropdown-item" type="button">Something else here</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="d-flex text-body-secondary pt-3">
+                            <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
+                                xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
+                                preserveAspectRatio="xMidYMid slice" focusable="false">
+                                <title>Placeholder</title>
+                                <rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%"
+                                    fill="#007bff" dy=".3em">32x32</text>
+                            </svg>
+                            <p class="pb-3 pe-3 mb-0 small lh-sm border-bottom">
+                                <strong class="d-block text-gray-dark">@username</strong>
+                                Some representative placeholder content, with some information about this user. Imagine
+                                this
+                                being some sort of status update, perhaps?
+                            </p>
+                            <div class="dropdown">
+                                <button class="btn" type="button" id="dropdownMenu2" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                        <path
+                                            d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                                    </svg>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <li><button class="dropdown-item" type="button">Action</button></li>
+                                    <li><button class="dropdown-item" type="button">Another action</button></li>
+                                    <li><button class="dropdown-item" type="button">Something else here</button></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                @csrf
+            </form>
+
+        </div>
+    </div>
+    {{-- comments model end --}}
+
     <main>
 
         <section class="py-5 text-center container">
@@ -647,11 +773,9 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                                                             </path>
                                                         </svg>
                                                     </span>
+                                                    <span id="likecount_{{ $up->id }}">{{ $up->like }}
+                                                    </span>
 
-                                                    &nbsp; <span
-                                                        id="likecount_{{ $up->id }}">{{ $up->like }}</span>
-                                                    &nbsp;
-                                                    Like
                                                 </button>
                                                 <button type="button" value="{{ Crypt::encryptString($up->id) }}"
                                                     class="btn btn-sm btn-outline-secondary share"
@@ -663,7 +787,19 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                                                         <path
                                                             d="M3 12c0 1.654 1.346 3 3 3 .794 0 1.512-.315 2.049-.82l5.991 3.424c-.018.13-.04.26-.04.396 0 1.654 1.346 3 3 3s3-1.346 3-3-1.346-3-3-3c-.794 0-1.512.315-2.049.82L8.96 12.397c.018-.131.04-.261.04-.397s-.022-.266-.04-.397l5.991-3.423c.537.505 1.255.82 2.049.82 1.654 0 3-1.346 3-3s-1.346-3-3-3-3 1.346-3 3c0 .136.022.266.04.397L8.049 9.82A2.982 2.982 0 0 0 6 9c-1.654 0-3 1.346-3 3z">
                                                         </path>
-                                                    </svg> &nbsp; Share</button>
+                                                    </svg>
+                                                </button>
+                                                <button type="button" value="{{ Crypt::encryptString($up->id) }}"
+                                                    class="btn btn-sm btn-outline-secondary comment"
+                                                    data-bs-toggle="modal" data-bs-target="#exampleModalComment"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" width="16"
+                                                        height="16" fill="currentColor"
+                                                        class="bi bi-chat-right-text-fill" viewBox="0 0 16 16"
+                                                        style="fill: rgb(37, 193, 255);transform: ;msFilter:;">
+                                                        <path
+                                                            d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1" />
+                                                    </svg>
+                                                </button>
                                                 <div class="btn-group" role="group">
                                                     <button type="button"
                                                         class="btn btn-sm btn-outline-secondary dropdown-toggle"
