@@ -527,20 +527,37 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-floating">
+                        <div class="form-floating pb-2">
                             <textarea class="form-control" placeholder="Leave a comment here" id="comment" style="height: 200px; width: 765px"
-                                name="comment">
+                                name="comment" required>
                             </textarea>
+                            <input type="hidden" name="postid" id="postid" value="" readonly>
+                            <input type="hidden" name="commentid" id="commentid" value="" readonly>
                         </div>
-                        <div class="float-end py-3">
+
+                        {{-- javascript validation alert for error --}}
+
+                        <div class="alert alert-danger text-center" role="alert" id="jsalerterrorcomment"
+                            style="visibility:hidden">
+
+                        </div>
+
+                        {{-- success alert message --}}
+                        <div class="alert alert-success text-center" role="alert" id="jsalertsuccesscomment"
+                            style="visibility:hidden">
+
+                        </div>
+
+
+                        <div class="float-end">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" id="submit" name="submit"
-                                class="btn btn-info">Comment</button>
+                                class="btn btn-info commentbutton">Comment</button>
                         </div>
 
                     </div>
-                    <div class="modal-footer overflow-auto" style="max-height: 300px;">
-                        <div class="d-flex text-body-secondary pt-3">
+                    <div class="modal-footer overflow-auto" style="max-height: 300px;" id="footer">
+                        {{-- <div class="d-flex text-body-secondary pt-3">
                             <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
                                 xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
                                 preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -551,9 +568,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                             <p class="pb-3 pe-3 mb-0 small lh-sm border-bottom">
                                 <b class="d-block text-gray-dark">@username <small style="font-size:10px">1 month
                                         ago</small></b>
-                                Some representative placeholder content, with some information about this user. Imagine
-                                this
-                                being some sort of status update, perhaps?
+                                Some representative placeholder content.
                             </p>
                             <div class="dropdown">
                                 <button class="btn" type="button" id="dropdownMenu2" data-bs-toggle="dropdown"
@@ -565,73 +580,11 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                                     </svg>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <li><button class="dropdown-item" type="button">Action</button></li>
-                                    <li><button class="dropdown-item" type="button">Another action</button></li>
-                                    <li><button class="dropdown-item" type="button">Something else here</button></li>
+                                    <li><button class="dropdown-item" type="button">Edit</button></li>
+                                    <li><button class="dropdown-item" type="button">Delete</button></li>
                                 </ul>
                             </div>
-                        </div>
-                        <div class="d-flex text-body-secondary pt-3">
-                            <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
-                                xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
-                                preserveAspectRatio="xMidYMid slice" focusable="false">
-                                <title>Placeholder</title>
-                                <rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%"
-                                    fill="#007bff" dy=".3em">32x32</text>
-                            </svg>
-                            <p class="pb-3 pe-3 mb-0 small lh-sm border-bottom">
-                                <strong class="d-block text-gray-dark">@username</strong>
-                                Some representative placeholder content, with some information about this user. Imagine
-                                this
-                                being some sort of status update, perhaps?
-                            </p>
-                            <div class="dropdown">
-                                <button class="btn" type="button" id="dropdownMenu2" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                                        <path
-                                            d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-                                    </svg>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <li><button class="dropdown-item" type="button">Action</button></li>
-                                    <li><button class="dropdown-item" type="button">Another action</button></li>
-                                    <li><button class="dropdown-item" type="button">Something else here</button></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="d-flex text-body-secondary pt-3">
-                            <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
-                                xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
-                                preserveAspectRatio="xMidYMid slice" focusable="false">
-                                <title>Placeholder</title>
-                                <rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%"
-                                    fill="#007bff" dy=".3em">32x32</text>
-                            </svg>
-                            <p class="pb-3 pe-3 mb-0 small lh-sm border-bottom">
-                                <strong class="d-block text-gray-dark">@username</strong>
-                                Some representative placeholder content, with some information about this user. Imagine
-                                this
-                                being some sort of status update, perhaps?
-                            </p>
-                            <div class="dropdown">
-                                <button class="btn" type="button" id="dropdownMenu2" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                                        <path
-                                            d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-                                    </svg>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <li><button class="dropdown-item" type="button">Action</button></li>
-                                    <li><button class="dropdown-item" type="button">Another action</button></li>
-                                    <li><button class="dropdown-item" type="button">Something else here</button></li>
-                                </ul>
-                            </div>
-                        </div>
-
+                        </div> --}}
                     </div>
                 </div>
                 @csrf
@@ -640,6 +593,36 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
         </div>
     </div>
     {{-- comments model end --}}
+
+    {{-- comment delete confirmation model start --}}
+    <div class="modal fade" id="exampleModalCommentdelete" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <form action="/commentdeletefinal" method="post" id="commentdelete" enctype="multipart/form-data">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Comment Delete</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <p>If you want to delete this Comment?</p>
+
+                        <input type="hidden" class="form-control mt-2" id="udcid" name="udcid"
+                            value="" readonly>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" id="commentdeletesubmit" name="commentdeletesubmit"
+                            class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+                @csrf
+            </form>
+        </div>
+    </div>
+    {{-- comment delete confirmation model end --}}
 
     <main>
 
@@ -672,6 +655,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                         <button class="btn btn-info my-2" type="submit" id="submit"
                             name="submit">Share</button>
                         </p>
+                        <input type="hidden" name="session" id="usersession" value="{{ session('user_id') }}">
 
                         {{-- progress bar --}}
                         <div class="progress mb-3" style="display: none;">
@@ -790,6 +774,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                                                     </svg>
                                                 </button>
                                                 <button type="button" value="{{ Crypt::encryptString($up->id) }}"
+                                                    id="comment_{{ $up->id }}"
                                                     class="btn btn-sm btn-outline-secondary comment"
                                                     data-bs-toggle="modal" data-bs-target="#exampleModalComment"><svg
                                                         xmlns="http://www.w3.org/2000/svg" width="16"

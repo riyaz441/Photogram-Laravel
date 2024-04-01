@@ -17,6 +17,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ShareController;
 use App\Http\Controllers\AccountDeleteController;
+use App\Http\Controllers\CommentController;
 use App\Models\Signup;
 use Illuminate\Support\Facades\Route;
 
@@ -153,4 +154,19 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
     // account delete route
     Route::post('/accountdelete', [AccountDeleteController::class, 'accountdelete']);
+
+    // comment route
+    Route::post('/usercomment', [CommentController::class, 'usercomment']);
+
+    // get comments route
+    Route::post('/getcomments', [CommentController::class, 'getcomments']);
+
+    // comment edit route
+    Route::post('/commentedit', [CommentController::class, 'commentedit']);
+
+    // get comment delete id route
+    Route::post('/commentdelete', [CommentController::class, 'commentdelete']);
+
+    // final comment delete route
+    Route::post('/commentdeletefinal', [CommentController::class, 'commentdeletefinal']);
 });
