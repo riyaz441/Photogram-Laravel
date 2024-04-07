@@ -528,7 +528,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                     </div>
                     <div class="modal-body">
                         <div class="form-floating pb-2">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="comment" style="height: 200px; width: 765px"
+                            <textarea class="form-control" placeholder="Leave a comment here" id="comment" style="height: 100%;"
                                 name="comment" required>
                             </textarea>
                             <input type="hidden" name="postid" id="postid" value="" readonly>
@@ -549,10 +549,16 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                         </div>
 
 
-                        <div class="float-end">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" id="submit" name="submit"
-                                class="btn btn-info commentbutton">Comment</button>
+                        <div>
+                            <div class="float-start">
+                                <span class="badge text-bg-info comment_count"></span>
+                            </div>
+                            <div class="float-end">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Close</button>
+                                <button type="submit" id="submit" name="submit"
+                                    class="btn btn-info commentbutton">Comment</button>
+                            </div>
                         </div>
 
                     </div>

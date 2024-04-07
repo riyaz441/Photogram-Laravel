@@ -707,16 +707,30 @@ $(document).ready(function () {
                 // clear the html content
                 $("#footer").html("");
 
+                // show total comments count
+                $(".comment_count").html("");
+                $(".comment_count").html('<i class="bi bi-chat-right-text-fill"></i>&nbsp;&nbsp;' + data.length);
+
                 // check comment present or not
                 if (data.length > 0) {
+
+                    var profilephoto = "";
                     // append the html content
                     for (var a = 0; a < data.length; a++) {
+
+                        // check profile picture present or not
+                        if (data[a].profile_photo == "" || data[a].profile_photo == null) {
+                            profilephoto = "../assets/brand/person.svg";
+                        } else {
+                            profilephoto = data[a].profile_photo;
+                        }
+
 
                         // check what type of user then show comment data
                         if (userSession == data[a].userid) {
                             $("#footer").append(`
                         <div class="d-flex text-body-secondary pt-3" style="min-width: 100%;">
-                            <img src="${data[a].profile_photo}" alt="pi" width="40" height="40" class="rounded-circle">
+                            <img src="${profilephoto}" alt="pi" width="40" height="40" class="rounded-circle">
                             <p class="pb-3 pe-3 mb-0 small lh-sm border-bottom px-3 text-light" style="min-width: 90%;">
                                 <b class="d-block text-light-emphasis">@${data[a].username} <small style="font-size:10px" class="text-secondary-emphasis">${data[a].created_at_human}</small></b>
                                 ${data[a].comment}
@@ -756,7 +770,7 @@ $(document).ready(function () {
                         } else {
                             $("#footer").append(`
                         <div class="d-flex text-body-secondary pt-3" style="min-width: 100%;">
-                            <img src="${data[a].profile_photo}" alt="pi" width="40" height="40" class="rounded-circle">
+                            <img src="${profilephoto}" alt="pi" width="40" height="40" class="rounded-circle">
                             <p class="pb-3 pe-3 mb-0 small lh-sm border-bottom px-3 text-light" style="min-width: 90%;">
                                 <b class="d-block text-light-emphasis">@${data[a].username} <small style="font-size:10px" class="text-secondary-emphasis">${data[a].created_at_human}</small></b>
                                 ${data[a].comment}
