@@ -74,7 +74,7 @@ class ProfileController extends Controller
                 $path = $request->file('profilephoto')->storeAs('profileimages', $image, 'public');
                 $finalprofileimage = '/storage/' . $path;
 
-                Profile::where('id', session('user_id'))->update(['profile_photo' => $finalprofileimage]);
+                Profile::where('userid', session('user_id'))->update(['profile_photo' => $finalprofileimage]);
                 return response()->json(['message' => 0]);
             }
 
