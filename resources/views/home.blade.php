@@ -292,6 +292,9 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
+                            <div class="alert alert-warning" role="alert">
+                                Complete your profile, better experience
+                            </div>
                             <div class="form-floating">
                                 <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 120px"
                                     name="about"></textarea>

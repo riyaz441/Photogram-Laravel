@@ -4,6 +4,8 @@ $(document).ready(function () {
     // $('#myToast').toast('hide');
     // $('#myToastunlike').toast('hide');
 
+    // show profile create page
+    $('#exampleModal').modal('show');
 
     // tooltip
     $('[data-toggle="tooltip"]').tooltip();
