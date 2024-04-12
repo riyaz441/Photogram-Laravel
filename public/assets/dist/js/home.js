@@ -176,10 +176,17 @@ $(document).ready(function () {
                     $("#jsalerterror").show();
                     $("#jsalerterror").css("visibility", "visible");
                     $("#jsalerterror").html(data.error['profilephoto']);
+                    $("#jsalerterror").html(data.error['about']);
+
 
                     // reset the form
                     $("#profileupdate")[0].reset();
                     $('#exampleModal').modal('hide');
+
+                    // reload page after 5 sec
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, 5000);
                 }
                 if (data.message == 0) {
                     $("#jsalertsuccess").show();
@@ -193,7 +200,7 @@ $(document).ready(function () {
                     // reload page after 5 sec
                     setTimeout(function () {
                         location.reload(true);
-                    }, 3000);
+                    }, 5000);
                 }
 
             }
@@ -240,10 +247,16 @@ $(document).ready(function () {
                     $("#jsalerterror").show();
                     $("#jsalerterror").css("visibility", "visible");
                     $("#jsalerterror").html(data.error['profilephoto']);
+                    $("#jsalerterror").html(data.error['about']);
 
                     // reset the form
                     $("#profilechange")[0].reset();
                     $('#exampleModalUpdate').modal('hide');
+
+                    // reload page after 5 sec
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, 5000);
                 }
                 if (data.message == 0) {
                     $("#jsalertsuccess").show();
@@ -257,7 +270,7 @@ $(document).ready(function () {
                     // reload page after 5 sec
                     setTimeout(function () {
                         location.reload(true);
-                    }, 3000);
+                    }, 5000);
                 }
 
             }

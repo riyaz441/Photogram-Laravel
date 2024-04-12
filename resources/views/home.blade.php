@@ -282,14 +282,13 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
 
     <!-- Modal -->
     @if ($profile_update_status == 0)
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+            data-bs-backdrop="static">
+            <div class="modal-dialog">
                 <form action="/profileupdate" method="post" id="profileupdate" enctype="multipart/form-data">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">Profile</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="alert alert-warning" role="alert">
@@ -316,7 +315,6 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" id="submit" name="submit"
                                 class="btn btn-primary">Save</button>
                         </div>
@@ -329,7 +327,7 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
     @if ($profile_update_status == 1)
         <div class="modal fade" id="exampleModalUpdate" class="modelupdate" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-dialog">
                 <form action="/profilechange" method="post" id="profilechange" enctype="multipart/form-data">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -856,5 +854,5 @@ $liked_post_data = Like_button_stage::where('user_id', '=', session('user_id'))
 </html>
 
 {{-- js code --}}
-<script src="../assets/dist/js/home.min.js"></script>
+<script src="../assets/dist/js/home.js"></script>
 {{-- js code end --}}

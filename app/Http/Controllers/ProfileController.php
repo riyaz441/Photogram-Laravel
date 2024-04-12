@@ -18,7 +18,8 @@ class ProfileController extends Controller
 
         // server side validation
         $validator = Validator::make($request->all(), [
-            'profilephoto' => 'image|mimes:jpeg,png,jpg|max:5000'
+            'about' => 'required',
+            'profilephoto' => 'required|image|mimes:jpeg,png,jpg|max:5000'
         ]);
 
         if (!$validator->passes()) {
@@ -53,6 +54,7 @@ class ProfileController extends Controller
 
         // server side validation
         $validator = Validator::make($request->all(), [
+            'about' => 'required',
             'profilephoto' => 'image|mimes:jpeg,png,jpg|max:5000'
         ]);
 
